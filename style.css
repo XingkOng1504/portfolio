@@ -627,6 +627,7 @@ html[data-theme="light"] {
   --text-dim:   #9899b5;
   --shadow:     0 4px 24px rgba(0,0,0,0.08);
 }
+html[data-theme="light"] .skill-bar { background: #c8cbdf; }
 html[data-theme="light"] .navbar {
   background: rgba(245,246,250,0.92);
 }
@@ -952,6 +953,7 @@ html[data-theme="light"] {
   --text-dim:   #9899b5;
   --shadow:     0 4px 24px rgba(0,0,0,0.08);
 }
+html[data-theme="light"] .skill-bar { background: #c8cbdf; }
 html[data-theme="light"] .navbar {
   background: rgba(245,246,250,0.92);
 }
