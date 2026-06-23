@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mahjong 麻将</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d1117;color:#e6edf3;font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem;overflow-x:hidden}
+    a.back{color:#8b949e;text-decoration:none;align-self:flex-start;margin-bottom:1.5rem;font-size:.9rem}
+    a.back:hover{color:#e6edf3}
+    h1{font-size:1.6rem;font-weight:700;margin-bottom:.4rem}
+    .sub{color:#8b949e;font-size:.82rem;margin-bottom:1rem;text-align:center}
+    .hud{display:flex;gap:1.5rem;margin-bottom:.75rem;font-size:.9rem;align-items:center}
+    .btn{background:#21262d;color:#e6edf3;border:1px solid #30363d;border-radius:8px;padding:.45rem 1rem;cursor:pointer;font-size:.82rem;font-family:inherit;transition:background .15s}
+    .btn:hover{background:#0284c7;border-color:#0284c7;color:#fff}
+    #board-wrap{position:relative;margin:0 auto}
+    .tile{position:absolute;cursor:pointer;border-radius:5px;border:1px solid #444;display:flex;align-items:center;justify-content:center;font-size:1.5rem;line-height:1;transition:box-shadow .1s,filter .1s;user-select:none}
+    .tile.free{background:linear-gradient(145deg,#f5f0e8,#ddd5c0);color:#222;box-shadow:2px 2px 5px rgba(0,0,0,.5)}
+    .tile.blocked{background:linear-gradient(145deg,#c8c0b0,#b0a898);color:#555;cursor:not-allowed;box-shadow:1px 1px 3px rgba(0,0,0,.4)}
+    .tile.selected{box-shadow:0 0 0 3px #0284c7,2px 2px 5px rgba(0,0,0,.5)!important;filter:brightness(1.1)}
+    .tile.hint{animation:pulse .5s infinite alternate}
+    @keyframes pulse{from{box-shadow:0 0 0 2px #4ade80}to{box-shadow:0 0 0 4px #4ade80,2px 2px 5px rgba(0,0,0,.5)}}
+    .msg{margin-top:.75rem;font-size:1rem;font-weight:600;min-height:1.4rem;text-align:center;color:#38bdf8}
+    .msg.win{color:#4ade80} .msg.lose{color:#f87171}
+  </style>
+</head>
+<body>
+  <a href="../games.html" class="back">← Jeux</a>
+  <h1>🀄 Mahjong 麻将</h1>
+  <p class="sub">Retirez les paires de tuiles libres (non couvertes et avec un côté libre)</p>
+  <div class="hud">
+    <span>🀄 Restant: <strong id="remaining">144</strong></span>
+    <span>⏱ <span id="timer">0s</span></span>
+    <button class="btn" onclick="newGame()">Nouvelle partie</button>
+    <button class="btn" onclick="showHint()">Indice</button>
+  </div>
+  <div id="board-wrap"></div>
+  <div class="msg" id="msg"></div>
+  <script>
+    // Tile types: match by group+num; flowers all match, seasons all match
+    const TILE_DEFS = [];
+    const BAM  = ['🀐','🀑','🀒','🀓','🀔','🀕','🀖','🀗','🀘'];
+    const CIR  = ['🀙','🀚','🀛','🀜','🀝','🀞','🀟','🀠','🀡'];
+    const CHR  = ['🀇','🀈','🀉','🀊','🀋','🀌','🀍','🀎','🀏'];
+    const WIND = ['🀀','🀁','🀂','🀃'];
+    const DRAG = ['🀄','🀅','🀆'];
+
+    BAM.forEach((c,i) =>{ for(let k=0;k<4;k++) TILE_DEFS.push({g:'b',n:i,c}); });
+    CIR.forEach((c,i) =>{ for(let k=0;k<4;k++) TILE_DEFS.push({g:'c',n:i,c}); });
+    CHR.forEach((c,i) =>{ for(let k=0;k<4;k++) TILE_DEFS.push({g:'h',n:i,c}); });
+    WIND.forEach((c,i)=>{ for(let k=0;k<4;k++) TILE_DEFS.push({g:'w',n:i,c}); });
+    DRAG.forEach((c,i)=>{ for(let k=0;k<4;k++) TILE_DEFS.push({g:'d',n:i,c}); });
+    ['🀢','🀣','🀤','🀥'].forEach((c,i)=>TILE_DEFS.push({g:'s',n:i,c}));
+    ['🀦','🀧','🀨','🀩'].forEach((c,i)=>TILE_DEFS.push({g:'f',n:i,c}));
+    // Total: 36+36+36+16+12+4+4 = 144
+
+    // Layout: [z, r, c] — 144 positions
+    // Layer 0: 6 rows × 14 cols = 84
+    // Layer 1: 4 rows × 10 cols (r 1-4, c 2-11) = 40
+    // Layer 2: 2 rows × 6 cols (r 2-3, c 4-9) = 12
+    // Layer 3: 2 rows × 4 cols (r 2-3, c 5-8) = 8
+    const POSITIONS = [];
+    for(let r=0;r<6;r++)  for(let c=0;c<14;c++) POSITIONS.push({z:0,r,c});
+    for(let r=1;r<=4;r++) for(let c=2;c<=11;c++) POSITIONS.push({z:1,r,c});
+    for(let r=2;r<=3;r++) for(let c=4;c<=9;c++)  POSITIONS.push({z:2,r,c});
+    for(let r=2;r<=3;r++) for(let c=5;c<=8;c++)  POSITIONS.push({z:3,r,c});
+
+    const TW=52, TH=62, ZOFF=5;
+    let tiles=[], selected2=null, timerInt=null, elapsed=0, gameOver=false;
+
+    function shuffle(arr){ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
+
+    function tilesMatch(a,b){
+      if(a.g===b.g){
+        if(a.g==='s'||a.g==='f') return true; // all seasons/flowers match
+        return a.n===b.n;
+      }
+      return false;
+    }
+
+    function isCovered(t){
+      return tiles.some(o=>!o.removed&&o.pos.z===t.pos.z+1&&o.pos.r===t.pos.r&&o.pos.c===t.pos.c);
+    }
+
+    function isFree(t){
+      if(isCovered(t)) return false;
+      const {z,r,c}=t.pos;
+      const hasL=tiles.some(o=>!o.removed&&o.pos.z===z&&o.pos.r===r&&o.pos.c===c-1);
+      const hasR=tiles.some(o=>!o.removed&&o.pos.z===z&&o.pos.r===r&&o.pos.c===c+1);
+      return !hasL||!hasR;
+    }
+
+    function newGame(){
+      clearInterval(timerInt); elapsed=0; gameOver=false; selected2=null;
+      document.getElementById('timer').textContent='0s';
+      document.getElementById('msg').textContent='';
+      const shuffled=shuffle([...TILE_DEFS]);
+      tiles=POSITIONS.map((pos,i)=>({...shuffled[i],pos,removed:false,id:i}));
+      timerInt=setInterval(()=>{ elapsed++; document.getElementById('timer').textContent=elapsed+'s'; },1000);
+      render();
+    }
+
+    function render(){
+      const wrap=document.getElementById('board-wrap');
+      const maxC=14, maxR=6;
+      const W=maxC*TW+(4*ZOFF)+30, H=maxR*TH+(4*ZOFF)+30;
+      wrap.style.width=W+'px'; wrap.style.height=H+'px';
+      wrap.innerHTML='';
+      // Sort by z ascending so higher layers render on top
+      const sorted=[...tiles].filter(t=>!t.removed).sort((a,b)=>a.pos.z-b.pos.z);
+      sorted.forEach(t=>{
+        const {z,r,c}=t.pos;
+        const x=c*TW+z*ZOFF+10;
+        const y=r*TH-z*ZOFF+10;
+        const el=document.createElement('div');
+        el.className='tile '+(isFree(t)?'free':'blocked');
+        if(selected2===t.id) el.classList.add('selected');
+        el.style.cssText=`left:${x}px;top:${y}px;width:${TW-3}px;height:${TH-3}px;z-index:${z*100+r*10+c}`;
+        el.textContent=t.c;
+        if(isFree(t)) el.addEventListener('click',()=>clickTile(t.id));
+        wrap.appendChild(el);
+      });
+      const rem=tiles.filter(t=>!t.removed).length;
+      document.getElementById('remaining').textContent=rem;
+      if(rem===0){ win(); return; }
+      if(!hasValidMove()&&!gameOver){ lose(); }
+    }
+
+    function clickTile(id){
+      if(gameOver) return;
+      const t=tiles[id];
+      if(!isFree(t)) return;
+      if(selected2===null){ selected2=id; render(); return; }
+      if(selected2===id){ selected2=null; render(); return; }
+      const prev=tiles[selected2];
+      if(tilesMatch(prev,t)){
+        prev.removed=true; t.removed=true; selected2=null; render();
+      } else {
+        selected2=id; render();
+      }
+    }
+
+    function showHint(){
+      const free=tiles.filter(t=>!t.removed&&isFree(t));
+      for(let i=0;i<free.length;i++){
+        for(let j=i+1;j<free.length;j++){
+          if(tilesMatch(free[i],free[j])){
+            selected2=null; render();
+            document.querySelectorAll('.tile').forEach((el,k)=>{
+              const sorted=[...tiles].filter(t=>!t.removed).sort((a,b)=>a.pos.z-b.pos.z);
+              if(sorted[k]&&(sorted[k].id===free[i].id||sorted[k].id===free[j].id)) el.classList.add('hint');
+            });
+            return;
+          }
+        }
+      }
+      document.getElementById('msg').textContent='Aucun coup possible !';
+    }
+
+    function hasValidMove(){
+      const free=tiles.filter(t=>!t.removed&&isFree(t));
+      for(let i=0;i<free.length;i++) for(let j=i+1;j<free.length;j++) if(tilesMatch(free[i],free[j])) return true;
+      return false;
+    }
+
+    function win(){ clearInterval(timerInt); gameOver=true; const m=document.getElementById('msg'); m.textContent='🎉 Félicitations ! Toutes les tuiles retirées en '+elapsed+'s !'; m.className='msg win'; }
+    function lose(){ clearInterval(timerInt); gameOver=true; const m=document.getElementById('msg'); m.textContent='😔 Plus de coup possible — essayez encore !'; m.className='msg lose'; }
+
+    newGame();
+  </script>
+</body>
+</html>

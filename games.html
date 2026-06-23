@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jeux — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d1117;color:#e6edf3;font-family:'Inter',sans-serif;min-height:100vh;padding:2rem 1.5rem}
+    .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem}
+    .back{color:#8b949e;text-decoration:none;font-size:.9rem;display:flex;align-items:center;gap:.4rem}
+    .back:hover{color:#e6edf3}
+    h1{font-size:2.2rem;font-weight:700;text-align:center;margin-bottom:.5rem}
+    .sub{text-align:center;color:#8b949e;margin-bottom:3rem;font-size:.95rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;max-width:1000px;margin:0 auto}
+    .card{background:#161b22;border:1px solid #30363d;border-radius:14px;padding:1.75rem 1.5rem;text-decoration:none;color:inherit;transition:border-color .2s,transform .15s,box-shadow .2s;display:block}
+    .card:hover{border-color:#0284c7;transform:translateY(-3px);box-shadow:0 8px 30px rgba(2,132,199,.15)}
+    .icon{font-size:2.8rem;margin-bottom:1rem;display:block}
+    .title{font-size:1.1rem;font-weight:600;margin-bottom:.4rem}
+    .desc{color:#8b949e;font-size:.85rem;line-height:1.6}
+    .badge{display:inline-block;font-size:.7rem;background:rgba(2,132,199,.12);color:#38bdf8;border-radius:999px;padding:.15rem .6rem;margin-top:.6rem}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <a href="index.html" class="back">← Portfolio</a>
+  </div>
+  <h1>🎮 Jeux</h1>
+  <p class="sub">Jeux classiques jouables directement dans le navigateur</p>
+  <div class="grid">
+    <a href="games/chess.html" class="card">
+      <span class="icon">♟</span>
+      <div class="title">Échecs</div>
+      <div class="desc">Jeu d'échecs complet avec toutes les règles — 2 joueurs ou contre l'IA</div>
+      <span class="badge">IA Minimax</span>
+    </a>
+    <a href="games/minesweeper.html" class="card">
+      <span class="icon">💣</span>
+      <div class="title">Démineur</div>
+      <div class="desc">Trouvez toutes les mines sans en déclencher aucune — 3 niveaux</div>
+      <span class="badge">Classique</span>
+    </a>
+    <a href="games/sudoku.html" class="card">
+      <span class="icon">🔢</span>
+      <div class="title">Sudoku</div>
+      <div class="desc">Grille 9×9 générée aléatoirement — facile, moyen, difficile</div>
+      <span class="badge">Générateur</span>
+    </a>
+    <a href="games/go.html" class="card">
+      <span class="icon">⚫</span>
+      <div class="title">Go 围棋</div>
+      <div class="desc">Le jeu de go chinois sur plateau 9×9 — captures et territoire</div>
+      <span class="badge">2 joueurs</span>
+    </a>
+    <a href="games/mahjong.html" class="card">
+      <span class="icon">🀄</span>
+      <div class="title">Mahjong 麻将</div>
+      <div class="desc">Mahjong solitaire — retirez les paires de tuiles libres pour vider le plateau</div>
+      <span class="badge">144 tuiles</span>
+    </a>
+  </div>
+</body>
+</html>

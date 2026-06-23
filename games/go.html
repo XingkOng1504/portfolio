@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Go 围棋</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d1117;color:#e6edf3;font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem}
+    a.back{color:#8b949e;text-decoration:none;align-self:flex-start;margin-bottom:1.5rem;font-size:.9rem}
+    a.back:hover{color:#e6edf3}
+    h1{font-size:1.6rem;font-weight:700;margin-bottom:.5rem}
+    .rules{color:#8b949e;font-size:.8rem;text-align:center;margin-bottom:1rem;max-width:500px}
+    .hud{display:flex;align-items:center;gap:2rem;margin-bottom:1rem;font-size:.95rem}
+    .stone-indicator{display:flex;align-items:center;gap:.5rem}
+    .stone-dot{width:18px;height:18px;border-radius:50%;display:inline-block}
+    .stone-dot.black{background:radial-gradient(circle at 35% 35%,#555,#000)}
+    .stone-dot.white{background:radial-gradient(circle at 35% 35%,#fff,#ccc);border:1px solid #999}
+    .score-box{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:.5rem 1rem;font-size:.85rem;text-align:center}
+    canvas{background:#dcb975;border-radius:4px;cursor:pointer;touch-action:none}
+    .actions{display:flex;gap:.75rem;margin-top:1rem}
+    .btn{background:#21262d;color:#e6edf3;border:1px solid #30363d;border-radius:8px;padding:.5rem 1.1rem;cursor:pointer;font-size:.85rem;font-family:inherit;transition:background .15s}
+    .btn:hover{background:#0284c7;border-color:#0284c7;color:#fff}
+    .msg{margin-top:.75rem;font-size:.95rem;font-weight:600;min-height:1.4rem;text-align:center;color:#38bdf8}
+    .size-btns{display:flex;gap:.5rem;margin-bottom:.75rem}
+    .size-btn{background:#21262d;color:#8b949e;border:1px solid #30363d;border-radius:6px;padding:.3rem .8rem;cursor:pointer;font-size:.8rem;font-family:inherit}
+    .size-btn.active,.size-btn:hover{background:#0284c7;border-color:#0284c7;color:#fff}
+  </style>
+</head>
+<body>
+  <a href="../games.html" class="back">← Jeux</a>
+  <h1>⚫ Go 围棋</h1>
+  <p class="rules">Posez des pierres pour capturer le territoire adverse. Les groupes sans liberté sont capturés. Règles chinoises simplifiées.</p>
+  <div class="size-btns">
+    <button class="size-btn active" onclick="initGame(9)">9×9</button>
+    <button class="size-btn" onclick="initGame(13)">13×13</button>
+    <button class="size-btn" onclick="initGame(19)">19×19</button>
+  </div>
+  <div class="hud">
+    <div class="stone-indicator" id="turnIndicator">
+      <div class="stone-dot black"></div>
+      <span>Noir joue</span>
+    </div>
+    <div class="score-box">⚫ Cap: <span id="bCap">0</span> &nbsp;|&nbsp; ⚪ Cap: <span id="wCap">0</span></div>
+  </div>
+  <canvas id="canvas"></canvas>
+  <div class="actions">
+    <button class="btn" onclick="pass()">Passer</button>
+    <button class="btn" onclick="initGame(N)">Nouvelle partie</button>
+    <button class="btn" onclick="scoreGame()">Compter le score</button>
+  </div>
+  <div class="msg" id="msg"></div>
+  <script>
+    let N = 9, CELL = 44, PAD = 30;
+    let board = [], turn = 1, captured = {1:0, 2:0};
+    let koPoint = -1, lastBoard = '', consecutivePasses = 0, gameOver = false;
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function idx(r,c){ return r*N+c; }
+
+    function initGame(size) {
+      N = size;
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent === size+'×'+size);
+      });
+      CELL = size === 9 ? 44 : size === 13 ? 32 : 22;
+      PAD = size === 9 ? 30 : 24;
+      const sz = PAD*2 + CELL*(N-1);
+      canvas.width = sz; canvas.height = sz;
+      board = Array(N*N).fill(0);
+      turn = 1; captured = {1:0,2:0}; koPoint = -1;
+      consecutivePasses = 0; gameOver = false; lastBoard = '';
+      document.getElementById('bCap').textContent = 0;
+      document.getElementById('wCap').textContent = 0;
+      document.getElementById('msg').textContent = '';
+      updateTurnIndicator();
+      draw();
+    }
+
+    function draw(hoverR=-1, hoverC=-1) {
+      const sz = PAD*2 + CELL*(N-1);
+      ctx.clearRect(0,0,sz,sz);
+      ctx.fillStyle = '#dcb975';
+      ctx.fillRect(0,0,sz,sz);
+
+      // Grid lines
+      ctx.strokeStyle = '#8b6914'; ctx.lineWidth = 1;
+      for (let i = 0; i < N; i++) {
+        ctx.beginPath();
+        ctx.moveTo(PAD, PAD+i*CELL); ctx.lineTo(PAD+(N-1)*CELL, PAD+i*CELL); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(PAD+i*CELL, PAD); ctx.lineTo(PAD+i*CELL, PAD+(N-1)*CELL); ctx.stroke();
+      }
+
+      // Star points
+      const stars = N===9 ? [[2,2],[2,6],[4,4],[6,2],[6,6]]
+                  : N===13 ? [[3,3],[3,9],[6,6],[9,3],[9,9]]
+                  : [[3,3],[3,9],[3,15],[9,3],[9,9],[9,15],[15,3],[15,9],[15,15]];
+      ctx.fillStyle = '#8b6914';
+      stars.forEach(([r,c]) => {
+        ctx.beginPath();
+        ctx.arc(PAD+c*CELL, PAD+r*CELL, 3, 0, Math.PI*2);
+        ctx.fill();
+      });
+
+      // Stones
+      for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) {
+        const stone = board[idx(r,c)];
+        if (!stone) continue;
+        const x = PAD+c*CELL, y = PAD+r*CELL, rad = CELL*0.44;
+        const grad = ctx.createRadialGradient(x-rad*.3,y-rad*.3,rad*.05,x,y,rad);
+        if (stone === 1) { grad.addColorStop(0,'#666'); grad.addColorStop(1,'#000'); }
+        else { grad.addColorStop(0,'#fff'); grad.addColorStop(1,'#ccc'); }
+        ctx.beginPath(); ctx.arc(x,y,rad,0,Math.PI*2);
+        ctx.fillStyle = grad; ctx.fill();
+        if (stone === 2) { ctx.strokeStyle='#999'; ctx.lineWidth=.5; ctx.stroke(); }
+      }
+
+      // Hover ghost
+      if (hoverR >= 0 && hoverC >= 0 && board[idx(hoverR,hoverC)] === 0) {
+        const x = PAD+hoverC*CELL, y = PAD+hoverR*CELL, rad = CELL*0.44;
+        ctx.beginPath(); ctx.arc(x,y,rad,0,Math.PI*2);
+        ctx.fillStyle = turn===1 ? 'rgba(0,0,0,.3)' : 'rgba(255,255,255,.4)';
+        ctx.fill();
+      }
+    }
+
+    function canvasToCell(e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+      const c = Math.round((x - PAD) / CELL);
+      const r = Math.round((y - PAD) / CELL);
+      if (r < 0 || r >= N || c < 0 || c >= N) return null;
+      return [r, c];
+    }
+
+    canvas.addEventListener('mousemove', e => {
+      const pos = canvasToCell(e);
+      if (pos) draw(pos[0], pos[1]); else draw();
+    });
+    canvas.addEventListener('mouseleave', () => draw());
+    canvas.addEventListener('click', e => {
+      const pos = canvasToCell(e);
+      if (!pos || gameOver) return;
+      placeStone(pos[0], pos[1]);
+    });
+
+    function getGroup(b, start) {
+      const color = b[start], visited = new Set([start]);
+      const stack = [start], liberties = new Set();
+      while (stack.length) {
+        const cur = stack.pop();
+        const r = Math.floor(cur/N), c = cur%N;
+        for (const [dr,dc] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+          const nr=r+dr, nc=c+dc;
+          if (nr<0||nr>=N||nc<0||nc>=N) continue;
+          const ni = idx(nr,nc);
+          if (b[ni]===0) liberties.add(ni);
+          else if (b[ni]===color && !visited.has(ni)) { visited.add(ni); stack.push(ni); }
+        }
+      }
+      return { stones: visited, liberties };
+    }
+
+    function placeStone(r, c) {
+      const i = idx(r,c);
+      if (board[i] !== 0 || i === koPoint) return;
+      const nb = [...board];
+      nb[i] = turn;
+      const opp = turn===1?2:1;
+      let totalCaptured = 0;
+      let koCapture = -1;
+      for (const [dr,dc] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+        const nr=r+dr, nc=c+dc;
+        if (nr<0||nr>=N||nc<0||nc>=N) continue;
+        const ni = idx(nr,nc);
+        if (nb[ni]===opp) {
+          const {stones, liberties} = getGroup(nb, ni);
+          if (liberties.size===0) {
+            totalCaptured += stones.size;
+            if (stones.size===1) koCapture = ni;
+            stones.forEach(s => { nb[s]=0; });
+          }
+        }
+      }
+      const {liberties: myLibs} = getGroup(nb, i);
+      if (myLibs.size===0 && totalCaptured===0) return; // suicide
+
+      const boardStr = nb.join(',');
+      if (boardStr === lastBoard) return; // Ko
+
+      lastBoard = board.join(',');
+      koPoint = (totalCaptured===1 && koCapture>=0) ? koCapture : -1;
+      captured[turn] += totalCaptured;
+      board = nb;
+      turn = opp;
+      consecutivePasses = 0;
+      document.getElementById('bCap').textContent = captured[1];
+      document.getElementById('wCap').textContent = captured[2];
+      updateTurnIndicator();
+      draw();
+    }
+
+    function pass() {
+      if (gameOver) return;
+      consecutivePasses++;
+      if (consecutivePasses >= 2) { scoreGame(); return; }
+      turn = turn===1?2:1;
+      koPoint = -1;
+      updateTurnIndicator();
+      const msg = document.getElementById('msg');
+      msg.textContent = (turn===1?'Blanc':'Noir') + ' a passé.';
+    }
+
+    function updateTurnIndicator() {
+      const ind = document.getElementById('turnIndicator');
+      ind.innerHTML = turn===1
+        ? '<div class="stone-dot black"></div><span>Noir joue</span>'
+        : '<div class="stone-dot white"></div><span>Blanc joue</span>';
+    }
+
+    function scoreGame() {
+      gameOver = true;
+      let blackScore = captured[1], whiteScore = captured[2] + 6.5; // komi
+      const territory = Array(N*N).fill(0);
+      const visited = new Array(N*N).fill(false);
+      for (let start = 0; start < N*N; start++) {
+        if (board[start]!==0 || visited[start]) continue;
+        const region = new Set([start]);
+        const stack = [start];
+        let black = false, white = false;
+        while (stack.length) {
+          const cur = stack.pop();
+          const r = Math.floor(cur/N), c = cur%N;
+          for (const [dr,dc] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+            const nr=r+dr, nc=c+dc;
+            if (nr<0||nr>=N||nc<0||nc>=N) continue;
+            const ni = idx(nr,nc);
+            if (board[ni]===1) black=true;
+            else if (board[ni]===2) white=true;
+            else if (!region.has(ni)) { region.add(ni); stack.push(ni); }
+          }
+        }
+        region.forEach(i => { visited[i]=true; territory[i] = (black&&!white)?1:(white&&!black)?2:0; });
+      }
+      for (let i=0;i<N*N;i++) {
+        if (territory[i]===1) blackScore++;
+        else if (territory[i]===2) whiteScore++;
+      }
+      blackScore += board.filter(x=>x===1).length;
+      whiteScore += board.filter(x=>x===2).length;
+      const winner = blackScore>whiteScore?'Noir':'Blanc';
+      document.getElementById('msg').textContent =
+        `Fin ! Noir: ${blackScore} pts — Blanc: ${whiteScore.toFixed(1)} pts — ${winner} gagne !`;
+    }
+
+    initGame(9);
+  </script>
+</body>
+</html>

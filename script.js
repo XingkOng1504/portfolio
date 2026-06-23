@@ -11,6 +11,7 @@ const translations = {
     nav_stage:        'Stage',
     nav_objectifs:    'Objectifs',
     nav_contact:      'Contact',
+    nav_games:        '🎮 Jeux',
 
     hero_tag:      'Portfolio S4 — BUT Informatique · IUT Villetaneuse',
     hero_name:     'Lin Huang <span class="accent">Christophe</span>',
@@ -218,6 +219,7 @@ const translations = {
     nav_stage:        'Internship',
     nav_objectifs:    'Goals',
     nav_contact:      'Contact',
+    nav_games:        '🎮 Games',
 
     hero_tag:      'S4 Portfolio — BSc Computer Science · IUT Villetaneuse',
     hero_name:     'Lin Huang <span class="accent">Christophe</span>',
@@ -421,6 +423,7 @@ const translations = {
     nav_stage:        '实习',
     nav_objectifs:    '职业规划',
     nav_contact:      '联系我',
+    nav_games:        '🎮 游戏',
 
     hero_tag:      'S4 学期作品集 — 计算机技术学士 · 维勒塔纳伊夫理工学院',
     hero_name:     '林黄 <span class="accent">亦凯</span>',

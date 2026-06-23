@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sudoku</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d1117;color:#e6edf3;font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem}
+    a.back{color:#8b949e;text-decoration:none;align-self:flex-start;margin-bottom:1.5rem;font-size:.9rem}
+    a.back:hover{color:#e6edf3}
+    h1{font-size:1.6rem;font-weight:700;margin-bottom:1.25rem}
+    .controls{display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;justify-content:center}
+    .btn{background:#21262d;color:#e6edf3;border:1px solid #30363d;border-radius:8px;padding:.5rem 1.1rem;cursor:pointer;font-size:.85rem;font-family:inherit;transition:background .15s}
+    .btn:hover,.btn.active{background:#0284c7;border-color:#0284c7;color:#fff}
+    .hud{display:flex;align-items:center;gap:1.5rem;margin-bottom:1rem;font-size:.9rem;color:#8b949e}
+    #timer-display{font-family:'JetBrains Mono',monospace;color:#e6edf3}
+    .grid{display:grid;grid-template-columns:repeat(9,48px);gap:0;border:2px solid #8b949e;border-radius:4px;user-select:none}
+    .cell{width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;border:1px solid #30363d;transition:background .1s;position:relative}
+    .cell.selected{background:#0284c7 !important;color:#fff}
+    .cell.highlight{background:rgba(2,132,199,.12)}
+    .cell.given{color:#e6edf3;cursor:default}
+    .cell.user{color:#38bdf8}
+    .cell.error{color:#f87171;background:rgba(239,68,68,.08)}
+    .cell.error.selected{background:#ef4444 !important;color:#fff}
+    /* 3x3 box borders */
+    .cell:nth-child(3n){border-right:2px solid #8b949e}
+    .cell:nth-child(n+19):nth-child(-n+27){border-bottom:2px solid #8b949e}
+    .cell:nth-child(n+46):nth-child(-n+54){border-bottom:2px solid #8b949e}
+    .numpad{display:grid;grid-template-columns:repeat(9,48px);gap:6px;margin-top:1rem}
+    .numpad button{width:48px;height:48px;background:#21262d;border:1px solid #30363d;border-radius:8px;color:#e6edf3;font-size:1.2rem;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:background .1s}
+    .numpad button:hover{background:#0284c7;border-color:#0284c7;color:#fff}
+    .actions{display:flex;gap:.75rem;margin-top:1rem}
+    .msg{margin-top:1rem;font-size:1rem;font-weight:600;min-height:1.5rem;color:#4ade80}
+    .msg.err{color:#f87171}
+  </style>
+</head>
+<body>
+  <a href="../games.html" class="back">← Jeux</a>
+  <h1>🔢 Sudoku</h1>
+  <div class="controls">
+    <button class="btn active" onclick="newGame('easy')">Facile</button>
+    <button class="btn" onclick="newGame('medium')">Moyen</button>
+    <button class="btn" onclick="newGame('hard')">Difficile</button>
+  </div>
+  <div class="hud">
+    <span>⏱ <span id="timer-display">0s</span></span>
+    <span id="errors-display">Erreurs: 0</span>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="numpad" id="numpad"></div>
+  <div class="actions">
+    <button class="btn" onclick="clearCell()">✕ Effacer</button>
+    <button class="btn" onclick="checkSolution()">✓ Vérifier</button>
+  </div>
+  <div class="msg" id="msg"></div>
+  <script>
+    let solution = [], puzzle = [], userGrid = [], selected = -1;
+    let errors = 0, timerInt = null, elapsed = 0, gameOver = false;
+
+    function isValid(b, r, c, n) {
+      for (let i = 0; i < 9; i++) {
+        if (b[r*9+i] === n) return false;
+        if (b[i*9+c] === n) return false;
+      }
+      const br = Math.floor(r/3)*3, bc = Math.floor(c/3)*3;
+      for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++)
+        if (b[(br+i)*9+(bc+j)] === n) return false;
+      return true;
+    }
+
+    function solve(b) {
+      const idx = b.indexOf(0);
+      if (idx === -1) return true;
+      const r = Math.floor(idx/9), c = idx%9;
+      const nums = [1,2,3,4,5,6,7,8,9].sort(() => Math.random()-.5);
+      for (const n of nums) {
+        if (isValid(b, r, c, n)) {
+          b[idx] = n;
+          if (solve(b)) return true;
+          b[idx] = 0;
+        }
+      }
+      return false;
+    }
+
+    function newGame(diff = 'easy') {
+      document.querySelectorAll('.controls .btn').forEach(b => b.classList.remove('active'));
+      event?.target?.classList.add('active');
+      clearInterval(timerInt); elapsed = 0; errors = 0; gameOver = false;
+      document.getElementById('timer-display').textContent = '0s';
+      document.getElementById('errors-display').textContent = 'Erreurs: 0';
+      document.getElementById('msg').textContent = '';
+      selected = -1;
+
+      solution = Array(81).fill(0);
+      solve(solution);
+
+      const toRemove = diff === 'easy' ? 35 : diff === 'medium' ? 47 : 57;
+      puzzle = [...solution];
+      const cells = [...Array(81).keys()].sort(() => Math.random()-.5);
+      for (let i = 0; i < toRemove; i++) puzzle[cells[i]] = 0;
+
+      userGrid = [...puzzle];
+
+      timerInt = setInterval(() => {
+        elapsed++;
+        document.getElementById('timer-display').textContent = elapsed + 's';
+      }, 1000);
+
+      render();
+    }
+
+    function render() {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      for (let i = 0; i < 81; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        const r = Math.floor(i/9), c = i%9;
+        if (puzzle[i] !== 0) {
+          cell.classList.add('given');
+          cell.textContent = puzzle[i];
+        } else if (userGrid[i] !== 0) {
+          cell.classList.add('user');
+          cell.textContent = userGrid[i];
+          if (userGrid[i] !== solution[i]) cell.classList.add('error');
+        }
+        if (i === selected) cell.classList.add('selected');
+        else if (selected !== -1) {
+          const sr = Math.floor(selected/9), sc = selected%9;
+          if (r === sr || c === sc || (Math.floor(r/3)===Math.floor(sr/3) && Math.floor(c/3)===Math.floor(sc/3)))
+            cell.classList.add('highlight');
+        }
+        cell.addEventListener('click', () => {
+          if (puzzle[i] !== 0) return;
+          selected = (selected === i) ? -1 : i;
+          render();
+        });
+        grid.appendChild(cell);
+      }
+      buildNumpad();
+    }
+
+    function buildNumpad() {
+      const np = document.getElementById('numpad');
+      np.innerHTML = '';
+      for (let n = 1; n <= 9; n++) {
+        const b = document.createElement('button');
+        b.textContent = n;
+        b.addEventListener('click', () => inputNum(n));
+        np.appendChild(b);
+      }
+    }
+
+    function inputNum(n) {
+      if (selected === -1 || puzzle[selected] !== 0 || gameOver) return;
+      userGrid[selected] = n;
+      if (n !== solution[selected]) {
+        errors++;
+        document.getElementById('errors-display').textContent = 'Erreurs: ' + errors;
+      }
+      checkWin();
+      render();
+    }
+
+    function clearCell() {
+      if (selected === -1 || puzzle[selected] !== 0) return;
+      userGrid[selected] = 0;
+      render();
+    }
+
+    function checkWin() {
+      for (let i = 0; i < 81; i++)
+        if (userGrid[i] !== solution[i]) return;
+      clearInterval(timerInt); gameOver = true;
+      document.getElementById('msg').textContent = '🎉 Résolu en ' + elapsed + 's — Bravo !';
+    }
+
+    function checkSolution() {
+      let ok = true;
+      for (let i = 0; i < 81; i++)
+        if (userGrid[i] !== 0 && userGrid[i] !== solution[i]) { ok = false; break; }
+      const msg = document.getElementById('msg');
+      if (ok) { msg.textContent = '✓ Pas d\'erreur pour l\'instant !'; msg.className = 'msg'; }
+      else { msg.textContent = '✗ Il y a des erreurs (en rouge)'; msg.className = 'msg err'; }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key >= '1' && e.key <= '9') inputNum(parseInt(e.key));
+      if (e.key === 'Backspace' || e.key === 'Delete') clearCell();
+    });
+
+    newGame('easy');
+  </script>
+</body>
+</html>

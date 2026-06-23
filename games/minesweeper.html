@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Démineur</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0d1117;color:#e6edf3;font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1.5rem}
+    a.back{color:#8b949e;text-decoration:none;align-self:flex-start;margin-bottom:1.5rem;font-size:.9rem}
+    a.back:hover{color:#e6edf3}
+    h1{font-size:1.6rem;font-weight:700;margin-bottom:1.25rem}
+    .controls{display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;justify-content:center}
+    .btn{background:#21262d;color:#e6edf3;border:1px solid #30363d;border-radius:8px;padding:.5rem 1.1rem;cursor:pointer;font-size:.85rem;font-family:inherit;transition:background .15s,border-color .15s}
+    .btn:hover,.btn.active{background:#0284c7;border-color:#0284c7;color:#fff}
+    .hud{display:flex;align-items:center;gap:2rem;margin-bottom:1rem;font-family:'JetBrains Mono',monospace;font-size:1.1rem}
+    .hud span{min-width:4ch;text-align:center}
+    #reset{background:none;border:none;font-size:1.6rem;cursor:pointer;padding:.2rem}
+    .board{display:inline-grid;gap:2px;background:#21262d;border:2px solid #30363d;border-radius:8px;padding:8px;user-select:none}
+    .cell{width:32px;height:32px;background:#161b22;border:1px solid #30363d;border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.85rem;font-weight:700;font-family:'JetBrains Mono',monospace;transition:background .1s}
+    .cell:hover:not(.revealed):not(.flagged){background:#21262d}
+    .cell.revealed{background:#0d1117;cursor:default;border-color:#21262d}
+    .cell.flagged{background:#21262d;color:#f87171}
+    .cell.mine-hit{background:#ef4444;color:#fff}
+    .cell.mine-reveal{background:#161b22;color:#8b949e}
+    .n1{color:#38bdf8} .n2{color:#4ade80} .n3{color:#f87171} .n4{color:#818cf8}
+    .n5{color:#f59e0b} .n6{color:#67e8f9} .n7{color:#e6edf3} .n8{color:#8b949e}
+    .msg{margin-top:1.25rem;font-size:1rem;font-weight:600;min-height:1.5rem;color:#38bdf8}
+    .msg.loss{color:#f87171}
+  </style>
+</head>
+<body>
+  <a href="../games.html" class="back">← Jeux</a>
+  <h1>💣 Démineur</h1>
+  <div class="controls">
+    <button class="btn active" id="d-easy" onclick="setDiff('easy')">Facile 9×9</button>
+    <button class="btn" id="d-med" onclick="setDiff('medium')">Moyen 16×16</button>
+    <button class="btn" id="d-hard" onclick="setDiff('hard')">Difficile 30×16</button>
+  </div>
+  <div class="hud">
+    <span>💣 <span id="mineCount">10</span></span>
+    <button id="reset" onclick="newGame()">🙂</button>
+    <span>⏱ <span id="timer">0</span>s</span>
+  </div>
+  <div class="board" id="board" oncontextmenu="return false"></div>
+  <div class="msg" id="msg"></div>
+  <script>
+    const DIFFS = {
+      easy:   { rows:9,  cols:9,  mines:10 },
+      medium: { rows:16, cols:16, mines:40 },
+      hard:   { rows:16, cols:30, mines:99 },
+    };
+    let diff = 'easy', config = DIFFS.easy;
+    let grid = [], firstClick = true, gameOver = false, flagCount = 0;
+    let timerInt = null, elapsed = 0;
+
+    function setDiff(d) {
+      diff = d; config = DIFFS[d];
+      document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('d-' + d.replace('ium','').replace('ard','ard')).classList.add('active');
+      document.getElementById('d-easy').classList.toggle('active', d==='easy');
+      document.getElementById('d-med').classList.toggle('active', d==='medium');
+      document.getElementById('d-hard').classList.toggle('active', d==='hard');
+      newGame();
+    }
+
+    function newGame() {
+      clearInterval(timerInt); elapsed = 0;
+      document.getElementById('timer').textContent = '0';
+      document.getElementById('reset').textContent = '🙂';
+      document.getElementById('msg').textContent = '';
+      document.getElementById('msg').className = 'msg';
+      firstClick = true; gameOver = false; flagCount = 0;
+      const {rows, cols, mines} = config;
+      document.getElementById('mineCount').textContent = mines;
+      grid = Array.from({length: rows}, () =>
+        Array.from({length: cols}, () => ({mine:false, revealed:false, flagged:false, adj:0}))
+      );
+      render();
+    }
+
+    function placeMines(sr, sc) {
+      const {rows, cols, mines} = config;
+      let placed = 0;
+      while (placed < mines) {
+        const r = Math.floor(Math.random() * rows);
+        const c = Math.floor(Math.random() * cols);
+        if (grid[r][c].mine || (Math.abs(r-sr)<=1 && Math.abs(c-sc)<=1)) continue;
+        grid[r][c].mine = true;
+        placed++;
+      }
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++) {
+          if (grid[r][c].mine) continue;
+          let cnt = 0;
+          neighbors(r, c).forEach(([nr, nc]) => { if (grid[nr][nc].mine) cnt++; });
+          grid[r][c].adj = cnt;
+        }
+    }
+
+    function neighbors(r, c) {
+      const {rows, cols} = config;
+      const res = [];
+      for (let dr = -1; dr <= 1; dr++)
+        for (let dc = -1; dc <= 1; dc++) {
+          if (!dr && !dc) continue;
+          const nr = r+dr, nc = c+dc;
+          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) res.push([nr, nc]);
+        }
+      return res;
+    }
+
+    function reveal(r, c) {
+      const cell = grid[r][c];
+      if (cell.revealed || cell.flagged) return;
+      cell.revealed = true;
+      if (cell.adj === 0 && !cell.mine)
+        neighbors(r, c).forEach(([nr, nc]) => reveal(nr, nc));
+    }
+
+    function click(r, c) {
+      if (gameOver || grid[r][c].revealed || grid[r][c].flagged) return;
+      if (firstClick) {
+        firstClick = false;
+        placeMines(r, c);
+        timerInt = setInterval(() => {
+          elapsed++;
+          document.getElementById('timer').textContent = elapsed;
+        }, 1000);
+      }
+      if (grid[r][c].mine) {
+        grid[r][c].revealed = true;
+        endGame(false, r, c);
+        return;
+      }
+      reveal(r, c);
+      checkWin();
+      render();
+    }
+
+    function rightClick(r, c) {
+      if (gameOver || grid[r][c].revealed) return;
+      const cell = grid[r][c];
+      cell.flagged = !cell.flagged;
+      flagCount += cell.flagged ? 1 : -1;
+      document.getElementById('mineCount').textContent = config.mines - flagCount;
+      render();
+    }
+
+    function endGame(win, hitR, hitC) {
+      clearInterval(timerInt); gameOver = true;
+      const {rows, cols} = config;
+      document.getElementById('reset').textContent = win ? '😎' : '😵';
+      const msg = document.getElementById('msg');
+      if (win) { msg.textContent = '🎉 Gagné ! ' + elapsed + 's'; msg.className = 'msg'; }
+      else {
+        msg.textContent = '💥 Boom ! Perdu.'; msg.className = 'msg loss';
+        for (let r = 0; r < rows; r++)
+          for (let c = 0; c < cols; c++)
+            if (grid[r][c].mine) grid[r][c].hitCell = (r===hitR && c===hitC);
+      }
+      render();
+    }
+
+    function checkWin() {
+      const {rows, cols, mines} = config;
+      let unrevealed = 0;
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++)
+          if (!grid[r][c].revealed) unrevealed++;
+      if (unrevealed === mines) endGame(true);
+    }
+
+    function render() {
+      const {rows, cols} = config;
+      const board = document.getElementById('board');
+      board.style.gridTemplateColumns = `repeat(${cols}, 32px)`;
+      board.innerHTML = '';
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++) {
+          const cell = grid[r][c];
+          const el = document.createElement('div');
+          el.className = 'cell';
+          if (cell.revealed) {
+            if (cell.mine) {
+              el.className = 'cell ' + (cell.hitCell ? 'mine-hit' : 'mine-reveal');
+              el.textContent = '💣';
+            } else {
+              el.classList.add('revealed');
+              if (cell.adj > 0) { el.textContent = cell.adj; el.classList.add('n'+cell.adj); }
+            }
+          } else if (cell.flagged) {
+            el.classList.add('flagged');
+            el.textContent = '🚩';
+          }
+          el.addEventListener('click', () => click(r, c));
+          el.addEventListener('contextmenu', e => { e.preventDefault(); rightClick(r, c); });
+          board.appendChild(el);
+        }
+    }
+
+    newGame();
+  </script>
+</body>
+</html>
