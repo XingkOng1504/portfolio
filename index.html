@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,19 +14,31 @@
   <nav class="navbar">
     <span class="nav-logo">LHC</span>
     <ul class="nav-links">
-      <li><a href="#presentation">Présentation</a></li>
-      <li><a href="#competences">Compétences</a></li>
-      <li><a href="#stage">Stage</a></li>
-      <li><a href="#objectifs">Objectifs</a></li>
+      <li><a href="#presentation" data-i18n="nav_presentation">Présentation</a></li>
+      <li><a href="#competences" data-i18n="nav_competences">Compétences</a></li>
+      <li><a href="#projets" data-i18n="nav_projets">Projets</a></li>
+      <li><a href="#stage" data-i18n="nav_stage">Stage</a></li>
+      <li><a href="#objectifs" data-i18n="nav_objectifs">Objectifs</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
   </nav>
 
   <!-- HERO -->
   <header class="hero">
     <div class="hero-content">
-      <p class="hero-tag">Portfolio S4 — BUT Informatique · IUT Villetaneuse</p>
-      <h1>Lin Huang <span class="accent">Christophe</span></h1>
-      <p class="hero-subtitle">Développeur Back-End · Automatisation · E-commerce &amp; Logistique</p>
+      <p class="hero-tag" data-i18n="hero_tag">Portfolio S4 — BUT Informatique · IUT Villetaneuse</p>
+      <h1 data-i18n-html="hero_name">Lin Huang <span class="accent">Christophe</span></h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">Développeur Back-End · Automatisation · E-commerce &amp; Logistique</p>
       <div class="hero-badges">
         <span class="badge">Python</span>
         <span class="badge">Flask</span>
@@ -34,10 +46,13 @@
         <span class="badge">API REST</span>
         <span class="badge">Docker</span>
       </div>
-      <a href="#presentation" class="cta-btn">Découvrir le portfolio</a>
+      <div class="hero-actions">
+        <a href="#presentation" class="cta-btn" data-i18n="hero_cta">Découvrir le portfolio</a>
+        <a href="cv.pdf" class="cv-btn" download data-i18n="hero_cv">Télécharger CV</a>
+      </div>
     </div>
     <div class="hero-code">
-      <pre><code><span class="kw">class</span> <span class="cls">Christophe</span>:
+      <pre><code data-i18n-html="hero_code"><span class="kw">class</span> <span class="cls">Christophe</span>:
   formation  = <span class="str">"BUT Informatique S4"</span>
   école      = <span class="str">"IUT Villetaneuse"</span>
   ambition   = <span class="str">"Ingénieur Cnam (alternance)"</span>
@@ -48,132 +63,88 @@
 
   <main>
 
-    <!-- ======================================
-         SECTION 1 — PRÉSENTATION PERSONNELLE
-         ====================================== -->
+    <!-- ======== 01 — PRÉSENTATION ======== -->
     <section id="presentation" class="section">
       <div class="container">
         <div class="section-header">
           <span class="section-num">01</span>
-          <h2>Présentation personnelle</h2>
-          <p class="section-sub">Parcours · Projet professionnel · Évolution BUT 1 → BUT 2</p>
+          <h2 data-i18n="s01_title">Présentation personnelle</h2>
+          <p class="section-sub" data-i18n="s01_sub">Parcours · Projet professionnel · Évolution BUT 1 → BUT 2</p>
         </div>
 
         <div class="grid-2">
           <div class="card">
-            <h3>Mon projet professionnel</h3>
-            <p>
-              Mon orientation vers le développement Back-End n'est pas le fruit du hasard : elle découle
-              d'une appétence concrète pour <strong>l'automatisation des flux d'information</strong>,
-              notamment dans les secteurs de l'e-commerce et de la logistique.
-            </p>
-            <p>
-              Durant mon stage, j'ai pu mesurer l'impact direct d'un code robuste sur des processus
-              critiques : la génération automatique de bordereaux d'expédition, la synchronisation
-              des catalogues produits entre marketplaces. Ce type de problème, à l'intersection du
-              code et du métier, est exactement ce qui me motive.
-            </p>
-            <p>
-              Mon objectif est d'intégrer le <strong>diplôme d'ingénieur Informatique et Systèmes
-              d'Information du Cnam</strong> en alternance, pour ancrer mes compétences techniques
-              dans une réalité d'entreprise dès la troisième année.
-            </p>
+            <h3 data-i18n="s01_c1_title">Mon projet professionnel</h3>
+            <div data-i18n-html="s01_c1_body">
+              <p>Mon orientation vers le développement Back-End découle d'une appétence concrète pour <strong>l'automatisation des flux d'information</strong>, notamment dans les secteurs de l'e-commerce et de la logistique.</p>
+              <p>Durant mon stage, j'ai mesuré l'impact direct d'un code robuste sur des processus critiques : génération automatique de bordereaux d'expédition, synchronisation des catalogues produits entre marketplaces.</p>
+              <p>Mon objectif est d'intégrer le <strong>diplôme d'ingénieur Informatique et Systèmes d'Information du Cnam</strong> en alternance, pour ancrer mes compétences dans une réalité d'entreprise dès la troisième année.</p>
+            </div>
           </div>
 
           <div class="card">
-            <h3>Pourquoi l'informatique ?</h3>
-            <p>
-              Ce qui m'a attiré dans l'informatique, c'est la capacité à <strong>transformer
-              un problème complexe en une solution reproductible</strong>. Lorsqu'une tâche
-              répétitive peut être automatisée, on libère du temps pour des décisions à plus
-              haute valeur ajoutée.
-            </p>
-            <p>
-              Cette logique s'est confirmée dès mes premières SAÉ : j'y ai trouvé plus d'intérêt
-              à comprendre <em>pourquoi</em> une architecture fonctionne qu'à simplement la
-              faire tourner. C'est cette posture analytique que je cherche à approfondir vers
-              un rôle d'ingénieur logiciel orienté systèmes.
-            </p>
+            <h3 data-i18n="s01_c2_title">Pourquoi l'informatique ?</h3>
+            <div data-i18n-html="s01_c2_body">
+              <p>Ce qui m'a attiré dans l'informatique, c'est la capacité à <strong>transformer un problème complexe en une solution reproductible</strong>. Lorsqu'une tâche répétitive peut être automatisée, on libère du temps pour des décisions à plus haute valeur ajoutée.</p>
+              <p>Cette logique s'est confirmée dès mes premières SAÉ : j'y ai trouvé plus d'intérêt à comprendre <em>pourquoi</em> une architecture fonctionne qu'à simplement la faire tourner. C'est cette posture analytique que je cherche à approfondir vers un rôle d'ingénieur logiciel orienté systèmes.</p>
+            </div>
           </div>
         </div>
 
         <div class="card card-full mt-lg">
-          <h3>Qualités personnelles — illustrées par mes projets</h3>
+          <h3 data-i18n="s01_c3_title">Qualités personnelles — illustrées par mes projets</h3>
           <div class="qualities-grid">
             <div class="quality-item">
               <span class="quality-icon">&#x1F9E9;</span>
-              <h4>Persévérance</h4>
-              <p>
-                La connexion aux API d'Octopia, Cdiscount et Back Market lors de mon stage
-                a nécessité plusieurs semaines de lecture de documentation, de tests et de
-                corrections d'erreurs silencieuses. J'ai tenu jusqu'à obtenir un pipeline
-                stable en production.
-              </p>
+              <h4 data-i18n="q1_title">Persévérance</h4>
+              <p data-i18n="q1_body">La connexion aux API d'Octopia, Cdiscount et Back Market lors de mon stage a nécessité plusieurs semaines de lecture de documentation, de tests et de corrections d'erreurs silencieuses. J'ai tenu jusqu'à obtenir un pipeline stable en production.</p>
             </div>
             <div class="quality-item">
               <span class="quality-icon">&#x1F50D;</span>
-              <h4>Esprit d'analyse</h4>
-              <p>
-                Sur Mnémosyne, la modélisation des flux étudiants (passage, redoublement,
-                abandon) a exigé d'analyser des données hétérogènes issues de l'API ScoDoc
-                et de définir des règles métier cohérentes avant d'écrire la moindre ligne
-                de code.
-              </p>
+              <h4 data-i18n="q2_title">Esprit d'analyse</h4>
+              <p data-i18n="q2_body">Sur Mnémosyne, la modélisation des flux étudiants a exigé d'analyser des données hétérogènes issues de l'API ScoDoc et de définir des règles métier cohérentes avant d'écrire la moindre ligne de code.</p>
             </div>
             <div class="quality-item">
               <span class="quality-icon">&#x1F4D0;</span>
-              <h4>Rigueur architecturale</h4>
-              <p>
-                L'application des patrons de conception — Composite, Strategy, Observer —
-                dans mes développements de SAÉ reflète une volonté de produire un code
-                maintenable, pas seulement fonctionnel.
-              </p>
+              <h4 data-i18n="q3_title">Rigueur architecturale</h4>
+              <p data-i18n="q3_body">L'application des patrons de conception — Composite, Strategy, Observer — reflète une volonté de produire un code maintenable, pas seulement fonctionnel.</p>
             </div>
           </div>
         </div>
 
         <div class="card card-full mt-lg highlight-card">
-          <h3>Évolution BUT 1 → BUT 2 : le cap franchi</h3>
+          <h3 data-i18n="s01_c4_title">Évolution BUT 1 → BUT 2 : le cap franchi</h3>
           <div class="evolution-timeline">
             <div class="evo-step">
               <span class="evo-badge but1">BUT 1</span>
-              <p>Exercices académiques, algorithmes, bases de données SQL, premiers projets encadrés.</p>
+              <p data-i18n="evo_but1">Exercices académiques, algorithmes, bases de données SQL, premiers projets encadrés.</p>
             </div>
             <div class="evo-arrow">&#x2192;</div>
             <div class="evo-step">
               <span class="evo-badge but2">BUT 2</span>
-              <p>Solutions déployables en entreprise, architecture MVC, Docker, API tierces, gestion de données réelles.</p>
+              <p data-i18n="evo_but2">Solutions déployables en entreprise, architecture MVC, Docker, API tierces, gestion de données réelles.</p>
             </div>
           </div>
-          <p class="mt-md">
-            Ce passage d'exercices purement académiques à la création de solutions concrètes
-            pour des environnements d'entreprise (infrastructure Windows / Alwaysdata, contraintes
-            RGPD, environnements de production) constitue la transformation centrale de cette
-            deuxième année. Je ne produis plus du code qui fonctionne en local : je produis
-            du code qui tient en conditions réelles.
-          </p>
+          <p class="mt-md" data-i18n="evo_conclusion">Ce passage d'exercices purement académiques à la création de solutions concrètes pour des environnements d'entreprise constitue la transformation centrale de cette deuxième année. Je ne produis plus du code qui fonctionne en local : je produis du code qui tient en conditions réelles.</p>
         </div>
       </div>
     </section>
 
-    <!-- ======================================
-         SECTION 2 — COMPÉTENCES & SAÉ
-         ====================================== -->
+    <!-- ======== 02 — COMPÉTENCES & SAÉ ======== -->
     <section id="competences" class="section section-dark">
       <div class="container">
         <div class="section-header">
           <span class="section-num">02</span>
-          <h2>Bilan des compétences — SAÉ BUT 2</h2>
-          <p class="section-sub">Traces d'apprentissage · Preuves · Perspectives</p>
+          <h2 data-i18n="s02_title">Bilan des compétences — SAÉ BUT 2</h2>
+          <p class="section-sub" data-i18n="s02_sub">Traces d'apprentissage · Preuves · Perspectives</p>
         </div>
 
-        <!-- SAÉ S4 — Mnémosyne -->
         <div class="project-card">
           <div class="project-header">
             <div>
-              <span class="project-tag">SAÉ S4 · Projet universitaire n°2</span>
+              <span class="project-tag" data-i18n="sae_s4_tag">SAÉ S4 · Projet universitaire n°2</span>
               <h3 class="project-title">Mnémosyne</h3>
-              <p class="project-sub">Plateforme de suivi des cohortes étudiantes — IUT Villetaneuse</p>
+              <p class="project-sub" data-i18n="sae_s4_sub">Plateforme de suivi des cohortes étudiantes — IUT Villetaneuse</p>
             </div>
             <div class="project-stack">
               <span class="badge">Flask</span>
@@ -187,17 +158,12 @@
 
           <div class="grid-2 mt-md">
             <div>
-              <h4>Contexte &amp; objectif</h4>
-              <p>
-                Depuis la réforme BUT 2021, l'IUT Villetaneuse (6 départements, 3 années)
-                peine à visualiser les flux d'étudiants entre promotions. Mnémosyne répond
-                à ce besoin via des <strong>diagrammes de Sankey interactifs</strong> connectés
-                à l'API ScoDoc, permettant de suivre passages, redoublements et abandons.
-              </p>
+              <h4 data-i18n="sae_s4_ctx_title">Contexte &amp; objectif</h4>
+              <div data-i18n-html="sae_s4_ctx_body"><p>Depuis la réforme BUT 2021, l'IUT Villetaneuse peine à visualiser les flux d'étudiants entre promotions. Mnémosyne répond à ce besoin via des <strong>diagrammes de Sankey interactifs</strong> connectés à l'API ScoDoc, permettant de suivre passages, redoublements et abandons.</p></div>
             </div>
             <div>
-              <h4>Ce que j'ai apporté</h4>
-              <ul class="bullet-list">
+              <h4 data-i18n="sae_s4_contrib_title">Ce que j'ai apporté</h4>
+              <ul class="bullet-list" data-i18n-html="sae_s4_contrib_body">
                 <li>Architecture MVC Flask avec séparation stricte Controllers / Services / DAO</li>
                 <li>Système de règles métier configurables pour qualifier les parcours étudiants</li>
                 <li>Export PDF des rapports de cohorte</li>
@@ -208,30 +174,23 @@
           </div>
 
           <div class="proof-box mt-md">
-            <span class="proof-label">Preuve de compétence</span>
-            <p>
-              La mise en place du diagramme de Sankey illustre ma capacité à
-              <strong>traiter et visualiser des données complexes</strong> : il a fallu
-              transformer des décisions de jury brutes (ADM, PASD, RED, NAR, ADJ) en
-              flux agrégés cohérents, puis les lier à une interface permettant de
-              "percer" chaque flux pour consulter les détails individuels.
-            </p>
+            <span class="proof-label" data-i18n="proof_label">Preuve de compétence</span>
+            <p data-i18n-html="sae_s4_proof">La mise en place du diagramme de Sankey illustre ma capacité à <strong>traiter et visualiser des données complexes</strong> : transformer des décisions de jury brutes (ADM, PASD, RED, NAR, ADJ) en flux agrégés cohérents.</p>
           </div>
 
           <div class="competence-tags mt-md">
-            <span class="comp-tag">Réaliser le développement d'applications</span>
-            <span class="comp-tag">Optimiser des applications informatiques</span>
-            <span class="comp-tag">Administrer des systèmes informatiques communicants</span>
+            <span class="comp-tag" data-i18n="comp_realiser">Réaliser le développement d'applications</span>
+            <span class="comp-tag" data-i18n="comp_optimiser">Optimiser des applications informatiques</span>
+            <span class="comp-tag" data-i18n="comp_administrer">Administrer des systèmes informatiques communicants</span>
           </div>
         </div>
 
-        <!-- SAÉ S3 -->
         <div class="project-card mt-lg">
           <div class="project-header">
             <div>
-              <span class="project-tag">SAÉ S3 · Projet universitaire n°1</span>
-              <h3 class="project-title">Mnémosyne — Archive v1</h3>
-              <p class="project-sub">Première version · Fondations techniques</p>
+              <span class="project-tag" data-i18n="sae_s3_tag">SAÉ S3 · Projet universitaire n°1</span>
+              <h3 class="project-title" data-i18n="sae_s3_title">Mnémosyne — Archive v1</h3>
+              <p class="project-sub" data-i18n="sae_s3_sub">Première version · Fondations techniques</p>
             </div>
             <div class="project-stack">
               <span class="badge">Flask</span>
@@ -243,8 +202,8 @@
 
           <div class="grid-2 mt-md">
             <div>
-              <h4>Compétences techniques acquises</h4>
-              <ul class="bullet-list">
+              <h4 data-i18n="sae_s3_tech_title">Compétences techniques acquises</h4>
+              <ul class="bullet-list" data-i18n-html="sae_s3_tech_body">
                 <li>Mise en place de l'architecture MVC en Python/Flask</li>
                 <li>Modélisation de base de données relationnelle (schéma SQL)</li>
                 <li>Authentification utilisateur (sessions Flask)</li>
@@ -252,92 +211,257 @@
               </ul>
             </div>
             <div>
-              <h4>Compétences transversales</h4>
-              <ul class="bullet-list">
+              <h4 data-i18n="sae_s3_trans_title">Compétences transversales</h4>
+              <ul class="bullet-list" data-i18n-html="sae_s3_trans_body">
                 <li>Travail en équipe avec versioning Git</li>
                 <li>Rédaction de documentation technique</li>
                 <li>Gestion des sprints et priorisation des tâches</li>
               </ul>
             </div>
           </div>
-
-          <div class="grid-sae-table mt-md">
-            <table class="sae-table">
-              <thead>
-                <tr>
-                  <th>Objectif(s)</th>
-                  <th>Tâches principales</th>
-                  <th>Compétences acquises</th>
-                  <th>Preuves</th>
-                  <th>Pistes d'amélioration (S4)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Créer une plateforme de suivi étudiant connectée à ScoDoc</td>
-                  <td>Conception BDD, API Flask, interface HTML/CSS</td>
-                  <td>Techniques : MVC, SQL, REST<br/>Transversales : Git, travail en équipe</td>
-                  <td>Code source versionné, interface fonctionnelle, tests manuels</td>
-                  <td>Docker, tests automatisés, export PDF, règles métier configurables</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
 
-        <!-- Bilan synthétique -->
         <div class="card card-full mt-lg">
-          <h3>Bilan synthétique &amp; perspectives de progression</h3>
+          <h3 data-i18n="bilan_title">Bilan synthétique &amp; perspectives de progression</h3>
           <div class="grid-3">
             <div class="bilan-item">
-              <h4>Ce que je valorise</h4>
-              <p>La capacité à concevoir des architectures propres dès le départ. L'habitude de séparer
-              les couches métier, données et présentation m'a évité de nombreuses régressions lors
-              des évolutions de Mnémosyne.</p>
+              <h4 data-i18n="bilan_1_title">Ce que je valorise</h4>
+              <p data-i18n="bilan_1_body">La capacité à concevoir des architectures propres dès le départ. L'habitude de séparer les couches métier, données et présentation m'a évité de nombreuses régressions lors des évolutions de Mnémosyne.</p>
             </div>
             <div class="bilan-item">
-              <h4>Bonnes pratiques apportées</h4>
-              <p>L'usage systématique d'interfaces (DAO Interface) pour abstraire les accès base de données,
-              permettant de basculer de SQLite vers une autre BDD sans toucher aux services métier.</p>
+              <h4 data-i18n="bilan_2_title">Bonnes pratiques apportées</h4>
+              <p data-i18n="bilan_2_body">L'usage systématique d'interfaces (DAO Interface) pour abstraire les accès base de données, permettant de basculer de SQLite vers une autre BDD sans toucher aux services métier.</p>
             </div>
             <div class="bilan-item">
-              <h4>Points à consolider</h4>
-              <p>La couverture par tests automatisés reste insuffisante. Les trois fichiers de test
-              présents dans la v2 sont un début, mais une stratégie TDD complète s'imposera
-              en alternance.</p>
+              <h4 data-i18n="bilan_3_title">Points à consolider</h4>
+              <p data-i18n="bilan_3_body">La couverture par tests automatisés reste insuffisante. Les fichiers de test présents dans la v2 sont un début, mais une stratégie TDD complète s'imposera en alternance.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ======================================
-         SECTION 3 — STAGE BUT 2
-         ====================================== -->
-    <section id="stage" class="section">
+    <!-- ======== 03 — PROJETS ======== -->
+    <section id="projets" class="section">
       <div class="container">
         <div class="section-header">
           <span class="section-num">03</span>
-          <h2>Stage BUT 2 — Découverte du monde professionnel</h2>
-          <p class="section-sub">DSI de METM · 2 mois · Automatisation e-commerce &amp; logistique</p>
+          <h2 data-i18n="s03_title">Projets</h2>
+          <p class="section-sub" data-i18n="s03_sub">Réalisations · Code source · Démonstrations</p>
+        </div>
+
+        <div class="projects-grid">
+
+          <div class="proj-card">
+            <div class="proj-card-header">
+              <div class="proj-card-icon">&#x1F9E0;</div>
+              <div class="proj-card-meta">
+                <span class="proj-card-type" data-i18n="proj1_type">SAÉ S4 · Universitaire</span>
+                <h3 class="proj-card-title">Mnémosyne</h3>
+              </div>
+            </div>
+            <p class="proj-card-desc" data-i18n="proj1_desc">Plateforme Flask de suivi des cohortes étudiantes via diagrammes de Sankey interactifs. Connectée à l'API ScoDoc, conteneurisée sous Docker, export PDF.</p>
+            <div class="proj-card-stack">
+              <span class="badge">Python</span>
+              <span class="badge">Flask</span>
+              <span class="badge">SQLite3</span>
+              <span class="badge">Docker</span>
+              <span class="badge">Sankey</span>
+            </div>
+            <div class="proj-card-highlights">
+              <div class="proj-highlight">
+                <span class="ph-num">MVC</span>
+                <span class="ph-label" data-i18n="proj1_h1">architecture stricte</span>
+              </div>
+              <div class="proj-highlight">
+                <span class="ph-num">RGPD</span>
+                <span class="ph-label" data-i18n="proj1_h2">données anonymisées</span>
+              </div>
+              <div class="proj-highlight">
+                <span class="ph-num">PDF</span>
+                <span class="ph-label" data-i18n="proj1_h3">export rapports</span>
+              </div>
+            </div>
+            <div class="proj-card-actions">
+              <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener" class="proj-btn" data-i18n="proj_github">Voir sur GitHub</a>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-card-header">
+              <div class="proj-card-icon">&#x1F4DA;</div>
+              <div class="proj-card-meta">
+                <span class="proj-card-type" data-i18n="proj2_type">SAÉ S3 · Universitaire</span>
+                <h3 class="proj-card-title">Mnémosyne — Archive v1</h3>
+              </div>
+            </div>
+            <p class="proj-card-desc" data-i18n="proj2_desc">Première version de la plateforme : authentification, consommation API ScoDoc, base de données relationnelle. Fondations techniques de la v2.</p>
+            <div class="proj-card-stack">
+              <span class="badge">Python</span>
+              <span class="badge">Flask</span>
+              <span class="badge">SQLite</span>
+              <span class="badge">MVC</span>
+            </div>
+            <div class="proj-card-highlights">
+              <div class="proj-highlight">
+                <span class="ph-num">MVC</span>
+                <span class="ph-label" data-i18n="proj2_h1">architecture</span>
+              </div>
+              <div class="proj-highlight">
+                <span class="ph-num">API</span>
+                <span class="ph-label" data-i18n="proj2_h2">ScoDoc intégré</span>
+              </div>
+              <div class="proj-highlight">
+                <span class="ph-num">Git</span>
+                <span class="ph-label" data-i18n="proj2_h3">versioning équipe</span>
+              </div>
+            </div>
+            <div class="proj-card-actions">
+              <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener" class="proj-btn" data-i18n="proj_github">Voir sur GitHub</a>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-card-header">
+              <div class="proj-card-icon">&#x1F4E6;</div>
+              <div class="proj-card-meta">
+                <span class="proj-card-type" data-i18n="proj3_type">Stage · Professionnel</span>
+                <h3 class="proj-card-title" data-i18n="proj3_name">Automatisation E-commerce</h3>
+              </div>
+            </div>
+            <p class="proj-card-desc" data-i18n="proj3_desc">Scripts Python d'automatisation pour la DSI de METM : génération de bordereaux d'expédition (UPS, Packlink), synchronisation de catalogues avec Octopia, Cdiscount et Back Market.</p>
+            <div class="proj-card-stack">
+              <span class="badge">Python</span>
+              <span class="badge">API REST</span>
+              <span class="badge">UPS</span>
+              <span class="badge">Packlink</span>
+              <span class="badge">Octopia</span>
+            </div>
+            <div class="proj-card-highlights">
+              <div class="proj-highlight">
+                <span class="ph-num">3+</span>
+                <span class="ph-label" data-i18n="proj3_h1">APIs intégrées</span>
+              </div>
+              <div class="proj-highlight">
+                <span class="ph-num">Batch</span>
+                <span class="ph-label" data-i18n="proj3_h2">traitement en lots</span>
+              </div>
+              <div class="proj-highlight">
+                <span class="ph-num">Prod</span>
+                <span class="ph-label" data-i18n="proj3_h3">déployé en prod</span>
+              </div>
+            </div>
+            <div class="proj-card-actions">
+              <span class="proj-confidential" data-i18n="proj_confidential">&#x1F512; Code confidentiel</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== 04 — COMPÉTENCES TECHNIQUES ======== -->
+    <section id="skills" class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">04</span>
+          <h2 data-i18n="s04_title">Compétences techniques</h2>
+          <p class="section-sub" data-i18n="s04_sub">Langages · Frameworks · Outils</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skills-col">
+            <h3 class="skills-cat-title" data-i18n="skills_lang">Langages</h3>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Python</span>
+                <span class="skill-level" data-i18n="skill_advanced">Avancé</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">SQL / SQLite</span>
+                <span class="skill-level" data-i18n="skill_intermediate">Intermédiaire</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">HTML / CSS</span>
+                <span class="skill-level" data-i18n="skill_intermediate">Intermédiaire</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">JavaScript</span>
+                <span class="skill-level" data-i18n="skill_beginner">Débutant</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="40"></div></div>
+            </div>
+          </div>
+
+          <div class="skills-col">
+            <h3 class="skills-cat-title" data-i18n="skills_tools">Frameworks &amp; Outils</h3>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Flask</span>
+                <span class="skill-level" data-i18n="skill_advanced">Avancé</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">API REST</span>
+                <span class="skill-level" data-i18n="skill_advanced">Avancé</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Git</span>
+                <span class="skill-level" data-i18n="skill_intermediate">Intermédiaire</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Docker</span>
+                <span class="skill-level" data-i18n="skill_intermediate">Intermédiaire</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== 05 — STAGE ======== -->
+    <section id="stage" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">05</span>
+          <h2 data-i18n="s05_title">Stage BUT 2 — Découverte du monde professionnel</h2>
+          <p class="section-sub" data-i18n="s05_sub">DSI de METM · 2 mois · Automatisation e-commerce &amp; logistique</p>
         </div>
 
         <div class="stage-intro card card-full">
           <div class="stage-meta">
             <div class="stage-info">
-              <span class="label">Entreprise</span>
+              <span class="label" data-i18n="stage_co_label">Entreprise</span>
               <strong>METM</strong>
             </div>
             <div class="stage-info">
-              <span class="label">Service</span>
-              <strong>DSI (Direction des Systèmes d'Information)</strong>
+              <span class="label" data-i18n="stage_dept_label">Service</span>
+              <strong data-i18n="stage_dept">DSI (Direction des Systèmes d'Information)</strong>
             </div>
             <div class="stage-info">
-              <span class="label">Durée</span>
-              <strong>2 mois</strong>
+              <span class="label" data-i18n="stage_dur_label">Durée</span>
+              <strong data-i18n="stage_dur">2 mois</strong>
             </div>
             <div class="stage-info">
-              <span class="label">Technologies</span>
+              <span class="label" data-i18n="stage_tech_label">Technologies</span>
               <strong>Python · API REST · UPS · Packlink · Octopia · Cdiscount · Back Market</strong>
             </div>
           </div>
@@ -345,146 +469,139 @@
 
         <div class="grid-2 mt-lg">
           <div class="card">
-            <h3>Ce que j'ai découvert du monde professionnel</h3>
-            <p>
-              L'entreprise m'a confié le développement de <strong>scripts Python d'automatisation</strong>
-              pour des processus critiques : génération de bordereaux d'expédition (UPS, Packlink),
-              synchronisation de catalogues produits avec les marketplaces partenaires (Octopia,
-              Cdiscount, Back Market).
-            </p>
-            <p>
-              Cette expérience m'a appris que le monde professionnel impose des contraintes
-              que l'université simule difficilement :
-            </p>
-            <ul class="bullet-list">
-              <li><strong>La robustesse prime sur l'élégance</strong> : un script qui crashe
-              en production sur un bordereau d'expédition coûte de l'argent réel.</li>
-              <li><strong>Les infrastructures héritées sont contraignantes</strong> : travailler
-              sur un environnement PC/Windows avec des bases Alwaysdata impose des adaptations
-              que les tutos en ligne n'anticipent pas.</li>
-              <li><strong>La documentation des API tierces est rarement complète</strong> :
-              décortiquer les specs d'Octopia ou Packlink m'a demandé plus de temps que
-              le développement lui-même.</li>
-            </ul>
+            <h3 data-i18n="stage_c1_title">Ce que j'ai découvert du monde professionnel</h3>
+            <div data-i18n-html="stage_c1_body">
+              <p>L'entreprise m'a confié le développement de <strong>scripts Python d'automatisation</strong> pour des processus critiques : génération de bordereaux d'expédition (UPS, Packlink), synchronisation de catalogues produits avec les marketplaces partenaires.</p>
+              <p>Cette expérience m'a appris que le monde professionnel impose des contraintes que l'université simule difficilement :</p>
+              <ul class="bullet-list">
+                <li><strong>La robustesse prime sur l'élégance</strong> : un script qui crashe en production coûte de l'argent réel.</li>
+                <li><strong>Les infrastructures héritées sont contraignantes</strong> : travailler sur un environnement Windows avec des bases Alwaysdata impose des adaptations spécifiques.</li>
+                <li><strong>La documentation des API tierces est rarement complète</strong> : décortiquer les specs d'Octopia ou Packlink a demandé plus de temps que le développement lui-même.</li>
+              </ul>
+            </div>
           </div>
 
           <div class="card">
-            <h3>Compétences BUT mobilisées</h3>
-
-            <div class="competence-block">
-              <h4>Réaliser le développement d'applications</h4>
-              <p>
-                Les scripts Python conçus à la DSI vont au-delà du simple appel API :
-                gestion des erreurs réseau, retry automatique, logging structuré et
-                production d'un rapport d'exécution lisible par les équipes métier.
-                J'ai dû produire un code testable et maintenable par d'autres, pas
-                seulement par moi.
-              </p>
-            </div>
-
-            <div class="competence-block mt-md">
-              <h4>Optimiser des applications informatiques</h4>
-              <p>
-                Face au volume de commandes à traiter (appels API en boucle), j'ai
-                identifié des goulots d'étranglement et mis en place un mécanisme de
-                traitement par lots (<em>batch processing</em>), réduisant
-                significativement le temps total d'exécution et les risques de
-                rate-limiting côté API.
-              </p>
+            <h3 data-i18n="stage_c2_title">Compétences BUT mobilisées</h3>
+            <div data-i18n-html="stage_c2_body">
+              <div class="competence-block">
+                <h4>Réaliser le développement d'applications</h4>
+                <p>Les scripts Python vont au-delà du simple appel API : gestion des erreurs réseau, retry automatique, logging structuré et production d'un rapport d'exécution lisible par les équipes métier.</p>
+              </div>
+              <div class="competence-block mt-md">
+                <h4>Optimiser des applications informatiques</h4>
+                <p>Face au volume de commandes à traiter, j'ai identifié des goulots d'étranglement et mis en place un mécanisme de traitement par lots (<em>batch processing</em>), réduisant significativement le temps d'exécution et les risques de rate-limiting.</p>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="card card-full mt-lg warning-card">
-          <h3>Regard critique sur le stage</h3>
-          <p>
-            Ce stage a confirmé mon orientation tout en en révélant les limites : j'ai opéré
-            seul sur des scripts sans revue de code systématique ni suite de tests. Cette
-            autonomie m'a appris à prendre des décisions, mais elle a aussi mis en lumière
-            l'importance des pratiques collaboratives (revue de code, CI/CD) que je n'ai
-            pas encore pu expérimenter en entreprise. C'est précisément ce que l'alternance
-            visée au Cnam devra m'apporter.
-          </p>
+          <h3 data-i18n="stage_c3_title">Regard critique sur le stage</h3>
+          <p data-i18n="stage_c3_body">Ce stage a confirmé mon orientation tout en en révélant les limites : j'ai opéré seul sur des scripts sans revue de code systématique ni suite de tests. Cette autonomie m'a appris à prendre des décisions, mais elle a aussi mis en lumière l'importance des pratiques collaboratives (revue de code, CI/CD) que je n'ai pas encore pu expérimenter. C'est précisément ce que l'alternance visée au Cnam devra m'apporter.</p>
         </div>
       </div>
     </section>
 
-    <!-- ======================================
-         SECTION 4 — OBJECTIFS
-         ====================================== -->
+    <!-- ======== 06 — OBJECTIFS ======== -->
     <section id="objectifs" class="section section-dark">
       <div class="container">
         <div class="section-header">
-          <span class="section-num">04</span>
-          <h2>Objectifs</h2>
-          <p class="section-sub">Court terme · Moyen terme · Long terme</p>
+          <span class="section-num">06</span>
+          <h2 data-i18n="s06_title">Objectifs</h2>
+          <p class="section-sub" data-i18n="s06_sub">Court terme · Moyen terme · Long terme</p>
         </div>
 
         <div class="objectives-grid">
-
           <div class="objective-card">
             <div class="obj-header">
               <span class="obj-icon">&#x1F3AF;</span>
-              <span class="obj-horizon court">Court terme</span>
+              <span class="obj-horizon court" data-i18n="obj_court">Court terme</span>
             </div>
-            <h3>Décrocher une alternance BUT 3</h3>
-            <p>
-              Mon objectif immédiat est de sécuriser un contrat d'apprentissage pour
-              la troisième année du BUT, idéalement dans une entreprise spécialisée
-              en e-commerce, logistique ou solutions B2B, qui me permettra de
-              consolider mes compétences Back-End en conditions réelles.
-            </p>
-            <p>
-              Je mène actuellement des recherches ciblées : adaptation de mon profil
-              GitHub, développement d'un portfolio visible, candidatures orientées
-              vers des équipes DSI pratiquant du Python et des API.
-            </p>
+            <h3 data-i18n="obj1_title">Décrocher une alternance BUT 3</h3>
+            <p data-i18n="obj1_body">Mon objectif immédiat est de sécuriser un contrat d'apprentissage pour la troisième année du BUT, dans une entreprise spécialisée en e-commerce, logistique ou solutions B2B.</p>
             <div class="obj-action">
-              <strong>Actions en cours :</strong> candidatures actives, veille sur les offres
-              d'alternance Île-de-France, mise à jour du portfolio GitHub.
+              <strong data-i18n="obj_action_label">Actions en cours :</strong> <span data-i18n="obj1_action">candidatures actives, veille sur les offres d'alternance Île-de-France, mise à jour du portfolio GitHub.</span>
             </div>
           </div>
 
           <div class="objective-card">
             <div class="obj-header">
               <span class="obj-icon">&#x1F393;</span>
-              <span class="obj-horizon moyen">Moyen terme</span>
+              <span class="obj-horizon moyen" data-i18n="obj_moyen">Moyen terme</span>
             </div>
-            <h3>Diplôme d'ingénieur Cnam + premier emploi</h3>
-            <p>
-              À l'issue du BUT, j'envisage d'intégrer le <strong>diplôme d'ingénieur
-              Informatique et Systèmes d'Information du Cnam en alternance</strong>.
-              Ce cursus me permettra d'approfondir les fondements théoriques
-              (algorithmique avancée, architecture logicielle, génie logiciel)
-              tout en accumulant de l'expérience en entreprise.
-            </p>
-            <p>
-              Mon premier emploi cible : développeur Back-End dans une équipe
-              produit ou une ESN spécialisée, avec une forte composante
-              d'intégration de systèmes et d'automatisation.
-            </p>
+            <h3 data-i18n="obj2_title">Diplôme d'ingénieur Cnam + premier emploi</h3>
+            <p data-i18n-html="obj2_body">À l'issue du BUT, intégrer le <strong>diplôme d'ingénieur Informatique et Systèmes d'Information du Cnam en alternance</strong>. Premier emploi cible : développeur Back-End dans une équipe produit avec forte composante d'automatisation.</p>
           </div>
 
           <div class="objective-card">
             <div class="obj-header">
               <span class="obj-icon">&#x1F680;</span>
-              <span class="obj-horizon long">Long terme (10–15 ans)</span>
+              <span class="obj-horizon long" data-i18n="obj_long">Long terme (10–15 ans)</span>
             </div>
-            <h3>Architecte logiciel / Expert systèmes</h3>
-            <p>
-              Sur le long terme, je me projette comme <strong>architecte logiciel
-              ou expert en intégration de systèmes logistiques</strong> : concevoir
-              les infrastructures qui font circuler l'information entre ERP,
-              marketplaces, transporteurs et outils métier.
-            </p>
-            <p>
-              Une trajectoire vers un rôle de directeur technique (CTO) dans une
-              structure à taille humaine me paraît cohérente avec ma volonté
-              de rester proche du code tout en ayant de l'impact sur les décisions
-              produit et d'organisation.
-            </p>
+            <h3 data-i18n="obj3_title">Architecte logiciel / Expert systèmes</h3>
+            <p data-i18n-html="obj3_body">Me projeter comme <strong>architecte logiciel ou expert en intégration de systèmes logistiques</strong>. Une trajectoire vers CTO dans une structure à taille humaine est cohérente avec ma volonté de rester proche du code tout en ayant un impact sur les décisions produit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== 07 — CONTACT ======== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">07</span>
+          <h2 data-i18n="s07_title">Contact</h2>
+          <p class="section-sub" data-i18n="s07_sub">Recruteurs · Collaborations · Questions</p>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-info">
+            <div class="contact-item">
+              <span class="contact-icon">&#x2709;</span>
+              <div>
+                <span class="contact-label" data-i18n="contact_email_label">Email</span>
+                <a href="mailto:linhuangyikai@gmail.com" class="contact-value">linhuangyikai@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">&#x1F4BB;</span>
+              <div>
+                <span class="contact-label">GitHub</span>
+                <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener" class="contact-value">github.com/XingkOng1504</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">&#x1F4CD;</span>
+              <div>
+                <span class="contact-label" data-i18n="contact_loc_label">Localisation</span>
+                <span class="contact-value" data-i18n="contact_loc">Île-de-France · Disponible en alternance</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">&#x1F4C4;</span>
+              <div>
+                <span class="contact-label" data-i18n="contact_cv_label">CV</span>
+                <a href="cv.pdf" class="contact-value" download data-i18n="contact_cv_link">Télécharger mon CV (PDF)</a>
+              </div>
+            </div>
           </div>
 
+          <form class="contact-form" action="https://formspree.io/f/VOTRE_ID_ICI" method="POST">
+            <div class="form-group">
+              <label for="contact-name" data-i18n="form_name">Nom</label>
+              <input type="text" id="contact-name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="contact-email" data-i18n="form_email">Email</label>
+              <input type="email" id="contact-email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="contact-msg" data-i18n="form_message">Message</label>
+              <textarea id="contact-msg" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="cta-btn" data-i18n="form_send">Envoyer</button>
+          </form>
         </div>
       </div>
     </section>
@@ -495,12 +612,12 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div>
-        <p><strong>Lin Huang Christophe</strong></p>
-        <p>BUT Informatique S4 · IUT Villetaneuse · Sorbonne Paris Nord</p>
+        <p><strong data-i18n="footer_name">Lin Huang Christophe</strong></p>
+        <p data-i18n="footer_sub">BUT Informatique S4 · IUT Villetaneuse · Sorbonne Paris Nord</p>
       </div>
       <div class="footer-links">
-        <a href="https://github.com/LinHuangCh" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://linhuang-christophe.framer.website" target="_blank" rel="noopener">Ancien portfolio</a>
+        <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linhuang-christophe.framer.website" target="_blank" rel="noopener" data-i18n="footer_old">Ancien portfolio</a>
         <a href="mailto:linhuangyikai@gmail.com">Contact</a>
       </div>
     </div>
