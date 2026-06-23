@@ -21,12 +21,24 @@
       <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="fr">FR</button>
-        <button class="lang-btn" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="zh">中</button>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-current-btn" id="langCurrentBtn">
+          <span id="langCurrentText">FR</span>
+          <span class="lang-arr">▾</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-menu-item" data-lang="fr">FR — Français</button>
+          <button class="lang-menu-item" data-lang="en">EN — English</button>
+          <button class="lang-menu-item" data-lang="zh">中 — 中文</button>
+        </div>
       </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+      <div class="color-picker-wrap" id="colorPickerWrap">
+        <button class="color-picker-btn" id="colorPickerBtn" title="Couleur d'accent">
+          <span class="color-dot" id="colorDot"></span>
+        </button>
+        <div class="color-palette-popup" id="colorPalettePopup"></div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Thème">
         <span class="theme-icon">🌙</span>
       </button>
     </div>

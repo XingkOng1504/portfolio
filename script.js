@@ -616,6 +616,81 @@ const translations = {
 };
 
 // ============================================================
+//  COLOUR PALETTE — accents + auto-cycle
+// ============================================================
+const colorPalette = [
+  { key: 'violet',  name: 'Violet',       accent: '#6c63ff', accent2: '#a78bfa' },
+  { key: 'bleu',    name: 'Bleu',         accent: '#3b82f6', accent2: '#60a5fa' },
+  { key: 'vert',    name: 'Vert',         accent: '#10b981', accent2: '#34d399' },
+  { key: 'rouge',   name: '红 Rouge 🇨🇳',  accent: '#dc2626', accent2: '#f87171' },
+  { key: 'or',      name: '金 Or 🇨🇳',    accent: '#ca8a04', accent2: '#fcd34d' },
+  { key: 'marine',  name: '海军 Marine',   accent: '#1e40af', accent2: '#60a5fa' },
+  { key: 'ciel',    name: '空军 Ciel',     accent: '#0284c7', accent2: '#38bdf8' },
+  { key: 'kaki',    name: '陆军 Terre',    accent: '#15803d', accent2: '#4ade80' },
+  { key: 'fusees',  name: '火箭 Fusées',   accent: '#ea580c', accent2: '#fb923c' },
+  { key: 'police',  name: '警察 Police',   accent: '#1d4ed8', accent2: '#93c5fd' },
+];
+
+let currentColorIdx = 0;
+let autoCycleTimer  = null;
+let userPicked      = false;
+
+function applyColor(idx, fromAuto = false) {
+  const c = colorPalette[idx];
+  currentColorIdx = idx;
+  document.documentElement.style.setProperty('--accent',   c.accent);
+  document.documentElement.style.setProperty('--accent-2', c.accent2);
+  if (!fromAuto) {
+    userPicked = true;
+    localStorage.setItem('accentIdx', idx);
+  }
+  const dot = document.getElementById('colorDot');
+  if (dot) dot.style.background = c.accent;
+  document.querySelectorAll('.color-swatch').forEach((sw, i) => {
+    sw.classList.toggle('swatch-active', i === idx);
+  });
+}
+
+function buildPalette() {
+  const popup = document.getElementById('colorPalettePopup');
+  if (!popup) return;
+  popup.innerHTML = '';
+  colorPalette.forEach((c, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'swatch-wrap';
+    const btn = document.createElement('button');
+    btn.className = 'color-swatch' + (i === currentColorIdx ? ' swatch-active' : '');
+    btn.style.background = c.accent;
+    btn.title = c.name;
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      applyColor(i);
+      stopAutoCycle();
+      document.getElementById('colorPickerWrap')?.classList.remove('open');
+    });
+    const lbl = document.createElement('span');
+    lbl.className = 'swatch-label';
+    lbl.textContent = c.name.replace(/[^\w\s一-鿿]/g, '').trim().split(' ')[0];
+    wrap.appendChild(btn);
+    wrap.appendChild(lbl);
+    popup.appendChild(wrap);
+  });
+}
+
+function startAutoCycle() {
+  if (autoCycleTimer) return;
+  autoCycleTimer = setInterval(() => {
+    if (!userPicked) {
+      applyColor((currentColorIdx + 1) % colorPalette.length, true);
+    }
+  }, 18000); // toutes les 18 secondes
+}
+
+function stopAutoCycle() {
+  if (autoCycleTimer) { clearInterval(autoCycleTimer); autoCycleTimer = null; }
+}
+
+// ============================================================
 //  TYPING EFFECT
 // ============================================================
 function typeWriter(el, text, speed = 38) {
@@ -660,8 +735,11 @@ function applyLang(lang) {
 
   localStorage.setItem('lang', lang);
 
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
+  // Update dropdown display
+  const langText = document.getElementById('langCurrentText');
+  if (langText) langText.textContent = lang === 'zh' ? '中' : lang.toUpperCase();
+  document.querySelectorAll('.lang-menu-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.lang === lang);
   });
 
   // Typing effect on hero subtitle (index.html or about.html)
@@ -686,15 +764,56 @@ function applyTheme(theme) {
 //  INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-  const savedLang  = localStorage.getItem('lang')  || 'fr';
-  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const savedLang     = localStorage.getItem('lang')      || 'fr';
+  const savedTheme    = localStorage.getItem('theme')     || 'dark';
+  const savedColorIdx = parseInt(localStorage.getItem('accentIdx') || '0', 10);
 
   applyLang(savedLang);
   applyTheme(savedTheme);
 
-  // Language switcher
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  // Colour: restore saved or start auto-cycle
+  if (localStorage.getItem('accentIdx') !== null) {
+    userPicked = true;
+    applyColor(savedColorIdx);
+  } else {
+    applyColor(0);
+    startAutoCycle();
+  }
+  buildPalette();
+
+  // ── Language dropdown ──
+  const langDropdown   = document.getElementById('langDropdown');
+  const langCurrentBtn = document.getElementById('langCurrentBtn');
+  const colorPickerWrap = document.getElementById('colorPickerWrap');
+
+  if (langCurrentBtn) {
+    langCurrentBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      langDropdown?.classList.toggle('open');
+      colorPickerWrap?.classList.remove('open');
+    });
+  }
+  document.querySelectorAll('.lang-menu-item').forEach(item => {
+    item.addEventListener('click', () => {
+      applyLang(item.dataset.lang);
+      langDropdown?.classList.remove('open');
+    });
+  });
+
+  // ── Colour picker ──
+  const colorPickerBtn = document.getElementById('colorPickerBtn');
+  if (colorPickerBtn) {
+    colorPickerBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      colorPickerWrap?.classList.toggle('open');
+      langDropdown?.classList.remove('open');
+    });
+  }
+
+  // Close both on outside click
+  document.addEventListener('click', () => {
+    langDropdown?.classList.remove('open');
+    colorPickerWrap?.classList.remove('open');
   });
 
   // Theme toggle
