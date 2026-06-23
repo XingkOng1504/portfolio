@@ -683,19 +683,28 @@ const colorPalette = [
   { key: 'bordeaux',  name: 'Bordeaux',  accent: '#9f1239', accent2: '#fecdd3' },
 ];
 
-let currentColorIdx = 0;
-let autoCycleTimer  = null;
-let userPicked      = false;
+let currentColorIdx  = 0;
+let autoCycleTimer   = null;
+let autoCycleEnabled = false;
+let autoCycleMs      = 20000; // 20s par défaut
 
-function applyColor(idx, fromAuto = false) {
+function parseInterval(str) {
+  str = str.trim().toLowerCase();
+  let ms = 0;
+  const m = str.match(/(\d+)\s*m/);
+  const s = str.match(/(\d+)\s*s/);
+  if (m) ms += parseInt(m[1]) * 60000;
+  if (s) ms += parseInt(s[1]) * 1000;
+  if (!ms) ms = parseInt(str) * 1000 || 20000;
+  return Math.max(5000, Math.min(ms, 3600000)); // min 5s, max 1h
+}
+
+function applyColor(idx) {
   const c = colorPalette[idx];
   currentColorIdx = idx;
   document.documentElement.style.setProperty('--accent',   c.accent);
   document.documentElement.style.setProperty('--accent-2', c.accent2);
-  if (!fromAuto) {
-    userPicked = true;
-    localStorage.setItem('accentIdx', idx);
-  }
+  localStorage.setItem('accentIdx', idx);
   const dot = document.getElementById('colorDot');
   if (dot) dot.style.background = c.accent;
   document.querySelectorAll('.color-swatch').forEach((sw, i) => {
@@ -703,13 +712,26 @@ function applyColor(idx, fromAuto = false) {
   });
 }
 
+function startAutoCycle() {
+  stopAutoCycle();
+  autoCycleTimer = setInterval(() => {
+    applyColor((currentColorIdx + 1) % colorPalette.length);
+  }, autoCycleMs);
+}
+
+function stopAutoCycle() {
+  if (autoCycleTimer) { clearInterval(autoCycleTimer); autoCycleTimer = null; }
+}
+
 function buildPalette() {
   const popup = document.getElementById('colorPalettePopup');
   if (!popup) return;
   popup.innerHTML = '';
+
+  // Swatches grid
+  const grid = document.createElement('div');
+  grid.className = 'swatches-grid';
   colorPalette.forEach((c, i) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'swatch-wrap';
     const btn = document.createElement('button');
     btn.className = 'color-swatch' + (i === currentColorIdx ? ' swatch-active' : '');
     btn.style.background = c.accent;
@@ -717,11 +739,39 @@ function buildPalette() {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       applyColor(i);
-      stopAutoCycle();
-      document.getElementById('colorPickerWrap')?.classList.remove('open');
     });
-    wrap.appendChild(btn);
-    popup.appendChild(wrap);
+    grid.appendChild(btn);
+  });
+  popup.appendChild(grid);
+
+  // Cycle controls
+  const ctrl = document.createElement('div');
+  ctrl.className = 'cycle-ctrl';
+  ctrl.innerHTML = `
+    <label class="cycle-label">
+      <input type="checkbox" id="cycleCheck" ${autoCycleEnabled ? 'checked' : ''}>
+      <span>🔄 Cycle auto</span>
+    </label>
+    <input type="text" id="cycleInput" class="cycle-input"
+      value="${autoCycleMs >= 60000 ? Math.round(autoCycleMs/60000)+'m' : Math.round(autoCycleMs/1000)+'s'}"
+      placeholder="20s" title="ex: 20s, 1m, 1m30s" ${!autoCycleEnabled ? 'disabled' : ''}>
+  `;
+  ctrl.addEventListener('click', e => e.stopPropagation());
+  popup.appendChild(ctrl);
+
+  document.getElementById('cycleCheck').addEventListener('change', e => {
+    autoCycleEnabled = e.target.checked;
+    localStorage.setItem('cycleEnabled', autoCycleEnabled ? '1' : '0');
+    document.getElementById('cycleInput').disabled = !autoCycleEnabled;
+    autoCycleEnabled ? startAutoCycle() : stopAutoCycle();
+  });
+
+  document.getElementById('cycleInput').addEventListener('change', e => {
+    autoCycleMs = parseInterval(e.target.value);
+    localStorage.setItem('cycleMs', autoCycleMs);
+    const disp = autoCycleMs >= 60000 ? Math.round(autoCycleMs/60000)+'m' : Math.round(autoCycleMs/1000)+'s';
+    e.target.value = disp;
+    if (autoCycleEnabled) startAutoCycle();
   });
 }
 
@@ -823,15 +873,12 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLang(savedLang);
   applyTheme(savedTheme);
 
-  // Colour: restore saved or start auto-cycle
-  if (localStorage.getItem('accentIdx') !== null) {
-    userPicked = true;
-    applyColor(savedColorIdx);
-  } else {
-    applyColor(0);
-    startAutoCycle();
-  }
+  // Cycle settings
+  autoCycleEnabled = localStorage.getItem('cycleEnabled') === '1';
+  autoCycleMs      = parseInt(localStorage.getItem('cycleMs') || '20000', 10);
+  applyColor(savedColorIdx);
   buildPalette();
+  if (autoCycleEnabled) startAutoCycle();
 
   // ── Language dropdown ──
   const langDropdown   = document.getElementById('langDropdown');
