@@ -616,6 +616,48 @@ const translations = {
 };
 
 // ============================================================
+//  SIMPLIFIED → TRADITIONAL CHINESE CONVERTER
+// ============================================================
+const s2tMap = {
+  '学':'學','计':'計','时':'時','实':'實','习':'習','现':'現','统':'統',
+  '软':'軟','体':'體','应':'應','发':'發','开':'開','关':'關','长':'長',
+  '国':'國','语':'語','码':'碼','进':'進','验':'驗','数':'數','据':'據',
+  '来':'來','为':'為','这':'這','们':'們','从':'從','对':'對','过':'過',
+  '图':'圖','项':'項','还':'還','样':'樣','会':'會','场':'場','标':'標',
+  '经':'經','总':'總','员':'員','层':'層','录':'錄','务':'務','导':'導',
+  '测':'測','试':'試','传':'傳','优':'優','组':'組','联':'聯','师':'師',
+  '问':'問','题':'題','网':'網','线':'線','积':'積','极':'極','处':'處',
+  '节':'節','历':'歷','与':'與','离':'離','术':'術','获':'獲','维':'維',
+  '纳':'納','专':'專','设':'設','个':'個','两':'兩','东':'東','动':'動',
+  '将':'將','让':'讓','给':'給','兴':'興','选':'選','择':'擇','协':'協',
+  '书':'書','证':'證','变':'變','间':'間','继':'繼','续':'續','级':'級',
+  '结':'結','构':'構','后':'後','识':'識','认':'認','类':'類','队':'隊',
+  '难':'難','输':'輸','载':'載','读':'讀','权':'權','签':'簽','环':'環',
+  '围':'圍','库':'庫','战':'戰','况':'況','综':'綜','绩':'績','础':'礎',
+  '块':'塊','虑':'慮','费':'費','购':'購','该':'該','区':'區','带':'帶',
+  '递':'遞','针':'針','历':'歷','实':'實','议':'議','备':'備','执':'執',
+  '态':'態','话':'話','质':'質','联':'聯','规':'規','划':'劃','响':'響',
+  '链':'鏈','值':'值','营':'營','确':'確','击':'擊','协':'協','讨':'討',
+  '论':'論','预':'預','义':'義','们':'們','获':'獲','补':'補','观':'觀',
+  '词':'詞','词':'詞','视':'視','频':'頻','档':'檔','汉':'漢','华':'華',
+};
+
+function toTraditional(str) {
+  return str.split('').map(c => s2tMap[c] || c).join('');
+}
+
+function buildZhTW(zhObj) {
+  const out = {};
+  for (const k in zhObj) {
+    out[k] = typeof zhObj[k] === 'string' ? toTraditional(zhObj[k]) : zhObj[k];
+  }
+  return out;
+}
+
+// Generate Traditional Chinese from Simplified
+translations['zh-tw'] = buildZhTW(translations['zh']);
+
+// ============================================================
 //  COLOUR PALETTE — accents + auto-cycle
 // ============================================================
 const colorPalette = [
@@ -708,7 +750,7 @@ function applyLang(lang) {
   const t = translations[lang];
   if (!t) return;
 
-  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang === 'zh-tw' ? 'zh-TW' : lang;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
@@ -733,7 +775,11 @@ function applyLang(lang) {
 
   // Update dropdown display
   const langText = document.getElementById('langCurrentText');
-  if (langText) langText.textContent = lang === 'zh' ? '中' : lang.toUpperCase();
+  if (langText) {
+    if (lang === 'zh')    langText.textContent = '简';
+    else if (lang === 'zh-tw') langText.textContent = '繁';
+    else langText.textContent = lang.toUpperCase();
+  }
   document.querySelectorAll('.lang-menu-item').forEach(item => {
     item.classList.toggle('active', item.dataset.lang === lang);
   });
