@@ -1710,3 +1710,13 @@ a.nav-logo {
 }
 .cycle-input:disabled { opacity: .35; cursor: not-allowed; }
 .cycle-input:focus { outline: none; border-color: var(--accent); }
+
+/* ── Version indicator ──────────────────────────────────────────────── */
+.nav-v {
+  font-size: 0.55rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  margin-left: 0.25rem;
+  vertical-align: super;
+  letter-spacing: 0;
+}
