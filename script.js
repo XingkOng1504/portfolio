@@ -619,16 +619,16 @@ const translations = {
 //  COLOUR PALETTE — accents + auto-cycle
 // ============================================================
 const colorPalette = [
-  { key: 'violet',  name: 'Violet',       accent: '#6c63ff', accent2: '#a78bfa' },
-  { key: 'bleu',    name: 'Bleu',         accent: '#3b82f6', accent2: '#60a5fa' },
-  { key: 'vert',    name: 'Vert',         accent: '#10b981', accent2: '#34d399' },
-  { key: 'rouge',   name: '红 Rouge 🇨🇳',  accent: '#dc2626', accent2: '#f87171' },
-  { key: 'or',      name: '金 Or 🇨🇳',    accent: '#ca8a04', accent2: '#fcd34d' },
-  { key: 'marine',  name: '海军 Marine',   accent: '#1e40af', accent2: '#60a5fa' },
-  { key: 'ciel',    name: '空军 Ciel',     accent: '#0284c7', accent2: '#38bdf8' },
-  { key: 'kaki',    name: '陆军 Terre',    accent: '#15803d', accent2: '#4ade80' },
-  { key: 'fusees',  name: '火箭 Fusées',   accent: '#ea580c', accent2: '#fb923c' },
-  { key: 'police',  name: '警察 Police',   accent: '#1d4ed8', accent2: '#93c5fd' },
+  { key: 'violet',  name: 'Violet',  accent: '#6c63ff', accent2: '#a78bfa' },
+  { key: 'bleu',    name: 'Bleu',    accent: '#3b82f6', accent2: '#60a5fa' },
+  { key: 'vert',    name: 'Vert',    accent: '#10b981', accent2: '#34d399' },
+  { key: 'rouge',   name: 'Rouge',   accent: '#dc2626', accent2: '#f87171' },
+  { key: 'or',      name: 'Or',      accent: '#ca8a04', accent2: '#fcd34d' },
+  { key: 'marine',  name: 'Marine',  accent: '#1e40af', accent2: '#60a5fa' },
+  { key: 'ciel',    name: 'Ciel',    accent: '#0284c7', accent2: '#38bdf8' },
+  { key: 'kaki',    name: 'Kaki',    accent: '#15803d', accent2: '#4ade80' },
+  { key: 'orange',  name: 'Orange',  accent: '#ea580c', accent2: '#fb923c' },
+  { key: 'indigo',  name: 'Indigo',  accent: '#1d4ed8', accent2: '#93c5fd' },
 ];
 
 let currentColorIdx = 0;
