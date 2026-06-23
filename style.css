@@ -1720,3 +1720,12 @@ a.nav-logo {
   vertical-align: super;
   letter-spacing: 0;
 }
+
+/* ── Nav separator ──────────────────────────────────────────────────── */
+.nav-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 0.25rem;
+  align-self: center;
+}
