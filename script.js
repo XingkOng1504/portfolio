@@ -873,8 +873,8 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLang(savedLang);
   applyTheme(savedTheme);
 
-  // Cycle settings
-  autoCycleEnabled = localStorage.getItem('cycleEnabled') === '1';
+  // Cycle settings (activé par défaut)
+  autoCycleEnabled = localStorage.getItem('cycleEnabled') !== '0';
   autoCycleMs      = parseInt(localStorage.getItem('cycleMs') || '20000', 10);
   applyColor(savedColorIdx);
   buildPalette();
