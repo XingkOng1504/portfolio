@@ -668,11 +668,7 @@ function buildPalette() {
       stopAutoCycle();
       document.getElementById('colorPickerWrap')?.classList.remove('open');
     });
-    const lbl = document.createElement('span');
-    lbl.className = 'swatch-label';
-    lbl.textContent = c.name.replace(/[^\w\s一-鿿]/g, '').trim().split(' ')[0];
     wrap.appendChild(btn);
-    wrap.appendChild(lbl);
     popup.appendChild(wrap);
   });
 }
