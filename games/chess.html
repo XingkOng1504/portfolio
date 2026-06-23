@@ -23,6 +23,8 @@
     #board{display:grid;grid-template-columns:repeat(8,64px);border:2px solid #30363d;user-select:none}
     .sq{width:64px;height:64px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;cursor:pointer;position:relative}
     .sq.light{background:#f0d9b5} .sq.dark{background:#b58863}
+    .piece-w{color:#fff;text-shadow:0 0 3px #000,1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000}
+    .piece-b{color:#111;text-shadow:0 0 3px rgba(255,255,255,.9),1px 1px 0 rgba(255,255,255,.6),-1px -1px 0 rgba(255,255,255,.6)}
     .sq.sel{background:#f6f669!important}
     .sq.legal::after{content:'';position:absolute;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.18);pointer-events:none}
     .sq.legal.occupied::after{content:'';position:absolute;inset:0;border-radius:0;background:none;box-shadow:inset 0 0 0 5px rgba(0,0,0,.22)}
@@ -39,6 +41,11 @@
     .prom-row{display:flex;gap:.75rem}
     .prom-btn{font-size:2.8rem;background:#21262d;border:1px solid #30363d;border-radius:8px;padding:.3rem .7rem;cursor:pointer}
     .prom-btn:hover{background:#0284c7;border-color:#0284c7}
+    /* Color choice */
+    #color-choice{display:none;gap:.5rem;align-items:center;font-size:.85rem;color:#8b949e}
+    #color-choice.show{display:flex}
+    .col-btn{background:#21262d;color:#e6edf3;border:1px solid #30363d;border-radius:8px;padding:.35rem .85rem;cursor:pointer;font-size:.85rem;font-family:inherit}
+    .col-btn:hover,.col-btn.active{background:#0284c7;border-color:#0284c7;color:#fff}
     /* Move list */
     #history{font-size:.75rem;color:#8b949e;font-family:monospace;max-height:80px;overflow-y:auto;background:#161b22;border:1px solid #30363d;border-radius:8px;padding:.4rem .6rem;width:512px}
   </style>
@@ -50,6 +57,11 @@
     <button class="btn active" id="btn-pvp" onclick="setMode('pvp')">2 Joueurs</button>
     <button class="btn" id="btn-ai"  onclick="setMode('ai')">vs IA</button>
     <button class="btn" onclick="newGame()">↺ Nouvelle partie</button>
+  </div>
+  <div id="color-choice">
+    Jouer :
+    <button class="col-btn active" id="col-w" onclick="setPlayerColor('w')">⬜ Blancs</button>
+    <button class="col-btn"        id="col-b" onclick="setPlayerColor('b')">⬛ Noirs</button>
   </div>
   <div id="status">Tour des Blancs</div>
   <div class="board-wrap">
@@ -86,7 +98,7 @@ const col = i => i & 7;
 const sq  = (r,c) => r*8+c;
 
 // ── Game state ─────────────────────────────────────────────────────────────
-let board, turn, cas, ep, selSq, legalCache, lastFrom, lastTo, over, mode;
+let board, turn, cas, ep, selSq, legalCache, lastFrom, lastTo, over, mode, playerColor;
 let capW, capB, moves;
 
 function initBoard() {
@@ -322,15 +334,17 @@ function minimax(b, depth, alpha, beta, t, epSq, castle) {
 }
 
 function aiMove() {
-  const ms = allLegalMoves(board, 'b', ep, cas);
+  const aiColor = playerColor === 'w' ? 'b' : 'w';
+  const oppColor = playerColor;
+  const ms = allLegalMoves(board, aiColor, ep, cas);
   if (!ms.length) return;
   let bestVal=-Infinity, bestMove=null;
   for (const [from,to] of ms) {
-    const pp = needsPromo(board,from,to) ? 'q' : null;
+    const pp = needsPromo(board,from,to) ? (aiColor==='w'?'Q':'q') : null;
     const nb = applyMove(board, from, to, ep, pp);
     const newEp = (board[from].toLowerCase()==='p' && Math.abs(to-from)===16) ? (from+to)/2 : -1;
-    // Negate: AI is black, evaluate returns positive=white good
-    const val = -minimax(nb, 2, -Infinity, Infinity, 'w', newEp, updateCastle(cas,from,to));
+    const rawScore = minimax(nb, 2, -Infinity, Infinity, oppColor, newEp, updateCastle(cas,from,to));
+    const val = aiColor==='w' ? rawScore : -rawScore;
     if (val > bestVal) { bestVal=val; bestMove=[from,to]; }
   }
   if (bestMove) doMove(bestMove[0], bestMove[1]);
@@ -387,7 +401,7 @@ function doMove(from, to, promoChoice=null) {
   updateStatus();
   render();
 
-  if (!over && mode==='ai' && turn==='b') {
+  if (!over && mode==='ai' && turn !== playerColor) {
     setTimeout(aiMove, 280);
   }
 }
@@ -437,7 +451,12 @@ function render() {
     }
     if (i===lastFrom||i===lastTo) div.classList.add('last');
     if ((i===wKi&&wInChk)||(i===bKi&&bInChk)) div.classList.add('king-check');
-    if (board[i]) div.textContent=SYM[board[i]]||'';
+    if (board[i]) {
+      const sp=document.createElement('span');
+      sp.className = isWhite(board[i]) ? 'piece-w' : 'piece-b';
+      sp.textContent = SYM[board[i]] || '';
+      div.appendChild(sp);
+    }
     div.addEventListener('click', () => clickSq(i));
     el.appendChild(div);
   }
@@ -445,7 +464,7 @@ function render() {
 
 function clickSq(i) {
   if (over) return;
-  if (mode==='ai' && turn==='b') return;
+  if (mode==='ai' && turn !== playerColor) return;
   if (selSq===-1) {
     if (!board[i]) return;
     if (turn==='w' && !isWhite(board[i])) return;
@@ -470,6 +489,14 @@ function setMode(m) {
   mode=m;
   document.getElementById('btn-pvp').classList.toggle('active',m==='pvp');
   document.getElementById('btn-ai').classList.toggle('active',m==='ai');
+  document.getElementById('color-choice').classList.toggle('show',m==='ai');
+  newGame();
+}
+
+function setPlayerColor(c) {
+  playerColor=c;
+  document.getElementById('col-w').classList.toggle('active',c==='w');
+  document.getElementById('col-b').classList.toggle('active',c==='b');
   newGame();
 }
 
@@ -480,9 +507,14 @@ function newGame() {
   rl.innerHTML=['8','7','6','5','4','3','2','1'].map(n=>`<span>${n}</span>`).join('');
   updateStatus();
   render();
+  // If player chose black, AI plays first as white
+  if (mode==='ai' && playerColor==='b') {
+    setTimeout(aiMove, 400);
+  }
 }
 
 mode='pvp';
+playerColor='w';
 newGame();
 </script>
 </body>
