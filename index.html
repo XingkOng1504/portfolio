@@ -12,8 +12,9 @@
 
   <!-- NAV -->
   <nav class="navbar">
-    <span class="nav-logo">LHC</span>
+    <a href="index.html" class="nav-logo">LHC</a>
     <ul class="nav-links">
+      <li><a href="about.html" data-i18n="nav_about">À propos</a></li>
       <li><a href="#presentation" data-i18n="nav_presentation">Présentation</a></li>
       <li><a href="#competences" data-i18n="nav_competences">Compétences</a></li>
       <li><a href="#projets" data-i18n="nav_projets">Projets</a></li>
@@ -108,6 +109,11 @@
               <span class="quality-icon">&#x1F4D0;</span>
               <h4 data-i18n="q3_title">Rigueur architecturale</h4>
               <p data-i18n="q3_body">L'application des patrons de conception — Composite, Strategy, Observer — reflète une volonté de produire un code maintenable, pas seulement fonctionnel.</p>
+            </div>
+            <div class="quality-item">
+              <span class="quality-icon">&#x1F91D;</span>
+              <h4 data-i18n="q4_title">Demander de l'aide au bon moment</h4>
+              <p data-i18n="q4_body">Durant mon stage, j'ai traversé une période de « blocage silencieux » : deux jours à chercher seul l'origine d'un bug BDD sans progresser. En formulant ma question précisément et en sollicitant mon maître de stage, j'ai débloqué la situation en vingt minutes. Cette expérience a transformé ma façon de travailler : je sais maintenant qu'un blocage non communiqué coûte plus cher qu'une question bien posée.</p>
             </div>
           </div>
         </div>
@@ -283,7 +289,7 @@
               </div>
             </div>
             <div class="proj-card-actions">
-              <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener" class="proj-btn" data-i18n="proj_github">Voir sur GitHub</a>
+              <span class="proj-confidential" data-i18n="proj_confidential">&#x1F512; Code confidentiel</span>
             </div>
           </div>
 
@@ -317,7 +323,7 @@
               </div>
             </div>
             <div class="proj-card-actions">
-              <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener" class="proj-btn" data-i18n="proj_github">Voir sur GitHub</a>
+              <span class="proj-confidential" data-i18n="proj_confidential">&#x1F512; Code confidentiel</span>
             </div>
           </div>
 
@@ -443,26 +449,30 @@
         <div class="section-header">
           <span class="section-num">05</span>
           <h2 data-i18n="s05_title">Stage BUT 2 — Découverte du monde professionnel</h2>
-          <p class="section-sub" data-i18n="s05_sub">DSI de METM · 2 mois · Automatisation e-commerce &amp; logistique</p>
+          <p class="section-sub" data-i18n="s05_sub">METM Miss &amp; Mister · 2 mois · Automatisation e-commerce &amp; logistique</p>
         </div>
 
         <div class="stage-intro card card-full">
           <div class="stage-meta">
             <div class="stage-info">
               <span class="label" data-i18n="stage_co_label">Entreprise</span>
-              <strong>METM</strong>
+              <strong data-i18n="stage_co">METM — Miss &amp; Mister</strong>
             </div>
             <div class="stage-info">
-              <span class="label" data-i18n="stage_dept_label">Service</span>
-              <strong data-i18n="stage_dept">DSI (Direction des Systèmes d'Information)</strong>
+              <span class="label" data-i18n="stage_loc_label">Lieu</span>
+              <strong>Rosny-sous-Bois (93)</strong>
             </div>
             <div class="stage-info">
-              <span class="label" data-i18n="stage_dur_label">Durée</span>
-              <strong data-i18n="stage_dur">2 mois</strong>
+              <span class="label" data-i18n="stage_period_label">Période</span>
+              <strong data-i18n="stage_period">3 fév. – 30 mars 2026</strong>
+            </div>
+            <div class="stage-info">
+              <span class="label" data-i18n="stage_dept_label">Contexte</span>
+              <strong data-i18n="stage_dept">Startup · Équipe de 5 stagiaires</strong>
             </div>
             <div class="stage-info">
               <span class="label" data-i18n="stage_tech_label">Technologies</span>
-              <strong>Python · API REST · UPS · Packlink · Octopia · Cdiscount · Back Market</strong>
+              <strong>Python · Flask · DBeaver · phpMyAdmin · SSH · FileZilla · systemd · XAMPP · Odoo · UPS · Packlink · Octopia</strong>
             </div>
           </div>
         </div>
@@ -471,11 +481,12 @@
           <div class="card">
             <h3 data-i18n="stage_c1_title">Ce que j'ai découvert du monde professionnel</h3>
             <div data-i18n-html="stage_c1_body">
-              <p>L'entreprise m'a confié le développement de <strong>scripts Python d'automatisation</strong> pour des processus critiques : génération de bordereaux d'expédition (UPS, Packlink), synchronisation de catalogues produits avec les marketplaces partenaires.</p>
-              <p>Cette expérience m'a appris que le monde professionnel impose des contraintes que l'université simule difficilement :</p>
+              <p><strong>METM (Miss &amp; Mister)</strong> est une startup de vente d'ordinateurs reconditionnés à Rosny-sous-Bois, créée en 2024. L'équipe était composée exclusivement de stagiaires — chacun responsable d'un périmètre distinct — avec Alain (gérant) comme maître de stage. Communication mixte : WhatsApp, Discord et présentiel. Aucun Git : le code était centralisé sur un serveur interne via SSH et FileZilla.</p>
+              <p>Mes missions concrètes : développement de <strong>scripts Python d'automatisation</strong> et réalisation de deux pages du site interne — <em>« Expédition »</em> (génération automatique des bordereaux UPS et Packlink) et <em>« Recherche de bordereaux »</em> (retrouver un bordereau par numéro de commande).</p>
+              <p>Ce que le monde professionnel m'a appris :</p>
               <ul class="bullet-list">
                 <li><strong>La robustesse prime sur l'élégance</strong> : un script qui crashe en production coûte de l'argent réel.</li>
-                <li><strong>Les infrastructures héritées sont contraignantes</strong> : travailler sur un environnement Windows avec des bases Alwaysdata impose des adaptations spécifiques.</li>
+                <li><strong>Pas de Git → une discipline de communication accrue</strong> : les mises en production se coordonnaient manuellement pour éviter les conflits.</li>
                 <li><strong>La documentation des API tierces est rarement complète</strong> : décortiquer les specs d'Octopia ou Packlink a demandé plus de temps que le développement lui-même.</li>
               </ul>
             </div>
@@ -498,7 +509,7 @@
 
         <div class="card card-full mt-lg warning-card">
           <h3 data-i18n="stage_c3_title">Regard critique sur le stage</h3>
-          <p data-i18n="stage_c3_body">Ce stage a confirmé mon orientation tout en en révélant les limites : j'ai opéré seul sur des scripts sans revue de code systématique ni suite de tests. Cette autonomie m'a appris à prendre des décisions, mais elle a aussi mis en lumière l'importance des pratiques collaboratives (revue de code, CI/CD) que je n'ai pas encore pu expérimenter. C'est précisément ce que l'alternance visée au Cnam devra m'apporter.</p>
+          <p data-i18n="stage_c3_body">Ce stage a révélé plusieurs frictions réelles. L'absence de Git a imposé une coordination manuelle des mises en production — une lacune organisationnelle avec des conséquences directes. Lorsque Tristan, l'expert BDD de l'équipe, est parti à mi-stage, j'ai repris son périmètre (passage de id_product à id_listing, récupération des données Back Market) : une mise à l'épreuve concrète de mon adaptabilité. J'ai aussi traversé un « blocage silencieux » de deux jours avant de comprendre qu'une question bien formulée vaut mieux que deux jours de recherche solitaire. Ces pratiques — revue de code, Git en équipe, CI/CD — sont exactement ce que l'alternance au Cnam devra m'apporter.</p>
         </div>
       </div>
     </section>
@@ -616,8 +627,8 @@
         <p data-i18n="footer_sub">BUT Informatique S4 · IUT Villetaneuse · Sorbonne Paris Nord</p>
       </div>
       <div class="footer-links">
+        <a href="about.html" data-i18n="nav_about">À propos</a>
         <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://linhuang-christophe.framer.website" target="_blank" rel="noopener" data-i18n="footer_old">Ancien portfolio</a>
         <a href="mailto:linhuangyikai@gmail.com">Contact</a>
       </div>
     </div>

@@ -91,17 +91,17 @@ const translations = {
     s05_title:       'Stage BUT 2 — Découverte du monde professionnel',
     s05_sub:         'DSI de METM · 2 mois · Automatisation e-commerce & logistique',
     stage_co_label:  'Entreprise',
-    stage_dept_label:'Service',
-    stage_dept:      'DSI (Direction des Systèmes d\'Information)',
+    stage_dept_label:'Contexte',
+    stage_dept:      'Startup · Équipe de 5 stagiaires',
     stage_dur_label: 'Durée',
     stage_dur:       '2 mois',
     stage_tech_label:'Technologies',
     stage_c1_title:  'Ce que j\'ai découvert du monde professionnel',
-    stage_c1_body:   '<p>L\'entreprise m\'a confié le développement de <strong>scripts Python d\'automatisation</strong> pour des processus critiques : génération de bordereaux d\'expédition (UPS, Packlink), synchronisation de catalogues produits avec les marketplaces partenaires.</p><p>Cette expérience m\'a appris que le monde professionnel impose des contraintes que l\'université simule difficilement :</p><ul class="bullet-list"><li><strong>La robustesse prime sur l\'élégance</strong> : un script qui crashe en production coûte de l\'argent réel.</li><li><strong>Les infrastructures héritées sont contraignantes</strong> : travailler sur un environnement Windows avec des bases Alwaysdata impose des adaptations spécifiques.</li><li><strong>La documentation des API tierces est rarement complète</strong> : décortiquer les specs d\'Octopia ou Packlink a demandé plus de temps que le développement lui-même.</li></ul>',
+    stage_c1_body:   '<p><strong>METM (Miss &amp; Mister)</strong> est une startup de vente d\'ordinateurs reconditionnés à Rosny-sous-Bois, créée en 2024. L\'équipe était composée exclusivement de stagiaires, avec Alain (gérant) comme maître de stage. Communication mixte : WhatsApp, Discord et présentiel. Aucun Git : le code était centralisé sur un serveur interne via SSH et FileZilla.</p><p>Mes missions concrètes : <strong>scripts Python d\'automatisation</strong> et deux pages du site interne — <em>« Expédition »</em> (génération des bordereaux UPS et Packlink) et <em>« Recherche de bordereaux »</em>.</p><p>Contraintes découvertes :</p><ul class="bullet-list"><li><strong>La robustesse prime sur l\'élégance</strong> : un script qui crashe en production coûte de l\'argent réel.</li><li><strong>Pas de Git → coordination manuelle</strong> : les mises en production se coordonnaient pour éviter les conflits.</li><li><strong>La documentation des API tierces est rarement complète</strong> : décortiquer les specs d\'Octopia ou Packlink a demandé plus de temps que le développement lui-même.</li></ul>',
     stage_c2_title:  'Compétences BUT mobilisées',
-    stage_c2_body:   '<div class="competence-block"><h4>Réaliser le développement d\'applications</h4><p>Les scripts Python vont au-delà du simple appel API : gestion des erreurs réseau, retry automatique, logging structuré et production d\'un rapport d\'exécution lisible par les équipes métier.</p></div><div class="competence-block mt-md"><h4>Optimiser des applications informatiques</h4><p>Face au volume de commandes à traiter, j\'ai identifié des goulots d\'étranglement et mis en place un mécanisme de traitement par lots (<em>batch processing</em>), réduisant significativement le temps d\'exécution et les risques de rate-limiting.</p></div>',
+    stage_c2_body:   '<div class="competence-block"><h4>Réaliser le développement d\'applications</h4><p>Les scripts Python vont au-delà du simple appel API : gestion des erreurs réseau, retry automatique, logging structuré, et production d\'un rapport d\'exécution lisible par les équipes métier.</p></div><div class="competence-block mt-md"><h4>Optimiser des applications informatiques</h4><p>Face au volume de commandes à traiter, j\'ai identifié des goulots d\'étranglement et mis en place un mécanisme de traitement par lots (<em>batch processing</em>), réduisant significativement le temps d\'exécution et les risques de rate-limiting.</p></div>',
     stage_c3_title:  'Regard critique sur le stage',
-    stage_c3_body:   'Ce stage a confirmé mon orientation tout en en révélant les limites : j\'ai opéré seul sur des scripts sans revue de code systématique ni suite de tests. Cette autonomie m\'a appris à prendre des décisions, mais elle a aussi mis en lumière l\'importance des pratiques collaboratives (revue de code, CI/CD) que je n\'ai pas encore pu expérimenter. C\'est précisément ce que l\'alternance visée au Cnam devra m\'apporter.',
+    stage_c3_body:   'Ce stage a révélé des frictions réelles. L\'absence de Git a imposé une coordination manuelle des mises en production. Lorsque Tristan, l\'expert BDD de l\'équipe, est parti à mi-stage, j\'ai repris son périmètre (passage de id_product à id_listing, récupération Back Market) : une preuve concrète d\'adaptabilité. J\'ai aussi traversé un « blocage silencieux » de deux jours avant de comprendre qu\'une question bien formulée vaut mieux que deux jours de recherche solitaire. Ces pratiques — revue de code, Git en équipe, CI/CD — sont exactement ce que l\'alternance au Cnam devra m\'apporter.',
 
     s06_title:        'Objectifs',
     s06_sub:          'Court terme · Moyen terme · Long terme',
@@ -132,6 +132,80 @@ const translations = {
     footer_name: 'Lin Huang Christophe',
     footer_sub:  'BUT Informatique S4 · IUT Villetaneuse · Sorbonne Paris Nord',
     footer_old:  'Ancien portfolio',
+
+    // NAV extra
+    nav_home:  'Accueil',
+    nav_about: 'À propos',
+
+    // ABOUT PAGE
+    about_page_title: 'Lin Huang Christophe — À propos',
+    about_hero_tag:   'Portfolio S4 — BUT Informatique · IUT Villetaneuse',
+    about_hero_name:  'Lin Huang <span class="accent">Christophe</span> <span class="name-zh">林黄亦凯</span>',
+    about_hero_sub:   '20 ans · Rosny-sous-Bois · Développeur Back-End',
+    about_back:       '← Retour au portfolio',
+
+    about_form_title: 'Parcours de formation',
+    about_form_sub:   'De la STI2D à l\'ingénierie informatique',
+    form1_badge:  'En cours',
+    form1_period: 'Depuis sept. 2024',
+    form1_name:   'BUT Informatique 2ème année',
+    form1_desc:   'Spécialité développement back-end. SAÉ portant sur des projets réels (Mnémosyne — plateforme de suivi des cohortes étudiantes). Stage de 2 mois chez METM (Miss & Mister) à Rosny-sous-Bois.',
+    form2_period: 'Sept. 2023 — Juil. 2024',
+    form2_name:   'Classe Préparatoire — Prépa TSI',
+    form2_desc:   'Formation intensive en mathématiques, sciences physiques et sciences de l\'ingénieur (TSI). Expérience formatrice de rigueur et de résistance au stress. Réorientation vers le BUT Informatique pour aligner la formation avec ma passion du développement logiciel.',
+    form3_period: '2020 — 2023',
+    form3_name:   'Baccalauréat Technologique STI2D',
+    form3_desc:   'Filière Systèmes d\'Information et Numérique (SIN). Première immersion dans les systèmes techniques et l\'électronique. Fondations pour l\'orientation informatique.',
+
+    about_exp_title: 'Expériences',
+    about_exp_sub:   'Stage informatique · Emploi familial',
+    exp1_role:    'Stage en informatique',
+    exp1_company: 'METM — Miss & Mister · Rosny-sous-Bois',
+    exp1_period:  'Fév. — Mars 2026 · 2 mois',
+    exp1_desc:    'Automatisation des processus e-commerce : génération de bordereaux d\'expédition (UPS, Packlink), pages « Expédition » et « Recherche de bordereaux » du site interne, synchronisation avec Octopia, Cdiscount et Back Market. Équipe de 5 stagiaires.',
+    exp2_role:    'Livreur & Serveur',
+    exp2_company: 'Restaurant Wanobi · Paris 20e',
+    exp2_period:  'Depuis 2018 · Emploi familial',
+    exp2_desc:    'Expérience développant la rigueur, le sens du service client et la résistance au stress. Compétences transversales directement réinvesties dans les projets en équipe.',
+
+    about_lang_title: 'Langues & Atouts',
+    about_lang_h:     'Langues parlées',
+    about_atouts_h:   'Atouts personnels',
+    lang_fr_level:  'C1 — Avancé',
+    lang_zh_level:  'C2 — Langue maternelle',
+    lang_en_level:  'B1 — Intermédiaire',
+    atout1: '🎯 Patient',
+    atout2: '🔍 Curieux',
+    atout3: '🧠 Esprit analytique',
+    atout4: '💪 Résistance au stress',
+    atout5: '🤝 Esprit d\'équipe',
+    atout6: '🔁 Persévérance',
+    atout7: '⚡ Autonome',
+
+    about_interest_title: 'Centres d\'intérêt',
+    about_interest_sub:   'Ce qui me définit en dehors du code',
+    int1_title: 'Technologie',
+    int1_desc:  'Cybersécurité · IA · Dev Web & Mobile · Réalité Virtuelle · Robotique',
+    int2_title: 'Sciences',
+    int2_desc:  'Astronomie & Exploration Spatiale · Sciences Physiques · Mathématiques',
+    int3_title: 'Histoire',
+    int3_desc:  'Histoire des sciences · Histoire culturelle et militaire · Civilisations',
+    int4_title: 'Militaire',
+    int4_desc:  'Passion d\'enfance pour la stratégie et la tactique. Nourrit ma rigueur et mon sens de l\'organisation.',
+    int5_title: 'Lecture',
+    int5_desc:  'Lecture numérique — sciences, histoire et romans techniques.',
+    int6_title: 'Jeux vidéo',
+    int6_desc:  'Un pilier qui m\'a conduit vers l\'informatique. La pensée systémique des jeux de stratégie influence ma façon de concevoir des architectures.',
+
+    // STAGE (updated)
+    stage_co:          'METM — Miss & Mister',
+    stage_loc_label:   'Lieu',
+    stage_period_label:'Période',
+    stage_period:      '3 fév. – 30 mars 2026',
+
+    // 4th quality
+    q4_title: 'Demander de l\'aide au bon moment',
+    q4_body:  'Durant mon stage, j\'ai traversé une période de « blocage silencieux » : deux jours à chercher seul l\'origine d\'un bug BDD sans progresser. En formulant ma question précisément et en sollicitant mon maître de stage, j\'ai débloqué la situation en vingt minutes. Cette expérience a transformé ma façon de travailler : je sais maintenant qu\'un blocage non communiqué coûte plus cher qu\'une question bien posée.',
   },
 
   // ──────────────────────────────────────────
@@ -224,17 +298,17 @@ const translations = {
     s05_title:       'Internship — Discovering the professional world',
     s05_sub:         'METM IT Dept · 2 months · E-commerce & logistics automation',
     stage_co_label:  'Company',
-    stage_dept_label:'Department',
-    stage_dept:      'IT Department (DSI)',
+    stage_dept_label:'Context',
+    stage_dept:      'Startup · Team of 5 interns',
     stage_dur_label: 'Duration',
     stage_dur:       '2 months',
     stage_tech_label:'Technologies',
     stage_c1_title:  'What I discovered about the professional world',
-    stage_c1_body:   '<p>The company entrusted me with developing <strong>Python automation scripts</strong> for critical processes: shipping label generation (UPS, Packlink) and product catalogue synchronisation with partner marketplaces.</p><p>This experience taught me that the professional world imposes constraints that university can barely simulate:</p><ul class="bullet-list"><li><strong>Robustness trumps elegance</strong>: a script that crashes in production costs real money.</li><li><strong>Legacy infrastructure is constraining</strong>: working on a Windows environment with Alwaysdata databases required specific adaptations.</li><li><strong>Third-party API documentation is rarely complete</strong>: deciphering Octopia or Packlink specs took more time than the development itself.</li></ul>',
+    stage_c1_body:   '<p><strong>METM (Miss &amp; Mister)</strong> is a startup selling refurbished computers in Rosny-sous-Bois, founded in 2024. The team consisted entirely of interns, each responsible for a distinct scope, with Alain (CEO) as supervisor. Mixed communication: WhatsApp, Discord and in-person. No Git: code was centralised on an internal server via SSH and FileZilla.</p><p>My concrete work: <strong>Python automation scripts</strong> and two pages on the internal website — <em>"Dispatch"</em> (automatic shipping label generation via UPS &amp; Packlink) and <em>"Label Search"</em> (find a label by order number).</p><p>Constraints I discovered:</p><ul class="bullet-list"><li><strong>Robustness over elegance</strong>: a production crash costs real money.</li><li><strong>No Git → manual coordination</strong>: deployments had to be coordinated manually to avoid conflicts.</li><li><strong>Third-party API documentation is rarely complete</strong>: deciphering Octopia or Packlink specs took more time than the coding itself.</li></ul>',
     stage_c2_title:  'Skills applied from the degree',
     stage_c2_body:   '<div class="competence-block"><h4>Application development</h4><p>The Python scripts go beyond simple API calls: network error handling, automatic retry, structured logging and execution reports readable by business teams.</p></div><div class="competence-block mt-md"><h4>Software optimisation</h4><p>Faced with the volume of orders to process, I identified bottlenecks and implemented a batch processing mechanism, significantly reducing execution time and API rate-limiting risks.</p></div>',
     stage_c3_title:  'Critical reflection on the internship',
-    stage_c3_body:   'This internship confirmed my direction while revealing its limits: I worked alone on scripts without systematic code review or a test suite. This autonomy taught me to make decisions, but also highlighted the importance of collaborative practices (code review, CI/CD) that I have yet to experience. That is exactly what the Cnam work-study programme should bring.',
+    stage_c3_body:   'This internship surfaced real friction points. The absence of Git forced manual production coordination. When Tristan, the team\'s database expert, left mid-internship, I took over his scope (switching from id_product to id_listing, retrieving Back Market data) — a concrete test of my adaptability. I also went through a "silent blocking" episode: two days searching alone before realising a well-formulated question beats two days of solo debugging. Code review, Git in a team, CI/CD — exactly what the Cnam work-study programme must bring.',
 
     s06_title:        'Goals',
     s06_sub:          'Short term · Medium term · Long term',
@@ -265,6 +339,76 @@ const translations = {
     footer_name: 'Lin Huang Christophe',
     footer_sub:  'BSc Computer Science S4 · IUT Villetaneuse · Sorbonne Paris Nord',
     footer_old:  'Old portfolio',
+
+    nav_home:  'Home',
+    nav_about: 'About',
+
+    about_page_title: 'Lin Huang Christophe — About me',
+    about_hero_tag:   'S4 Portfolio — BSc Computer Science · IUT Villetaneuse',
+    about_hero_name:  'Lin Huang <span class="accent">Christophe</span> <span class="name-zh">林黄亦凯</span>',
+    about_hero_sub:   '20 y/o · Rosny-sous-Bois · Back-End Developer',
+    about_back:       '← Back to portfolio',
+
+    about_form_title: 'Education',
+    about_form_sub:   'From STI2D to computer engineering',
+    form1_badge:  'Current',
+    form1_period: 'Since Sept. 2024',
+    form1_name:   'BSc Computer Science — Year 2',
+    form1_desc:   'Back-end development specialisation. University projects on real use cases (Mnémosyne — student cohort tracking). 2-month internship at METM (Miss & Mister), Rosny-sous-Bois.',
+    form2_period: 'Sept. 2023 — Jul. 2024',
+    form2_name:   'Preparatory Class — Prépa TSI',
+    form2_desc:   'Intensive programme in mathematics, physics and industrial sciences (TSI). A formative experience in rigour and stress management. Redirected towards BSc Computer Science to align with my passion for software development.',
+    form3_period: '2020 — 2023',
+    form3_name:   'Technology Baccalaureate — STI2D',
+    form3_desc:   'Digital Information Systems specialisation. First exposure to technical systems and electronics. Foundation for the computer science path.',
+
+    about_exp_title: 'Experience',
+    about_exp_sub:   'IT internship · Family job',
+    exp1_role:    'IT Internship',
+    exp1_company: 'METM — Miss & Mister · Rosny-sous-Bois',
+    exp1_period:  'Feb. — Mar. 2026 · 2 months',
+    exp1_desc:    'E-commerce process automation: shipping label generation (UPS, Packlink), "Dispatch" and "Label Search" pages on the internal website, catalogue sync with Octopia, Cdiscount and Back Market. Team of 5 interns.',
+    exp2_role:    'Delivery & Waiter',
+    exp2_company: 'Restaurant Wanobi · Paris 20e',
+    exp2_period:  'Since 2018 · Family job',
+    exp2_desc:    'Experience building rigour, customer service and stress management skills in a fast-paced environment. Transferable skills directly applied in team projects.',
+
+    about_lang_title: 'Languages & Strengths',
+    about_lang_h:     'Languages',
+    about_atouts_h:   'Personal strengths',
+    lang_fr_level:  'C1 — Advanced',
+    lang_zh_level:  'C2 — Native',
+    lang_en_level:  'B1 — Intermediate',
+    atout1: '🎯 Patient',
+    atout2: '🔍 Curious',
+    atout3: '🧠 Analytical mindset',
+    atout4: '💪 Stress resistant',
+    atout5: '🤝 Team player',
+    atout6: '🔁 Perseverance',
+    atout7: '⚡ Self-sufficient',
+
+    about_interest_title: 'Interests',
+    about_interest_sub:   'What defines me beyond code',
+    int1_title: 'Technology',
+    int1_desc:  'Cybersecurity · AI · Web & Mobile Dev · Virtual Reality · Robotics',
+    int2_title: 'Science',
+    int2_desc:  'Astronomy & Space Exploration · Physics · Mathematics',
+    int3_title: 'History',
+    int3_desc:  'History of science & technology · Cultural & military history · Civilisations',
+    int4_title: 'Military',
+    int4_desc:  'A childhood passion for strategy and tactics. Fuels my rigour and ability to anticipate risks in projects.',
+    int5_title: 'Reading',
+    int5_desc:  'Digital reading — science, history and technical novels.',
+    int6_title: 'Gaming',
+    int6_desc:  'A pillar that led me to computer science. Systemic thinking from strategy games directly influences how I design software architectures.',
+
+    stage_co:          'METM — Miss & Mister',
+    stage_loc_label:   'Location',
+    stage_period_label:'Period',
+    stage_period:      '3 Feb. – 30 Mar. 2026',
+
+    q4_title: 'Knowing when to ask for help',
+    q4_body:  'During my internship, I went through a "silent blocking" phase: two days searching alone for a database bug without progress. By formulating my question precisely and asking my supervisor, I resolved it in twenty minutes. This experience changed how I work: I now know that an uncommunicated blocker costs more than a well-formed question.',
   },
 
   // ──────────────────────────────────────────
@@ -398,8 +542,93 @@ const translations = {
     footer_name: '林黄亦凯',
     footer_sub:  '计算机技术学士 S4 · 维勒塔纳伊夫理工学院 · 索邦大学巴黎北校区',
     footer_old:  '旧版作品集',
+
+    nav_home:  '首页',
+    nav_about: '关于我',
+
+    about_page_title: '林黄亦凯 — 关于我',
+    about_hero_tag:   'S4 学期作品集 — 计算机技术学士 · 维勒塔纳伊夫理工学院',
+    about_hero_name:  '林黄 <span class="accent">亦凯</span> <span class="name-zh">Christophe</span>',
+    about_hero_sub:   '20 岁 · 罗西苏博瓦 · 后端开发工程师',
+    about_back:       '← 返回作品集',
+
+    about_form_title: '教育经历',
+    about_form_sub:   '从 STI2D 到计算机工程',
+    form1_badge:  '在读',
+    form1_period: '2024 年 9 月至今',
+    form1_name:   '计算机技术学士第二年',
+    form1_desc:   '专注后端开发方向。参与真实项目 SAÉ（Mnémosyne — 学生群体追踪平台）。在 METM（Miss & Mister）完成 2 个月实习。',
+    form2_period: '2023 年 9 月 — 2024 年 7 月',
+    form2_name:   '预科班 — TSI 预科',
+    form2_desc:   '数学、物理及工业科学强化课程（TSI 方向）。培养了严谨性和抗压能力。为专注软件开发热情而转入计算机技术学士专业。',
+    form3_period: '2020 — 2023',
+    form3_name:   '技术型高中会考 — STI2D',
+    form3_desc:   '数字信息系统（SIN）方向。初步接触技术系统与电子学，为走向计算机方向奠定基础。',
+
+    about_exp_title: '工作经历',
+    about_exp_sub:   '信息技术实习 · 家庭餐厅',
+    exp1_role:    '信息技术实习',
+    exp1_company: 'METM — Miss & Mister · 罗西苏博瓦',
+    exp1_period:  '2026 年 2 月 — 3 月 · 2 个月',
+    exp1_desc:    '电商流程自动化：生成运输单（UPS、Packlink）、内部网站「发货」与「查询运单」页面开发、与 Octopia、Cdiscount 及 Back Market 数据同步。五人实习生团队协作。',
+    exp2_role:    '外卖员 & 服务员',
+    exp2_company: '万比餐厅 · 巴黎 20 区',
+    exp2_period:  '2018 年至今 · 家庭兼职',
+    exp2_desc:    '在高节奏环境中锻炼了严谨性、客户服务意识和抗压能力，这些综合能力直接应用于团队项目中。',
+
+    about_lang_title: '语言与优势',
+    about_lang_h:     '语言能力',
+    about_atouts_h:   '个人优势',
+    lang_fr_level:  'C1 — 高级',
+    lang_zh_level:  'C2 — 母语',
+    lang_en_level:  'B1 — 中级',
+    atout1: '🎯 耐心',
+    atout2: '🔍 好奇心强',
+    atout3: '🧠 分析思维',
+    atout4: '💪 抗压能力强',
+    atout5: '🤝 团队协作',
+    atout6: '🔁 坚持不懈',
+    atout7: '⚡ 自主自立',
+
+    about_interest_title: '兴趣爱好',
+    about_interest_sub:   '代码之外定义我的事物',
+    int1_title: '技术',
+    int1_desc:  '网络安全 · 人工智能 · Web & 移动开发 · 虚拟现实 · 机器人',
+    int2_title: '科学',
+    int2_desc:  '天文学 & 太空探索 · 物理学 · 数学 · 理论计算机科学',
+    int3_title: '历史',
+    int3_desc:  '科学技术史 · 文化与军事史 · 文明史',
+    int4_title: '军事',
+    int4_desc:  '儿时对战略与战术的热情，培养了我的严谨性和组织能力，也帮助我在项目中提前规避风险。',
+    int5_title: '阅读',
+    int5_desc:  '数字阅读 — 科学、历史与技术类书籍，让我保持思维的活跃与沉静。',
+    int6_title: '电子游戏',
+    int6_desc:  '引领我走向计算机科学的重要支柱。策略游戏中的系统化思维直接影响了我设计软件架构的方式。',
+
+    stage_co:          'METM — Miss & Mister',
+    stage_loc_label:   '地点',
+    stage_period_label:'实习时间',
+    stage_period:      '2026 年 2 月 3 日 – 3 月 30 日',
+
+    q4_title: '懂得适时求助',
+    q4_body:  '实习期间，我经历过一段「沉默阻塞」：独自花费两天排查一个数据库 bug，毫无进展。当我将问题准确表述并向负责人请教后，二十分钟内便解决了问题。这段经历改变了我的工作方式：我深刻认识到，一个没有反馈的阻塞，比一个表述清晰的问题代价更高。',
   }
 };
+
+// ============================================================
+//  TYPING EFFECT
+// ============================================================
+function typeWriter(el, text, speed = 38) {
+  el.textContent = '';
+  let i = 0;
+  const timer = setInterval(() => {
+    if (i < text.length) {
+      el.textContent += text[i++];
+    } else {
+      clearInterval(timer);
+    }
+  }, speed);
+}
 
 // ============================================================
 //  I18N ENGINE
@@ -412,6 +641,8 @@ function applyLang(lang) {
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
+    // hero subtitle handled separately for typing effect
+    if (key === 'hero_subtitle' || key === 'about_hero_sub') return;
     if (t[key] !== undefined) el.textContent = t[key];
   });
 
@@ -420,13 +651,25 @@ function applyLang(lang) {
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
 
-  if (t.page_title) document.title = t.page_title;
+  if (t.page_title || t.about_page_title) {
+    document.title = t.about_page_title || t.page_title;
+    // page_title takes precedence on index.html
+    const titleEl = document.querySelector('title[data-i18n="about_page_title"]');
+    document.title = titleEl ? (t.about_page_title || t.page_title) : (t.page_title || t.about_page_title);
+  }
 
   localStorage.setItem('lang', lang);
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
+
+  // Typing effect on hero subtitle (index.html or about.html)
+  const subtitleEl = document.querySelector('[data-i18n="hero_subtitle"], [data-i18n="about_hero_sub"]');
+  if (subtitleEl) {
+    const key = subtitleEl.dataset.i18n;
+    if (t[key] !== undefined) typeWriter(subtitleEl, t[key]);
+  }
 }
 
 // ============================================================
@@ -492,9 +735,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.4 });
 
   sections.forEach(s => navObserver.observe(s));
+
+  // Scroll reveal for all cards / project cards / objective cards
+  const revealTargets = document.querySelectorAll(
+    '.section .card, .project-card, .proj-card, .objective-card, .skills-col, .stage-intro, .tl-item, .interest-card'
+  );
+  revealTargets.forEach((el, i) => {
+    if (!el.classList.contains('reveal')) {
+      el.classList.add('reveal');
+      el.style.transitionDelay = `${(i % 3) * 0.08}s`;
+    }
+  });
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 });
 
 // Inject active nav link style
 const style = document.createElement('style');
-style.textContent = '.nav-links a.active { color: var(--text); }';
+style.textContent = '.nav-links a.active, .nav-links a.nav-active { color: var(--text); }';
 document.head.appendChild(style);

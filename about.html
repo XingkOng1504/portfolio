@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="about_page_title">Lin Huang Christophe — À propos</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">LHC</a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-i18n="nav_home">Accueil</a></li>
+      <li><a href="about.html" class="nav-active" data-i18n="nav_about">À propos</a></li>
+      <li><a href="index.html#projets" data-i18n="nav_projets">Projets</a></li>
+      <li><a href="index.html#stage" data-i18n="nav_stage">Stage</a></li>
+      <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Basculer le thème">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ABOUT HERO -->
+  <header class="about-hero">
+    <div class="about-photo-wrap">
+      <img src="img/photo_0.png" alt="Christophe Lin Huang" class="about-photo" />
+    </div>
+    <div class="about-hero-content">
+      <p class="hero-tag" data-i18n="about_hero_tag">Portfolio S4 — BUT Informatique · IUT Villetaneuse</p>
+      <h1 data-i18n-html="about_hero_name">Lin Huang <span class="accent">Christophe</span> <span class="name-zh">林黄亦凯</span></h1>
+      <p class="hero-subtitle" data-i18n="about_hero_sub">20 ans · Rosny-sous-Bois · Développeur Back-End</p>
+      <div class="about-quick-info">
+        <span class="about-info-chip">✉ <a href="mailto:linhuangyikai@gmail.com">linhuangyikai@gmail.com</a></span>
+        <span class="about-info-chip">📱 +33 7 54 56 22 51</span>
+        <span class="about-info-chip">📍 Rosny-sous-Bois (93)</span>
+        <span class="about-info-chip">🔗 <a href="https://linkedin.com/in/christophe-lin-huang" target="_blank" rel="noopener">LinkedIn</a></span>
+      </div>
+      <div class="hero-actions">
+        <a href="index.html" class="cta-btn" data-i18n="about_back">← Retour au portfolio</a>
+        <a href="cv.pdf" class="cv-btn" download data-i18n="hero_cv">Télécharger CV</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 01 — FORMATION -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <h2 data-i18n="about_form_title">Parcours de formation</h2>
+          <p class="section-sub" data-i18n="about_form_sub">De la STI2D à l'ingénierie informatique</p>
+        </div>
+
+        <div class="timeline">
+
+          <div class="tl-item reveal">
+            <div class="tl-marker current"></div>
+            <div class="tl-period" data-i18n="form1_period">Depuis sept. 2024</div>
+            <div class="card tl-card">
+              <div class="tl-header">
+                <span class="tl-badge" data-i18n="form1_badge">En cours</span>
+                <h3 data-i18n="form1_name">BUT Informatique 2ème année</h3>
+              </div>
+              <p class="tl-school">🏛 <strong>IUT Villetaneuse — Sorbonne Paris Nord</strong></p>
+              <p data-i18n="form1_desc">Spécialité développement back-end. SAÉ portant sur des projets réels (Mnémosyne — plateforme de suivi des cohortes étudiantes). Stage de 2 mois chez METM (Miss & Mister) à Rosny-sous-Bois.</p>
+              <div class="tl-tags">
+                <span class="badge">Python</span>
+                <span class="badge">Flask</span>
+                <span class="badge">Docker</span>
+                <span class="badge">API REST</span>
+                <span class="badge">SQLite</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-marker"></div>
+            <div class="tl-period" data-i18n="form2_period">Sept. 2023 — Juil. 2024</div>
+            <div class="card tl-card">
+              <h3 data-i18n="form2_name">Classe Préparatoire — Prépa TSI</h3>
+              <p class="tl-school">🏛 <strong>Lycée Raspail, Paris</strong></p>
+              <p data-i18n="form2_desc">Formation intensive en mathématiques, sciences physiques et sciences de l'ingénieur (Technologie & Sciences Industrielles). Expérience formatrice de rigueur et de résistance au stress. Réorientation vers le BUT Informatique pour aligner la formation avec ma passion du développement logiciel.</p>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-marker"></div>
+            <div class="tl-period" data-i18n="form3_period">2020 — 2023</div>
+            <div class="card tl-card">
+              <h3 data-i18n="form3_name">Baccalauréat Technologique STI2D</h3>
+              <p class="tl-school">🏛 <strong>Lycée Nicolas-Joseph Cugnot, Neuilly-sur-Marne</strong></p>
+              <p data-i18n="form3_desc">Filière Systèmes d'Information et Numérique (SIN). Première immersion dans les systèmes techniques, l'électronique et les réseaux. Fondations pour l'orientation informatique. Utilisation de SolidWorks et SketchUp pour la conception 3D.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 — EXPÉRIENCES -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <h2 data-i18n="about_exp_title">Expériences</h2>
+          <p class="section-sub" data-i18n="about_exp_sub">Stage informatique · Emploi familial</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card reveal">
+            <div class="exp-header">
+              <span class="exp-icon">💼</span>
+              <div>
+                <h3 data-i18n="exp1_role">Stage en informatique</h3>
+                <p class="exp-company" data-i18n="exp1_company">METM — Miss &amp; Mister · Rosny-sous-Bois</p>
+                <p class="exp-period" data-i18n="exp1_period">Fév. — Mars 2026 · 2 mois</p>
+              </div>
+            </div>
+            <p data-i18n="exp1_desc">Automatisation des processus e-commerce : génération de bordereaux d'expédition (UPS, Packlink), pages «&nbsp;Expédition&nbsp;» et «&nbsp;Recherche de bordereaux&nbsp;» du site interne, synchronisation avec Octopia, Cdiscount et Back Market. Équipe de 5 stagiaires, communication via Discord &amp; WhatsApp.</p>
+            <div class="tl-tags mt-sm">
+              <span class="badge">Python</span>
+              <span class="badge">API REST</span>
+              <span class="badge">SSH</span>
+              <span class="badge">systemd</span>
+              <span class="badge">DBeaver</span>
+              <span class="badge">phpMyAdmin</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="exp-header">
+              <span class="exp-icon">🍜</span>
+              <div>
+                <h3 data-i18n="exp2_role">Livreur &amp; Serveur</h3>
+                <p class="exp-company" data-i18n="exp2_company">Restaurant Wanobi · Paris 20e</p>
+                <p class="exp-period" data-i18n="exp2_period">Depuis 2018 · Emploi familial</p>
+              </div>
+            </div>
+            <p data-i18n="exp2_desc">Expérience développant la rigueur, le sens du service client et la résistance au stress dans un environnement à flux tendus. Compétences transversales directement réinvesties dans le travail en équipe et la gestion de priorités dans les projets universitaires.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 — LANGUES & ATOUTS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <h2 data-i18n="about_lang_title">Langues &amp; Atouts</h2>
+        </div>
+
+        <div class="grid-2">
+          <div class="card reveal">
+            <h3 data-i18n="about_lang_h">Langues parlées</h3>
+            <div class="skill-item mt-md">
+              <div class="skill-header">
+                <span class="skill-name">🇫🇷 Français</span>
+                <span class="skill-level" data-i18n="lang_fr_level">C1 — Avancé</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">🇨🇳 中文 (Chinois)</span>
+                <span class="skill-level" data-i18n="lang_zh_level">C2 — Langue maternelle</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="98"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">🇬🇧 English</span>
+                <span class="skill-level" data-i18n="lang_en_level">B1 — Intermédiaire</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="60"></div></div>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h3 data-i18n="about_atouts_h">Atouts personnels</h3>
+            <div class="atouts-grid mt-md">
+              <div class="atout-chip" data-i18n="atout1">🎯 Patient</div>
+              <div class="atout-chip" data-i18n="atout2">🔍 Curieux</div>
+              <div class="atout-chip" data-i18n="atout3">🧠 Esprit analytique</div>
+              <div class="atout-chip" data-i18n="atout4">💪 Résistance au stress</div>
+              <div class="atout-chip" data-i18n="atout5">🤝 Esprit d'équipe</div>
+              <div class="atout-chip" data-i18n="atout6">🔁 Persévérance</div>
+              <div class="atout-chip" data-i18n="atout7">⚡ Autonome</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 — CENTRES D'INTÉRÊT -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">04</span>
+          <h2 data-i18n="about_interest_title">Centres d'intérêt</h2>
+          <p class="section-sub" data-i18n="about_interest_sub">Ce qui me définit en dehors du code</p>
+        </div>
+
+        <div class="interests-grid">
+          <div class="interest-card reveal">
+            <div class="interest-icon">💻</div>
+            <h3 data-i18n="int1_title">Technologie</h3>
+            <p data-i18n="int1_desc">Cybersécurité · Intelligence Artificielle · Développement Web &amp; Mobile · Réalité Virtuelle · Robotique</p>
+          </div>
+          <div class="interest-card reveal">
+            <div class="interest-icon">🔭</div>
+            <h3 data-i18n="int2_title">Sciences</h3>
+            <p data-i18n="int2_desc">Astronomie &amp; Exploration Spatiale · Sciences Physiques · Mathématiques · Informatique théorique</p>
+          </div>
+          <div class="interest-card reveal">
+            <div class="interest-icon">📚</div>
+            <h3 data-i18n="int3_title">Histoire</h3>
+            <p data-i18n="int3_desc">Histoire des sciences et des techniques · Histoire culturelle et militaire · Histoire des civilisations</p>
+          </div>
+          <div class="interest-card reveal">
+            <div class="interest-icon">⚔️</div>
+            <h3 data-i18n="int4_title">Militaire</h3>
+            <p data-i18n="int4_desc">Une passion d'enfance pour la stratégie et la tactique. Nourrit ma rigueur, mon sens de l'organisation et ma capacité à anticiper les risques dans les projets.</p>
+          </div>
+          <div class="interest-card reveal">
+            <div class="interest-icon">📖</div>
+            <h3 data-i18n="int5_title">Lecture</h3>
+            <p data-i18n="int5_desc">Lecture numérique — un espace de détente et de réflexion. Sciences, histoire et romans techniques.</p>
+          </div>
+          <div class="interest-card reveal">
+            <div class="interest-icon">🎮</div>
+            <h3 data-i18n="int6_title">Jeux vidéo</h3>
+            <p data-i18n="int6_desc">Un pilier qui m'a conduit vers l'informatique. La pensée systémique des jeux de stratégie influence directement ma façon de concevoir des architectures logicielles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <p><strong data-i18n="footer_name">Lin Huang Christophe</strong></p>
+        <p data-i18n="footer_sub">BUT Informatique S4 · IUT Villetaneuse · Sorbonne Paris Nord</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" data-i18n="nav_home">Accueil</a>
+        <a href="https://github.com/XingkOng1504" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:linhuangyikai@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

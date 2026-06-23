@@ -1,0 +1,7 @@
+# Rapport de stage complet (confidentiel)
+Rapport_Stage_*.pdf
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
