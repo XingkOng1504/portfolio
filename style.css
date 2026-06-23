@@ -1474,3 +1474,10 @@ a.nav-logo {
   .interests-grid { grid-template-columns: 1fr; }
   .about-photo { width: 150px; height: 150px; }
 }
+
+/* Badge cybersécurité */
+.badge-cyber {
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #34d399;
+}

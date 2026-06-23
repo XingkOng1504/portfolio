@@ -17,7 +17,7 @@ const translations = {
     hero_subtitle: 'Développeur Back-End · Automatisation · E-commerce & Logistique',
     hero_cta:      'Découvrir le portfolio',
     hero_cv:       'Télécharger CV',
-    hero_code:     '<span class="kw">class</span> <span class="cls">Christophe</span>:\n  formation  = <span class="str">"BUT Informatique S4"</span>\n  école      = <span class="str">"IUT Villetaneuse"</span>\n  ambition   = <span class="str">"Ingénieur Cnam (alternance)"</span>\n  spécialité = <span class="str">"Développement Back-End"</span>\n  passion    = <span class="str">"Automatisation des flux"</span>',
+    hero_code:     '<span class="kw">class</span> <span class="cls">Christophe</span>:\n  formation  = <span class="str">"BUT Informatique S4"</span>\n  école      = <span class="str">"IUT Villetaneuse"</span>\n  ambition   = <span class="str">"Ingénieur Cnam (alternance)"</span>\n  spécialité = <span class="str">"Développement Back-End"</span>\n  passion    = <span class="str">"Automatisation des flux"</span>\n  futur      = <span class="str">"Cybersécurité"</span>',
 
     s01_title:   'Présentation personnelle',
     s01_sub:     'Parcours · Projet professionnel · Évolution BUT 1 → BUT 2',
@@ -114,8 +114,8 @@ const translations = {
     obj1_action:      'candidatures actives, veille sur les offres d\'alternance Île-de-France, mise à jour du portfolio GitHub.',
     obj2_title:       'Diplôme d\'ingénieur Cnam + premier emploi',
     obj2_body:        'À l\'issue du BUT, intégrer le <strong>diplôme d\'ingénieur Informatique et Systèmes d\'Information du Cnam en alternance</strong>. Premier emploi cible : développeur Back-End dans une équipe produit avec forte composante d\'automatisation.',
-    obj3_title:       'Architecte logiciel / Expert systèmes',
-    obj3_body:        'Me projeter comme <strong>architecte logiciel ou expert en intégration de systèmes logistiques</strong>. Une trajectoire vers CTO dans une structure à taille humaine est cohérente avec ma volonté de rester proche du code tout en ayant un impact sur les décisions produit.',
+    obj3_title:       'Architecte logiciel / Cybersécurité',
+    obj3_body:        'Me projeter comme <strong>architecte logiciel ou spécialiste en cybersécurité applicative</strong>. La sécurité des systèmes m\'attire de plus en plus — concevoir des applications robustes et les sécuriser sont deux faces d\'un même métier. Une trajectoire vers CTO ou RSSI dans une structure à taille humaine est cohérente avec ma volonté de rester proche du code tout en ayant un impact stratégique.',
 
     s07_title:          'Contact',
     s07_sub:            'Recruteurs · Collaborations · Questions',
@@ -224,7 +224,7 @@ const translations = {
     hero_subtitle: 'Back-End Developer · Automation · E-commerce & Logistics',
     hero_cta:      'Explore portfolio',
     hero_cv:       'Download CV',
-    hero_code:     '<span class="kw">class</span> <span class="cls">Christophe</span>:\n  degree     = <span class="str">"BSc Computer Science S4"</span>\n  school     = <span class="str">"IUT Villetaneuse"</span>\n  ambition   = <span class="str">"Engineering Degree (Cnam)"</span>\n  specialty  = <span class="str">"Back-End Development"</span>\n  passion    = <span class="str">"Workflow Automation"</span>',
+    hero_code:     '<span class="kw">class</span> <span class="cls">Christophe</span>:\n  degree     = <span class="str">"BSc Computer Science S4"</span>\n  school     = <span class="str">"IUT Villetaneuse"</span>\n  ambition   = <span class="str">"Engineering Degree (Cnam)"</span>\n  specialty  = <span class="str">"Back-End Development"</span>\n  passion    = <span class="str">"Workflow Automation"</span>\n  future     = <span class="str">"Cybersecurity"</span>',
 
     s01_title:   'About Me',
     s01_sub:     'Background · Career goals · Growth from Year 1 to Year 2',
@@ -321,8 +321,8 @@ const translations = {
     obj1_action:      'active applications, monitoring work-study offers in Île-de-France, updating GitHub portfolio.',
     obj2_title:       'Cnam Engineering Degree + first job',
     obj2_body:        'After completing my degree, I plan to join the <strong>Cnam Engineering Degree in Information Systems and Computer Science via a work-study contract</strong>. Target first role: Back-End developer in a product team with a strong automation and systems integration focus.',
-    obj3_title:       'Software architect / Systems expert',
-    obj3_body:        'Long term, I see myself as a <strong>software architect or logistics systems integration expert</strong>. A path towards CTO in a mid-sized company is consistent with my desire to stay close to the code while influencing product and organisation decisions.',
+    obj3_title:       'Software architect / Cybersecurity',
+    obj3_body:        'Long term, I see myself as a <strong>software architect or application security specialist</strong>. Cybersecurity interests me more and more — designing robust systems and securing them are two sides of the same craft. A path towards CTO or CISO in a mid-sized company fits my desire to stay close to the code while having a strategic impact.',
 
     s07_title:          'Contact',
     s07_sub:            'Recruiters · Collaborations · Questions',
@@ -427,7 +427,7 @@ const translations = {
     hero_subtitle: '后端开发工程师 · 流程自动化 · 电商与物流',
     hero_cta:      '浏览作品集',
     hero_cv:       '下载简历',
-    hero_code:     '<span class="kw">class</span> <span class="cls">亦凯</span>:\n  学位    = <span class="str">"计算机技术学士 S4"</span>\n  院校    = <span class="str">"维勒塔纳伊夫理工学院"</span>\n  目标    = <span class="str">"工程师文凭（南工大，工读）"</span>\n  专长    = <span class="str">"后端开发"</span>\n  热情    = <span class="str">"流程自动化"</span>',
+    hero_code:     '<span class="kw">class</span> <span class="cls">亦凯</span>:\n  学位    = <span class="str">"计算机技术学士 S4"</span>\n  院校    = <span class="str">"维勒塔纳伊夫理工学院"</span>\n  目标    = <span class="str">"工程师文凭（南工大，工读）"</span>\n  专长    = <span class="str">"后端开发"</span>\n  热情    = <span class="str">"流程自动化"</span>\n  未来    = <span class="str">"网络安全"</span>',
 
     s01_title:   '个人介绍',
     s01_sub:     '学习历程 · 职业目标 · 第一年到第二年的成长',
@@ -524,8 +524,8 @@ const translations = {
     obj1_action:      '积极投递申请，关注法兰西岛地区工读职位，更新 GitHub 作品集。',
     obj2_title:       'Cnam 工程师文凭 + 首份工作',
     obj2_body:        '完成学士学位后，计划通过工读合同攻读<strong>Cnam 信息系统与计算机工程师文凭</strong>。目标职位：侧重系统集成与自动化的产品团队后端开发工程师。',
-    obj3_title:       '软件架构师 / 系统专家',
-    obj3_body:        '长期来看，我的定位是<strong>软件架构师或物流系统集成专家</strong>。在中等规模企业担任技术总监（CTO）是一条合理的职业路径，与我既想保持对代码的深度参与、又想对产品决策产生影响的愿景相契合。',
+    obj3_title:       '软件架构师 / 网络安全',
+    obj3_body:        '长期来看，我的定位是<strong>软件架构师或应用安全专家</strong>。网络安全领域越来越吸引我——设计健壮的系统与保障系统安全，本质上是同一件事的两面。在中等规模企业担任技术总监（CTO）或首席信息安全官（CISO）是一条合理的职业路径，与我既深耕代码、又追求战略影响力的愿景相契合。',
 
     s07_title:          '联系我',
     s07_sub:            '招聘方 · 合作 · 咨询',
