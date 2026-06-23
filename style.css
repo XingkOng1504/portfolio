@@ -70,15 +70,18 @@ body {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: 1.1rem;
+  flex-wrap: nowrap;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: color var(--transition);
+  white-space: nowrap;
 }
 
 .nav-links a:hover { color: var(--text); }
