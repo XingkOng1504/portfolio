@@ -670,14 +670,14 @@ const colorPalette = [
   { key: 'kaki',    name: 'Kaki',    accent: '#15803d', accent2: '#4ade80' },
   { key: 'orange',  name: 'Orange',  accent: '#ea580c', accent2: '#fb923c' },
   { key: 'indigo',  name: 'Indigo',  accent: '#1d4ed8', accent2: '#93c5fd' },
-  { key: 'cyan',    name: 'Cyan',    accent: '#06b6d4', accent2: '#67e8f9' },
-  { key: 'ambre',   name: 'Ambre',   accent: '#f59e0b', accent2: '#fcd34d' },
+  { key: 'cyan',      name: 'Cyan',      accent: '#06b6d4', accent2: '#67e8f9' },
+  { key: 'turquoise', name: 'Turquoise', accent: '#14b8a6', accent2: '#5eead4' },
   // ── 5 couleurs au choix ──
-  { key: 'rose',    name: 'Rose',    accent: '#ec4899', accent2: '#f9a8d4' },
-  { key: 'mauve',   name: 'Mauve',   accent: '#9333ea', accent2: '#c084fc' },
-  { key: 'corail',  name: 'Corail',  accent: '#f43f5e', accent2: '#fda4af' },
-  { key: 'emeraude',name: 'Émeraude',accent: '#059669', accent2: '#6ee7b7' },
-  { key: 'ardoise', name: 'Ardoise', accent: '#64748b', accent2: '#94a3b8' },
+  { key: 'rose',      name: 'Rose',      accent: '#ec4899', accent2: '#f9a8d4' },
+  { key: 'mauve',     name: 'Mauve',     accent: '#9333ea', accent2: '#c084fc' },
+  { key: 'corail',    name: 'Corail',    accent: '#f43f5e', accent2: '#fda4af' },
+  { key: 'emeraude',  name: 'Émeraude',  accent: '#059669', accent2: '#6ee7b7' },
+  { key: 'bordeaux',  name: 'Bordeaux',  accent: '#9f1239', accent2: '#fecdd3' },
 ];
 
 let currentColorIdx = 0;
