@@ -661,16 +661,23 @@ translations['zh-tw'] = buildZhTW(translations['zh']);
 //  COLOUR PALETTE — accents + auto-cycle
 // ============================================================
 const colorPalette = [
-  { key: 'violet',  name: 'Violet',  accent: '#6c63ff', accent2: '#a78bfa' },
-  { key: 'bleu',    name: 'Bleu',    accent: '#3b82f6', accent2: '#60a5fa' },
+  // ── Couleurs principales ──
+  { key: 'ciel',    name: 'Ciel',    accent: '#0284c7', accent2: '#38bdf8' }, // défaut
   { key: 'vert',    name: 'Vert',    accent: '#10b981', accent2: '#34d399' },
   { key: 'rouge',   name: 'Rouge',   accent: '#dc2626', accent2: '#f87171' },
   { key: 'or',      name: 'Or',      accent: '#ca8a04', accent2: '#fcd34d' },
   { key: 'marine',  name: 'Marine',  accent: '#1e40af', accent2: '#60a5fa' },
-  { key: 'ciel',    name: 'Ciel',    accent: '#0284c7', accent2: '#38bdf8' },
   { key: 'kaki',    name: 'Kaki',    accent: '#15803d', accent2: '#4ade80' },
   { key: 'orange',  name: 'Orange',  accent: '#ea580c', accent2: '#fb923c' },
   { key: 'indigo',  name: 'Indigo',  accent: '#1d4ed8', accent2: '#93c5fd' },
+  { key: 'cyan',    name: 'Cyan',    accent: '#06b6d4', accent2: '#67e8f9' },
+  { key: 'ambre',   name: 'Ambre',   accent: '#f59e0b', accent2: '#fcd34d' },
+  // ── 5 couleurs au choix ──
+  { key: 'rose',    name: 'Rose',    accent: '#ec4899', accent2: '#f9a8d4' },
+  { key: 'mauve',   name: 'Mauve',   accent: '#9333ea', accent2: '#c084fc' },
+  { key: 'corail',  name: 'Corail',  accent: '#f43f5e', accent2: '#fda4af' },
+  { key: 'emeraude',name: 'Émeraude',accent: '#059669', accent2: '#6ee7b7' },
+  { key: 'ardoise', name: 'Ardoise', accent: '#64748b', accent2: '#94a3b8' },
 ];
 
 let currentColorIdx = 0;
