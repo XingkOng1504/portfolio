@@ -1631,3 +1631,42 @@ a.nav-logo {
   transition-duration: 0.9s;
   transition-timing-function: ease;
 }
+
+/* ============================================
+   FIX dropdown langue (forcer colonne) + couleur visible
+   ============================================ */
+.lang-dropdown.open .lang-menu {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Couleur : bouton rond plus visible */
+.color-picker-wrap {
+  display: flex;
+  align-items: center;
+}
+.color-picker-btn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1.5px solid var(--border) !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  flex-shrink: 0;
+}
+.color-picker-btn:hover {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.15) !important;
+}
+.color-dot {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  display: block !important;
+  transition: background 0.9s ease !important;
+  pointer-events: none;
+}
