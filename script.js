@@ -787,19 +787,6 @@ function buildPalette() {
   });
 }
 
-function startAutoCycle() {
-  if (autoCycleTimer) return;
-  autoCycleTimer = setInterval(() => {
-    if (!userPicked) {
-      applyColor((currentColorIdx + 1) % colorPalette.length, true);
-    }
-  }, 18000); // toutes les 18 secondes
-}
-
-function stopAutoCycle() {
-  if (autoCycleTimer) { clearInterval(autoCycleTimer); autoCycleTimer = null; }
-}
-
 // ============================================================
 //  TYPING EFFECT
 // ============================================================
