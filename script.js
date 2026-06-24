@@ -160,7 +160,7 @@ const translations = {
     form_success: '✅ Message envoyé ! Je vous répondrai bientôt.',
 
     footer_name: 'Lin Huang Christophe',
-    footer_sub:  'BUT Informatique S4 · IUT Villetaneuse · Sorbonne Paris Nord',
+    footer_sub:  'BUT Informatique · IUT Villetaneuse · Sorbonne Paris Nord',
     footer_old:  'Ancien portfolio',
 
     // NAV extra
@@ -384,7 +384,7 @@ const translations = {
     form_success: '✅ Message sent! I\'ll get back to you soon.',
 
     footer_name: 'Lin Huang Christophe',
-    footer_sub:  'BSc Computer Science S4 · IUT Villetaneuse · Sorbonne Paris Nord',
+    footer_sub:  'BSc Computer Science · IUT Villetaneuse · Sorbonne Paris Nord',
     footer_old:  'Old portfolio',
 
     nav_home:  'Home',
@@ -604,7 +604,7 @@ const translations = {
     form_success: '✅ 消息已发送！我会尽快回复您。',
 
     footer_name: '林黄亦凯',
-    footer_sub:  '计算机技术学士 S4 · 维勒塔纳伊夫理工学院 · 索邦大学巴黎北校区',
+    footer_sub:  '计算机技术学士 · 维勒塔纳伊夫理工学院 · 索邦大学巴黎北校区',
     footer_old:  '旧版作品集',
 
     nav_home:  '首页',
