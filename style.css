@@ -1875,6 +1875,7 @@ a.nav-logo {
   margin-left: 0.25rem;
   vertical-align: super;
   letter-spacing: 0;
+  display: none;
 }
 
 /* ── Nav separator ──────────────────────────────────────────────────── */
