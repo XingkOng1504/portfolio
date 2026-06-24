@@ -470,71 +470,65 @@ body {
 .bilan-item p { color: var(--text-muted); font-size: 0.9rem; }
 
 /* ============================================
-   BILAN CARDS (section 02 redesign)
+   BILAN TABLES (section 02)
    ============================================ */
-.bilan-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.bilan-table-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.bilan-card-tag {
-  font-size: 0.7rem;
+.bilan-table-title {
+  font-size: 1rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: var(--accent);
-}
-
-.bilan-card-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  padding: 1rem 1.5rem 0.75rem;
   margin: 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.bilan-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
+.bilan-table-scroll { overflow-x: auto; }
 
-.bilan-section-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--text-muted);
-  margin: 0.25rem 0 0.25rem;
-}
-
-.bilan-card .bullet-list { margin: 0; padding-left: 1.1rem; }
-.bilan-card .bullet-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.2rem; }
-
-.bilan-verdict {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin-top: auto;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.bilan-strong,
-.bilan-improve {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
+.bilan-table {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 0.85rem;
+  min-width: 800px;
 }
 
-.bilan-strong span,
-.bilan-improve span { flex-shrink: 0; }
+.bilan-table thead tr {
+  background: rgba(108,99,255,0.08);
+}
 
-.bilan-strong strong { color: #4ade80; display: block; font-size: 0.75rem; margin-bottom: 0.1rem; }
-.bilan-improve strong { color: #facc15; display: block; font-size: 0.75rem; margin-bottom: 0.1rem; }
-.bilan-strong p,
-.bilan-improve p { margin: 0; color: var(--text-muted); line-height: 1.4; }
+.bilan-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.bilan-table td {
+  padding: 1rem;
+  vertical-align: top;
+  border-right: 1px solid var(--border);
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.bilan-table td:last-child { border-right: none; }
+
+.bilan-table td p { margin: 0 0 0.5rem; }
+.bilan-table td p:last-child { margin-bottom: 0; }
+.bilan-table td ul { margin: 0.25rem 0 0.5rem; padding-left: 1.1rem; }
+.bilan-table td ul:last-child { margin-bottom: 0; }
+.bilan-table td li { margin-bottom: 0.2rem; }
+.bilan-table td strong { color: var(--text-primary); }
 
 .highlight-card {
   border: 1px solid var(--accent);
