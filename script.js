@@ -1,4 +1,17 @@
 ﻿// ============================================================
+//  AGE AUTO-CALCULÉ
+// ============================================================
+function calcAge() {
+  const birth = new Date(2005, 6, 19); // 19 juillet 2005 (mois 0-indexé)
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const passed = today.getMonth() > birth.getMonth() ||
+    (today.getMonth() === birth.getMonth() && today.getDate() >= birth.getDate());
+  return passed ? age : age - 1;
+}
+const AGE = calcAge();
+
+// ============================================================
 //  TRANSLATIONS - FR / EN / ZH
 // ============================================================
 const translations = {
@@ -147,7 +160,7 @@ const translations = {
     about_page_title: 'Lin Huang Christophe - À propos',
     about_hero_tag:   'Portfolio S4 - BUT Informatique · IUT Villetaneuse',
     about_hero_name:  'Lin Huang <span class="accent">Christophe</span> <span class="name-zh">林黄亦凯</span>',
-    about_hero_sub:   '20 ans · Rosny-sous-Bois · Développeur Back-End',
+    about_hero_sub:   AGE + ' ans · Rosny-sous-Bois · Développeur Back-End',
     about_back:       '← Retour au portfolio',
 
     about_form_title: 'Parcours de formation',
@@ -358,7 +371,7 @@ const translations = {
     about_page_title: 'Lin Huang Christophe - About me',
     about_hero_tag:   'S4 Portfolio - BSc Computer Science · IUT Villetaneuse',
     about_hero_name:  'Lin Huang <span class="accent">Christophe</span> <span class="name-zh">林黄亦凯</span>',
-    about_hero_sub:   '20 y/o · Rosny-sous-Bois · Back-End Developer',
+    about_hero_sub:   AGE + ' y/o · Rosny-sous-Bois · Back-End Developer',
     about_back:       '← Back to portfolio',
 
     about_form_title: 'Education',
@@ -567,7 +580,7 @@ const translations = {
     about_page_title: '林黄亦凯 - 关于我',
     about_hero_tag:   'S4 学期作品集 - 计算机技术学士 · 维勒塔纳伊夫理工学院',
     about_hero_name:  '林黄 <span class="accent">亦凯</span> <span class="name-zh">Christophe</span>',
-    about_hero_sub:   '20 岁 · 罗西苏博瓦 · 后端开发工程师',
+    about_hero_sub:   AGE + ' 岁 · 罗西苏博瓦 · 后端开发工程师',
     about_back:       '← 返回作品集',
 
     about_form_title: '教育经历',
