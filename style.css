@@ -498,13 +498,13 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-.bilan-table-scroll { overflow-x: auto; }
+.bilan-table-scroll { overflow-x: visible; }
 
 .bilan-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
-  min-width: 800px;
+  font-size: 0.8rem;
+  table-layout: fixed;
 }
 
 .bilan-table thead tr {
@@ -512,19 +512,19 @@ body {
 }
 
 .bilan-table th {
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.6rem;
   text-align: left;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--accent);
   border-bottom: 1px solid var(--border);
-  white-space: nowrap;
+  word-break: break-word;
 }
 
 .bilan-table td {
-  padding: 1rem;
+  padding: 0.65rem 0.6rem;
   vertical-align: top;
   border-right: 1px solid var(--border);
   color: var(--text-muted);
