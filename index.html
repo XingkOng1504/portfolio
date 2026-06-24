@@ -12,7 +12,7 @@
 
   <!-- NAV -->
   <nav class="navbar">
-    <a href="index.html" class="nav-logo">軍<span class="nav-v">v25</span></a>
+    <a href="index.html" class="nav-logo">軍<span class="nav-v">v26</span></a>
     <button id="leafEgg" aria-hidden="true" tabindex="-1"></button>
     <ul class="nav-links">
       <li><a href="about.html" data-i18n="nav_about">À propos</a></li>
@@ -154,114 +154,104 @@
       </div>
     </section>
 
-    <!-- ======== 02 - COMPÉTENCES & SAÉ ======== -->
+    <!-- ======== 02 - BILAN DES COMPÉTENCES ======== -->
     <section id="competences" class="section section-dark">
       <div class="container">
         <div class="section-header">
           <span class="section-num">02</span>
-          <h2 data-i18n="s02_title">Bilan des compétences - SAÉ BUT 2</h2>
-          <p class="section-sub" data-i18n="s02_sub">Traces d'apprentissage · Preuves · Perspectives</p>
+          <h2 data-i18n="s02_title">Bilan des compétences</h2>
+          <p class="section-sub" data-i18n="s02_sub">SAÉ S3 · SAÉ S4 · Stage · Synthèse</p>
         </div>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div>
-              <span class="project-tag" data-i18n="sae_s4_tag">SAÉ S4 · Projet universitaire n°2</span>
-              <h3 class="project-title">Mnémosyne</h3>
-              <p class="project-sub" data-i18n="sae_s4_sub">Plateforme de suivi des cohortes étudiantes - IUT Villetaneuse</p>
+        <div class="grid-3">
+
+          <!-- SAÉ S3 -->
+          <div class="card bilan-card">
+            <div class="bilan-card-tag" data-i18n="b_s3_tag">SAÉ S3 - Projet n°1</div>
+            <h3 class="bilan-card-title" data-i18n="b_s3_title">Mnémosyne Archive v1</h3>
+            <div class="bilan-stack">
+              <span class="badge">Python</span><span class="badge">Flask</span>
+              <span class="badge">SQLite</span><span class="badge">MVC</span>
             </div>
-            <div class="project-stack">
-              <span class="badge">Flask</span>
-              <span class="badge">Python</span>
-              <span class="badge">SQLite3</span>
-              <span class="badge">ScoDoc API</span>
-              <span class="badge">Sankey</span>
-              <span class="badge">Docker</span>
+            <h4 class="bilan-section-label" data-i18n="b_acquired">Compétences acquises</h4>
+            <ul class="bullet-list" data-i18n-html="b_s3_list">
+              <li>Architecture MVC Python/Flask</li>
+              <li>Base de données relationnelle (SQLite)</li>
+              <li>Authentification utilisateur (sessions Flask)</li>
+              <li>Consommation API REST externe (ScoDoc)</li>
+              <li>Travail en équipe avec Git</li>
+            </ul>
+            <div class="bilan-verdict">
+              <div class="bilan-strong"><span>✅</span><div><strong data-i18n="b_strong">Point fort</strong><p data-i18n="b_s3_strong">Fondations MVC solides posées dès le début, réutilisées et améliorées en S4.</p></div></div>
+              <div class="bilan-improve"><span>⚠️</span><div><strong data-i18n="b_improve">À consolider</strong><p data-i18n="b_s3_improve">Séparation des couches encore perfectible, logique métier parfois mélangée aux vues.</p></div></div>
             </div>
           </div>
 
-          <div class="grid-2 mt-md">
-            <div>
-              <h4 data-i18n="sae_s4_ctx_title">Contexte &amp; objectif</h4>
-              <div data-i18n-html="sae_s4_ctx_body"><p>Depuis la réforme BUT 2021, l'IUT Villetaneuse peine à visualiser les flux d'étudiants entre promotions. Mnémosyne répond à ce besoin via des <strong>diagrammes de Sankey interactifs</strong> connectés à l'API ScoDoc, permettant de suivre passages, redoublements et abandons.</p></div>
+          <!-- SAÉ S4 -->
+          <div class="card bilan-card">
+            <div class="bilan-card-tag" data-i18n="b_s4_tag">SAÉ S4 - Projet n°2</div>
+            <h3 class="bilan-card-title">Mnémosyne v2</h3>
+            <div class="bilan-stack">
+              <span class="badge">Python</span><span class="badge">Flask</span>
+              <span class="badge">Docker</span><span class="badge">API ScoDoc</span>
             </div>
-            <div>
-              <h4 data-i18n="sae_s4_contrib_title">Ce que j'ai apporté</h4>
-              <ul class="bullet-list" data-i18n-html="sae_s4_contrib_body">
-                <li>Architecture MVC Flask avec séparation stricte Controllers / Services / DAO</li>
-                <li>Système de règles métier configurables pour qualifier les parcours étudiants</li>
-                <li>Export PDF des rapports de cohorte</li>
-                <li>Conteneurisation complète via Docker &amp; docker-compose</li>
-                <li>Données anonymisées JSON (conformité RGPD)</li>
-              </ul>
+            <h4 class="bilan-section-label" data-i18n="b_acquired">Compétences acquises</h4>
+            <ul class="bullet-list" data-i18n-html="b_s4_list">
+              <li>Architecture MVC stricte Controllers / Services / DAO</li>
+              <li>Conteneurisation Docker &amp; docker-compose</li>
+              <li>Visualisation de données (diagrammes de Sankey)</li>
+              <li>Export PDF de rapports de cohorte</li>
+              <li>Anonymisation des données (conformité RGPD)</li>
+            </ul>
+            <div class="bilan-verdict">
+              <div class="bilan-strong"><span>✅</span><div><strong data-i18n="b_strong">Point fort</strong><p data-i18n="b_s4_strong">Architecture propre et découplée : basculer de SQLite vers une autre BDD ne touche pas aux services métier.</p></div></div>
+              <div class="bilan-improve"><span>⚠️</span><div><strong data-i18n="b_improve">À consolider</strong><p data-i18n="b_s4_improve">Couverture de tests automatisés insuffisante - une stratégie TDD complète s'imposera en alternance.</p></div></div>
             </div>
           </div>
 
-          <div class="proof-box mt-md">
-            <span class="proof-label" data-i18n="proof_label">Preuve de compétence</span>
-            <p data-i18n-html="sae_s4_proof">La mise en place du diagramme de Sankey illustre ma capacité à <strong>traiter et visualiser des données complexes</strong> : transformer des décisions de jury brutes (ADM, PASD, RED, NAR, ADJ) en flux agrégés cohérents.</p>
+          <!-- Stage -->
+          <div class="card bilan-card">
+            <div class="bilan-card-tag" data-i18n="b_stage_tag">Stage - 2 mois en entreprise</div>
+            <h3 class="bilan-card-title" data-i18n="b_stage_title">METM - Miss &amp; Mister</h3>
+            <div class="bilan-stack">
+              <span class="badge">Python</span><span class="badge">API REST</span>
+              <span class="badge">SSH</span><span class="badge">systemd</span>
+            </div>
+            <h4 class="bilan-section-label" data-i18n="b_acquired">Compétences acquises</h4>
+            <ul class="bullet-list" data-i18n-html="b_stage_list">
+              <li>Intégration d'API tierces (UPS, Packlink, Octopia)</li>
+              <li>Déploiement sur serveur Linux via SSH</li>
+              <li>Gestion des erreurs réseau et retry automatique</li>
+              <li>Adaptabilité en conditions réelles (reprise de périmètre)</li>
+              <li>Communication en équipe sans outil centralisé</li>
+            </ul>
+            <div class="bilan-verdict">
+              <div class="bilan-strong"><span>✅</span><div><strong data-i18n="b_strong">Point fort</strong><p data-i18n="b_stage_strong">Autonomie et adaptabilité : reprise du périmètre d'un collègue parti à mi-stage sans perte de continuité.</p></div></div>
+              <div class="bilan-improve"><span>⚠️</span><div><strong data-i18n="b_improve">À consolider</strong><p data-i18n="b_stage_improve">Absence de Git et de CI/CD en entreprise : travailler dans un environnement structuré reste une priorité.</p></div></div>
+            </div>
           </div>
 
-          <div class="competence-tags mt-md">
-            <span class="comp-tag" data-i18n="comp_realiser">Réaliser le développement d'applications</span>
-            <span class="comp-tag" data-i18n="comp_optimiser">Optimiser des applications informatiques</span>
-            <span class="comp-tag" data-i18n="comp_administrer">Administrer des systèmes informatiques communicants</span>
-          </div>
         </div>
 
-        <div class="project-card mt-lg">
-          <div class="project-header">
-            <div>
-              <span class="project-tag" data-i18n="sae_s3_tag">SAÉ S3 · Projet universitaire n°1</span>
-              <h3 class="project-title" data-i18n="sae_s3_title">Mnémosyne - Archive v1</h3>
-              <p class="project-sub" data-i18n="sae_s3_sub">Première version · Fondations techniques</p>
-            </div>
-            <div class="project-stack">
-              <span class="badge">Flask</span>
-              <span class="badge">Python</span>
-              <span class="badge">SQLite</span>
-              <span class="badge">MVC</span>
-            </div>
-          </div>
-
-          <div class="grid-2 mt-md">
-            <div>
-              <h4 data-i18n="sae_s3_tech_title">Compétences techniques acquises</h4>
-              <ul class="bullet-list" data-i18n-html="sae_s3_tech_body">
-                <li>Mise en place de l'architecture MVC en Python/Flask</li>
-                <li>Modélisation de base de données relationnelle (schéma SQL)</li>
-                <li>Authentification utilisateur (sessions Flask)</li>
-                <li>Consommation d'une API REST externe (ScoDoc)</li>
-              </ul>
-            </div>
-            <div>
-              <h4 data-i18n="sae_s3_trans_title">Compétences transversales</h4>
-              <ul class="bullet-list" data-i18n-html="sae_s3_trans_body">
-                <li>Travail en équipe avec versioning Git</li>
-                <li>Rédaction de documentation technique</li>
-                <li>Gestion des sprints et priorisation des tâches</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="card card-full mt-lg">
-          <h3 data-i18n="bilan_title">Bilan synthétique &amp; perspectives de progression</h3>
-          <div class="grid-3">
+        <!-- Synthèse -->
+        <div class="card card-full mt-lg highlight-card">
+          <h3 data-i18n="b_synth_title">Bilan synthèse</h3>
+          <div class="grid-3 mt-md">
             <div class="bilan-item">
-              <h4 data-i18n="bilan_1_title">Ce que je valorise</h4>
-              <p data-i18n="bilan_1_body">La capacité à concevoir des architectures propres dès le départ. L'habitude de séparer les couches métier, données et présentation m'a évité de nombreuses régressions lors des évolutions de Mnémosyne.</p>
+              <h4 data-i18n="b_synth_1_title">Progression S3 → S4 → Stage</h4>
+              <p data-i18n="b_synth_1_body">Chaque expérience a élevé le niveau d'exigence : de l'exercice académique (S3) à l'architecture d'entreprise (S4) jusqu'au code en production réelle (stage). La courbe est cohérente et volontaire.</p>
             </div>
             <div class="bilan-item">
-              <h4 data-i18n="bilan_2_title">Bonnes pratiques apportées</h4>
-              <p data-i18n="bilan_2_body">L'usage systématique d'interfaces (DAO Interface) pour abstraire les accès base de données, permettant de basculer de SQLite vers une autre BDD sans toucher aux services métier.</p>
+              <h4 data-i18n="b_synth_2_title">Points forts transversaux</h4>
+              <p data-i18n="b_synth_2_body">Architecture propre, rigueur de séparation des couches, capacité d'adaptation rapide. Ces constantes se retrouvent sur les trois expériences et forment le socle de mon profil développeur.</p>
             </div>
             <div class="bilan-item">
-              <h4 data-i18n="bilan_3_title">Points à consolider</h4>
-              <p data-i18n="bilan_3_body">La couverture par tests automatisés reste insuffisante. Les fichiers de test présents dans la v2 sont un début, mais une stratégie TDD complète s'imposera en alternance.</p>
+              <h4 data-i18n="b_synth_3_title">À approfondir en alternance</h4>
+              <p data-i18n="b_synth_3_body">Tests automatisés (TDD), travail en équipe avec Git/PR/code review, CI/CD. Ce sont précisément les pratiques que l'alternance au Cnam devra ancrer durablement.</p>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
