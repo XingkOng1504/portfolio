@@ -74,7 +74,7 @@ body {
   height: 42px;
   object-fit: contain;
   display: block;
-  mix-blend-mode: screen;
+  border-radius: 8px;
 }
 
 .nav-links {
