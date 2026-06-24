@@ -1766,3 +1766,17 @@ a.nav-logo {
   75%  { transform: translateY(75vh) rotate(270deg) translateX(25px); }
   100% { transform: translateY(105vh) rotate(360deg) translateX(0);   opacity: 0; }
 }
+
+/* ── Easter egg leaf button ─────────────────────────────────────────── */
+#leafEgg {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+  border: none;
+  background: transparent;
+  cursor: default;
+  z-index: 9998;
+}

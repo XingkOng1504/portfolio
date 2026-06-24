@@ -938,6 +938,8 @@ document.addEventListener('DOMContentLoaded', () => {
   buildPalette();
   if (autoCycleEnabled) startAutoCycle();
   initContactForm();
+  const egg = document.getElementById('leafEgg');
+  if (egg) egg.addEventListener('click', () => launchLeaves(60));
 
   // ── Language dropdown ──
   const langDropdown   = document.getElementById('langDropdown');
