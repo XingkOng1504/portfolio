@@ -12,7 +12,7 @@
 
   <!-- NAV -->
   <nav class="navbar">
-    <a href="index.html" class="nav-logo">軍<span class="nav-v">v27</span></a>
+    <a href="index.html" class="nav-logo">軍<span class="nav-v">v28</span></a>
     <button id="leafEgg" aria-hidden="true" tabindex="-1"></button>
     <ul class="nav-links">
       <li><a href="about.html" data-i18n="nav_about">À propos</a></li>
@@ -501,7 +501,49 @@
 
         <div class="card card-full mt-lg warning-card">
           <h3 data-i18n="stage_c3_title">Regard critique sur le stage</h3>
-          <p data-i18n="stage_c3_body">Ce stage a révélé plusieurs frictions réelles. L'absence de Git a imposé une coordination manuelle des mises en production - une lacune organisationnelle avec des conséquences directes. Lorsque Tristan, l'expert BDD de l'équipe, est parti à mi-stage, j'ai repris son périmètre (passage de id_product à id_listing, récupération des données Back Market) : une mise à l'épreuve concrète de mon adaptabilité. J'ai aussi traversé un « blocage silencieux » de deux jours avant de comprendre qu'une question bien formulée vaut mieux que deux jours de recherche solitaire. Ces pratiques - revue de code, Git en équipe, CI/CD - sont exactement ce que l'alternance au Cnam devra m'apporter.</p>
+          <p data-i18n="stage_c3_body">Ce stage a révélé plusieurs frictions réelles. L'absence de Git a imposé une coordination manuelle des mises en production - une lacune organisationnelle avec des conséquences directes. Lorsque Tristan, l'expert BDD de l'équipe, est parti à mi-stage, j'ai repris son périmètre et assuré la continuité des développements en cours : une mise à l'épreuve concrète de mon adaptabilité. J'ai aussi traversé un « blocage silencieux » de deux jours avant de comprendre qu'une question bien formulée vaut mieux que deux jours de recherche solitaire. Ces pratiques - revue de code, Git en équipe, CI/CD - sont exactement ce que l'alternance au Cnam devra m'apporter.</p>
+        </div>
+
+        <!-- Bilan du stage -->
+        <div class="stage-bilan-wrap mt-lg">
+          <h3 class="stage-bilan-title" data-i18n="stage_bilan_title">Bilan du stage - Découverte du monde professionnel</h3>
+          <p class="stage-bilan-intro" data-i18n="stage_bilan_intro">Ce stage de 8 semaines m'a plongé au cœur d'une entreprise d'e-commerce confrontée à un volume critique de SAV. J'ai découvert les réalités du monde professionnel à travers la méthodologie de production « quick and dirty », privilégiant le déploiement rapide de solutions fonctionnelles provisoires. Cette immersion, complétée par une observation directe du support client, m'a permis de comprendre l'impact concret du code sur l'optimisation des flux internes de l'entreprise.</p>
+        </div>
+
+        <div class="grid-2 mt-md">
+
+          <!-- Compétence 1 : Réaliser -->
+          <div class="card bilan-comp-card">
+            <div class="comp-card-header">
+              <span class="comp-badge">C1</span>
+              <h4 data-i18n="stage_bilan_c1_title">Réaliser — Développer des applications simples</h4>
+            </div>
+            <div class="comp-section">
+              <strong data-i18n="stage_bilan_meo">Mise en œuvre &amp; Outils</strong>
+              <div data-i18n-html="stage_bilan_c1_meo"><p>Conception et mise en production d'un script d'automatisation d'envoi d'emails en Python via l'API Octopia pour intercepter les demandes clients répétitives (factures, guides Windows 11).</p><p>Développement de l'application web interne <em>metm-corporate</em> en PHP avec gestion de bases de données, variables d'environnement et chiffrement des mots de passe.</p><p><strong>Outils :</strong> VS Code, AlwaysData, FileZilla.</p></div>
+            </div>
+            <div class="comp-section">
+              <strong data-i18n="stage_bilan_preuve">Preuves &amp; Distanciation critique</strong>
+              <div data-i18n-html="stage_bilan_c1_preuve"><p>Les traces s'appuient sur les fichiers de logs d'activité du script mail et l'arborescence des interfaces du site.</p><p>Face aux délais courts et à des bugs persistants lors de la séparation back-end / front-end en PHP (reprise du travail d'un collègue parti à mi-stage), j'ai dû abandonner la séparation stricte MVC pour fusionner les couches et garantir un outil immédiatement livrable.</p></div>
+            </div>
+          </div>
+
+          <!-- Compétence 6 : Collaborer -->
+          <div class="card bilan-comp-card">
+            <div class="comp-card-header">
+              <span class="comp-badge">C6</span>
+              <h4 data-i18n="stage_bilan_c6_title">Collaborer — Travailler dans une équipe informatique</h4>
+            </div>
+            <div class="comp-section">
+              <strong data-i18n="stage_bilan_meo">Mise en œuvre &amp; Outils</strong>
+              <div data-i18n-html="stage_bilan_c6_meo"><p>Intégration au sein d'une équipe de stagiaires avec synchronisation quotidienne, salons Discord dédiés et groupes WhatsApp pour fluidifier la communication interne.</p><p>Collaboration via un répertoire partagé sur serveur local pour centraliser les codes.</p><p>Création d'un outil de recherche intelligente de commandes sur le site web pour assister l'équipe support client.</p></div>
+            </div>
+            <div class="comp-section">
+              <strong data-i18n="stage_bilan_preuve">Preuves &amp; Distanciation critique</strong>
+              <div data-i18n-html="stage_bilan_c6_preuve"><p>Le travail d'équipe est validé par la tenue de mon journal de bord régulier et la co-conception du modèle de base de données.</p><p>Bien que l'attribution de projets individuels m'ait parfois laissé confronté seul à mes blocages, cela m'a forcé à développer mon aisance à l'oral pour débattre des structures d'API avec mes collègues plutôt que de m'isoler.</p></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
