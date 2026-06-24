@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8"/>
@@ -254,7 +254,7 @@
       whiteScore += board.filter(x=>x===2).length;
       const winner = blackScore>whiteScore?'Noir':'Blanc';
       document.getElementById('msg').textContent =
-        `Fin ! Noir: ${blackScore} pts — Blanc: ${whiteScore.toFixed(1)} pts — ${winner} gagne !`;
+        `Fin ! Noir: ${blackScore} pts - Blanc: ${whiteScore.toFixed(1)} pts - ${winner} gagne !`;
     }
 
     initGame(9);

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8"/>
@@ -56,7 +56,7 @@
     ['🀦','🀧','🀨','🀩'].forEach((c,i)=>TILE_DEFS.push({g:'f',n:i,c}));
     // Total: 36+36+36+16+12+4+4 = 144
 
-    // Layout: [z, r, c] — 144 positions
+    // Layout: [z, r, c] - 144 positions
     // Layer 0: 6 rows × 14 cols = 84
     // Layer 1: 4 rows × 10 cols (r 1-4, c 2-11) = 40
     // Layer 2: 2 rows × 6 cols (r 2-3, c 4-9) = 12
@@ -166,7 +166,7 @@
     }
 
     function win(){ clearInterval(timerInt); gameOver=true; const m=document.getElementById('msg'); m.textContent='🎉 Félicitations ! Toutes les tuiles retirées en '+elapsed+'s !'; m.className='msg win'; }
-    function lose(){ clearInterval(timerInt); gameOver=true; const m=document.getElementById('msg'); m.textContent='😔 Plus de coup possible — essayez encore !'; m.className='msg lose'; }
+    function lose(){ clearInterval(timerInt); gameOver=true; const m=document.getElementById('msg'); m.textContent='😔 Plus de coup possible - essayez encore !'; m.className='msg lose'; }
 
     newGame();
   </script>

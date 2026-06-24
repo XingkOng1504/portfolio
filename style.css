@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    RESET & BASE
    ============================================ */
 *, *::before, *::after {
@@ -1286,7 +1286,7 @@ a.nav-logo {
 }
 
 /* ============================================
-   ABOUT PAGE — HERO
+   ABOUT PAGE - HERO
    ============================================ */
 .about-hero {
   min-height: 100vh;
@@ -1335,7 +1335,7 @@ a.nav-logo {
 }
 
 /* ============================================
-   ABOUT PAGE — TIMELINE
+   ABOUT PAGE - TIMELINE
    ============================================ */
 .timeline {
   position: relative;
@@ -1406,7 +1406,7 @@ a.nav-logo {
 }
 
 /* ============================================
-   ABOUT PAGE — EXPERIENCE
+   ABOUT PAGE - EXPERIENCE
    ============================================ */
 .exp-header {
   display: flex;
@@ -1419,7 +1419,7 @@ a.nav-logo {
 .exp-period { color: var(--text-muted); font-size: 0.75rem; font-family: var(--font-mono); }
 
 /* ============================================
-   ABOUT PAGE — ATOUTS
+   ABOUT PAGE - ATOUTS
    ============================================ */
 .atouts-grid {
   display: flex;
@@ -1439,7 +1439,7 @@ a.nav-logo {
 .atout-chip:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ============================================
-   ABOUT PAGE — INTERESTS GRID
+   ABOUT PAGE - INTERESTS GRID
    ============================================ */
 .interests-grid {
   display: grid;
