@@ -70,10 +70,11 @@ body {
   gap: 0.4rem;
 }
 .nav-logo-img {
-  width: 28px;
-  height: 28px;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
   display: block;
+  mix-blend-mode: screen;
 }
 
 .nav-links {
