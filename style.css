@@ -1734,3 +1734,35 @@ a.nav-logo {
   margin: 0 0.25rem;
   align-self: center;
 }
+
+/* ── Form success message ───────────────────────────────────────────── */
+.form-success {
+  display: none;
+  margin-top: 1rem;
+  padding: .75rem 1rem;
+  background: rgba(52, 211, 153, .12);
+  border: 1px solid rgba(52, 211, 153, .3);
+  border-radius: var(--radius-sm);
+  color: #34d399;
+  font-size: .9rem;
+  text-align: center;
+}
+.form-success.visible { display: block; }
+
+/* ── Falling leaves ─────────────────────────────────────────────────── */
+.leaf {
+  position: fixed;
+  top: -60px;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 1.4rem;
+  animation: leafFall linear forwards;
+  user-select: none;
+}
+@keyframes leafFall {
+  0%   { transform: translateY(0)    rotate(0deg)   translateX(0);    opacity: 1; }
+  25%  { transform: translateY(25vh) rotate(90deg)  translateX(30px); }
+  50%  { transform: translateY(50vh) rotate(180deg) translateX(-20px);}
+  75%  { transform: translateY(75vh) rotate(270deg) translateX(25px); }
+  100% { transform: translateY(105vh) rotate(360deg) translateX(0);   opacity: 0; }
+}

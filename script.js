@@ -133,6 +133,7 @@ const translations = {
     form_email:   'Email',
     form_message: 'Message',
     form_send:    'Envoyer',
+    form_success: '✅ Message envoyé ! Je vous répondrai bientôt.',
 
     footer_name: 'Lin Huang Christophe',
     footer_sub:  'BUT Informatique S4 · IUT Villetaneuse · Sorbonne Paris Nord',
@@ -345,6 +346,7 @@ const translations = {
     form_email:   'Email',
     form_message: 'Message',
     form_send:    'Send',
+    form_success: '✅ Message sent! I\'ll get back to you soon.',
 
     footer_name: 'Lin Huang Christophe',
     footer_sub:  'BSc Computer Science S4 · IUT Villetaneuse · Sorbonne Paris Nord',
@@ -553,6 +555,7 @@ const translations = {
     form_email:   '电子邮件',
     form_message: '留言',
     form_send:    '发送',
+    form_success: '✅ 消息已发送！我会尽快回复您。',
 
     footer_name: '林黄亦凯',
     footer_sub:  '计算机技术学士 S4 · 维勒塔纳伊夫理工学院 · 索邦大学巴黎北校区',
@@ -788,6 +791,62 @@ function buildPalette() {
 }
 
 // ============================================================
+//  FALLING LEAVES
+// ============================================================
+const LEAVES = ['🍃','🍂','🍁','🌿','🍀'];
+
+function spawnLeaf() {
+  const el = document.createElement('span');
+  el.className = 'leaf';
+  el.textContent = LEAVES[Math.floor(Math.random() * LEAVES.length)];
+  el.style.left = Math.random() * 100 + 'vw';
+  const dur = 2.5 + Math.random() * 2;
+  el.style.animationDuration = dur + 's';
+  el.style.fontSize = (1.1 + Math.random() * 0.8) + 'rem';
+  document.body.appendChild(el);
+  el.addEventListener('animationend', () => el.remove());
+}
+
+function launchLeaves(count = 40) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(spawnLeaf, i * 60);
+  }
+}
+
+// ============================================================
+//  CONTACT FORM — AJAX + LEAVES
+// ============================================================
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = document.getElementById('formSubmitBtn');
+    const success = document.getElementById('formSuccess');
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        form.reset();
+        success.classList.add('visible');
+        launchLeaves(45);
+      } else {
+        btn.disabled = false;
+        btn.style.opacity = '';
+      }
+    } catch {
+      btn.disabled = false;
+      btn.style.opacity = '';
+    }
+  });
+}
+
+// ============================================================
 //  TYPING EFFECT
 // ============================================================
 function typeWriter(el, text, speed = 38) {
@@ -878,6 +937,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyColor(savedColorIdx);
   buildPalette();
   if (autoCycleEnabled) startAutoCycle();
+  initContactForm();
 
   // ── Language dropdown ──
   const langDropdown   = document.getElementById('langDropdown');

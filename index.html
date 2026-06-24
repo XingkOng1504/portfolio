@@ -12,7 +12,7 @@
 
   <!-- NAV -->
   <nav class="navbar">
-    <a href="index.html" class="nav-logo">軍<span class="nav-v">v19</span></a>
+    <a href="index.html" class="nav-logo">軍<span class="nav-v">v20</span></a>
     <ul class="nav-links">
       <li><a href="about.html" data-i18n="nav_about">À propos</a></li>
       <li><a href="games.html" data-i18n="nav_games">🎮 Jeux</a></li>
@@ -622,7 +622,7 @@
             </div>
           </div>
 
-          <form class="contact-form" action="https://formspree.io/f/xnjknrzq" method="POST">
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/xnjknrzq" method="POST">
             <div class="form-group">
               <label for="contact-name" data-i18n="form_name">Nom</label>
               <input type="text" id="contact-name" name="name" required />
@@ -635,7 +635,8 @@
               <label for="contact-msg" data-i18n="form_message">Message</label>
               <textarea id="contact-msg" name="message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="cta-btn" data-i18n="form_send">Envoyer</button>
+            <button type="submit" class="cta-btn" id="formSubmitBtn" data-i18n="form_send">Envoyer</button>
+            <p class="form-success" id="formSuccess" data-i18n="form_success">✅ Message envoyé ! Je vous répondrai bientôt.</p>
           </form>
         </div>
       </div>
